@@ -155,11 +155,9 @@
             padding: 0;
             list-style: none;
         }
-
-        /* --- CORREÇÃO (Estilo do Botão) --- */
        .answer-btn {
-            display: flex; /* MUDADO: de 'block' para 'flex' */
-            align-items: flex-start; /* Alinha no topo se o texto quebrar */
+            display: flex;
+            align-items: flex-start;
             width: 100%;
             background: #f8f9fa;
             border: 1px solid #ced4da;
@@ -172,58 +170,47 @@
             transition: all 0.2s;
             box-sizing: border-box;
         }
-        /* --- FIM DA CORREÇÃO --- */
-
        .answer-btn:hover:not([disabled]) {
             background: #e9ecef;
             border-color: #b1b9c1;
         }
-        
-        /* --- NOVO: Estilos para a letra e o texto da opção --- */
        .option-key {
             font-weight: bold;
-            color: #333; /* Cor escura para a letra */
-            margin-right: 10px; /* Espaço entre a letra e o texto */
-            flex-shrink: 0; /* Impede que a letra "achate" */
+            color: #333;
+            margin-right: 10px;
+            flex-shrink: 0;
         }
        .option-text {
-            flex-grow: 1; /* Ocupa o espaço restante */
-            color: #555; /* Cor um pouco mais clara para o texto */
-            word-break: break-word; /* Quebra o texto se for longo */
+            flex-grow: 1;
+            color: #555;
+            word-break: break-word;
         }
-        /* --- FIM DOS NOVOS ESTILOS --- */
-        
        .answer-btn.selected {
             background-color: #d0e7ff; 
             border-color: #007bff;
         }
-        
        .answer-btn.correct {
             background-color: #d4edda;
             border-color: #c3e6cb;
             color: #155724;
             font-weight: bold;
         }
-        /* Quando o botão está correto, força a cor dos filhos */
        .answer-btn.correct .option-key,
        .answer-btn.correct .option-text {
             color: #155724;
             font-weight: bold;
         }
-
        .answer-btn.incorrect {
             background-color: #f8d7da;
             border-color: #f5c6cb;
             color: #721c24;
             font-weight: bold;
         }
-        /* Quando o botão está incorreto, força a cor dos filhos */
        .answer-btn.incorrect .option-key,
        .answer-btn.incorrect .option-text {
             color: #721c24;
             font-weight: bold;
         }
-
        .answer-btn:disabled {
             cursor: not-allowed;
             opacity: 0.7; 
@@ -268,7 +255,6 @@
             clear: both;
             padding-top: 10px;
         }
-        
        .explanation-container {
             background: #e7f3fe; 
             border: 1px solid #b0c4de; 
@@ -285,7 +271,6 @@
             display: block;
             margin-bottom: 5px;
         }
-        
        .quiz-footer {
             margin-top: 20px;
             text-align: right;
@@ -394,6 +379,7 @@
             menuToggle.style.display = 'block'; 
         }
 
+        // --- CORREÇÃO (Embaralhar Opções) ---
         function showQuestion() {
             resetState();
             const currentQuestion = quizData[currentQuestionIndex];
@@ -406,6 +392,7 @@
             const isMultiAnswer = Array.isArray(correctAnswers);
 
             if (currentQuestion.tipo === 'fill') {
+                // --- Lógica de Preenchimento (Sem alteração) ---
                 const input = document.createElement("input");
                 input.type = "text";
                 input.id = "fill-answer-input";
@@ -420,57 +407,73 @@
                         }
                     }
                 });
-
                 const submitBtn = document.createElement("button");
                 submitBtn.innerText = "Verificar";
                 submitBtn.classList.add("answer-btn", "submit-fill-btn"); 
                 submitBtn.id = "fill-submit-btn";
                 submitBtn.addEventListener("click", checkFillAnswer);
-
                 answersEl.appendChild(input);
                 answersEl.appendChild(submitBtn);
 
-            } else if (isMultiAnswer) {
-                for (const key in currentQuestion.opcoes) {
-                    const button = document.createElement("button");
-                    
-                    // --- CORREÇÃO (HTML do Botão) ---
-                    // Adiciona <span>s com classes para a letra e o texto
-                    button.innerHTML = `<span class="option-key">${key.toUpperCase()}:</span> <span class="option-text">${currentQuestion.opcoes[key]}</span>`;
-                    // --- FIM DA CORREÇÃO ---
-                    
-                    button.classList.add("answer-btn");
-                    button.dataset.key = key;
-                    button.addEventListener("click", toggleAnswer); 
-                    answersEl.appendChild(button);
-                }
-                const submitBtn = document.createElement("button");
-                submitBtn.innerText = "Verificar Respostas";
-                submitBtn.classList.add("answer-btn", "submit-fill-btn"); 
-                submitBtn.id = "multi-submit-btn";
-                submitBtn.addEventListener("click", checkMultiAnswer);
-                answersEl.appendChild(submitBtn);
-
             } else {
-                for (const key in currentQuestion.opcoes) {
-                    const button = document.createElement("button");
+                // --- NOVO: Lógica de embaralhamento de opções ---
+                const displayKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; // As novas letras a serem exibidas
+                
+                // Pega as chaves originais (ex: ["A", "B", "C", "D"])
+                const originalKeys = Object.keys(currentQuestion.opcoes);
+                
+                // Embaralha as chaves originais
+                originalKeys.sort(() => Math.random() - 0.5);
+                // --- FIM DA NOVA LÓGICA ---
+
+                if (isMultiAnswer) {
+                    // --- Múltiplas Respostas (Modificado) ---
+                    // Itera sobre as chaves originais embaralhadas
+                    originalKeys.forEach((originalKey, index) => {
+                        const displayKey = displayKeys[index]; // A nova letra (A, B, C...)
+                        const answerText = currentQuestion.opcoes[originalKey]; // O texto da resposta
+
+                        const button = document.createElement("button");
+                        button.innerHTML = `<span class="option-key">${displayKey}:</span> <span class="option-text">${answerText}</span>`;
+                        button.classList.add("answer-btn");
+                        // Armazena a CHAVE ORIGINAL (ex: "C") para verificação
+                        button.dataset.key = originalKey; 
+                        button.addEventListener("click", toggleAnswer); 
+                        answersEl.appendChild(button);
+                    });
                     
-                    // --- CORREÇÃO (HTML do Botão) ---
-                    // Adiciona <span>s com classes para a letra e o texto
-                    button.innerHTML = `<span class="option-key">${key.toUpperCase()}:</span> <span class="option-text">${currentQuestion.opcoes[key]}</span>`;
-                    // --- FIM DA CORREÇÃO ---
-                    
-                    button.classList.add("answer-btn");
-                    button.dataset.key = key;
-                    
-                    if (key === correctAnswers) {
-                        button.dataset.correct = "true";
-                    }
-                    button.addEventListener("click", selectAnswer); 
-                    answersEl.appendChild(button);
+                    const submitBtn = document.createElement("button");
+                    submitBtn.innerText = "Verificar Respostas";
+                    submitBtn.classList.add("answer-btn", "submit-fill-btn"); 
+                    submitBtn.id = "multi-submit-btn";
+                    submitBtn.addEventListener("click", checkMultiAnswer);
+                    answersEl.appendChild(submitBtn);
+
+                } else {
+                    // --- Resposta Única (Modificado) ---
+                    // Itera sobre as chaves originais embaralhadas
+                    originalKeys.forEach((originalKey, index) => {
+                        const displayKey = displayKeys[index]; // A nova letra (A, B, C...)
+                        const answerText = currentQuestion.opcoes[originalKey]; // O texto da resposta
+                        
+                        const button = document.createElement("button");
+                        button.innerHTML = `<span class="option-key">${displayKey}:</span> <span class="option-text">${answerText}</span>`;
+                        button.classList.add("answer-btn");
+                        // Armazena a CHAVE ORIGINAL
+                        button.dataset.key = originalKey; 
+
+                        // A verificação de 'correta' usa a CHAVE ORIGINAL
+                        if (originalKey === correctAnswers) { 
+                            button.dataset.correct = "true";
+                        }
+                        button.addEventListener("click", selectAnswer); 
+                        answersEl.appendChild(button);
+                    });
                 }
             }
         }
+        // --- FIM DA CORREÇÃO ---
+
 
         function resetState() {
             nextBtn.style.display = 'none';
@@ -483,7 +486,6 @@
         }
 
         function selectAnswer(e) {
-            // e.target pode ser o <span>, precisamos garantir que é o botão
             const selectedBtn = e.target.closest('.answer-btn'); 
             const isCorrect = selectedBtn.dataset.correct === "true";
 
@@ -495,7 +497,6 @@
             }
 
             Array.from(answersEl.children).forEach(button => {
-                // Só desabilita botões de resposta, não o botão de submit
                 if (button.classList.contains('answer-btn') && !button.id.includes('submit')) { 
                     if (button.dataset.correct === "true") {
                         button.classList.add("correct");
@@ -535,7 +536,6 @@
         }
 
         function toggleAnswer(e) {
-            // e.target pode ser o <span>, garante que pegamos o botão
             e.target.closest('.answer-btn').classList.toggle('selected');
         }
 
@@ -548,7 +548,8 @@
             let correctSelectedCount = 0;
 
             buttons.forEach(button => {
-                const key = button.dataset.key;
+                // A chave de verificação é a CHAVE ORIGINAL (ex: "C")
+                const key = button.dataset.key; 
                 if (!key) return; 
 
                 const isCorrect = correctAnswers.includes(key);
