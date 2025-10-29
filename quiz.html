@@ -1,1027 +1,686 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interativo de Linux</title>
+    <title>Quiz LPIC-2</title>
     <style>
-        /* --- ESTILOS DE LAYOUT --- */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
-            display: flex;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
-            min-height: 100vh;
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
+            padding: 0;
         }
 
-        #side-menu {
-            width: 240px;
-            flex-shrink: 0;
-            background-color: #ffffff;
-            border-right: 1px solid #e0e0e0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        #side-menu h3 {
-            text-align: center;
-            margin-top: 0;
-            color: #333;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        #nav-container {
-            flex-grow: 1;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            align-content: start;
-            padding-right: 10px;
-        }
-
-        .nav-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 35px;
-            font-size: 0.9em;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: bold;
-            color: #555;
-            background-color: #f9f9f9;
-        }
-
-        .nav-item:hover {
-            background-color: #eef2f5;
-            border-color: #007bff;
-        }
-
-        .nav-item.answered {
-            background-color: #e6ffed;
-            border-color: #155724;
-            color: #155724;
-        }
-
-        .nav-item.current {
-            background-color: #d1e7fd;
-            border-color: #007bff;
-            color: #0056b3;
-            transform: scale(1.1);
-        }
-
-        #main-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        /* --- ESTILOS DO QUIZ --- */
-        #quiz-container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        #question-counter {
-            text-align: right;
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 15px;
-        }
-
-        #question {
-            font-size: 1.3em;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        #options-container {
-            margin-bottom: 25px;
-        }
-
-        .option {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 12px 18px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            line-height: 1.5;
-            color: #495057;
-        }
-
-        .option:hover {
-            background-color: #e9ecef;
-            border-color: #adb5bd;
-        }
-
-        .option.selected {
-            background-color: #cfe2ff;
-            border-color: #9ec5fe;
-            color: #052c65;
-            font-weight: bold;
-        }
-
-        /* Feedback visual após resposta */
-        .feedback-correct {
-            background-color: #d1e7dd !important;
-            border-color: #a3cfbb !important;
-            color: #0a3622 !important;
-        }
-        .feedback-incorrect {
-            background-color: #f8d7da !important;
-            border-color: #f1aeb5 !important;
-            color: #58151c !important;
-        }
-
-        #feedback-container p {
-            margin-top: 0;
-            padding: 15px;
-            border-radius: 8px;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        .feedback-correct-box p {
-            background-color: #d1e7dd;
-            border: 1px solid #a3cfbb;
-            color: #0a3622;
-        }
-        .feedback-incorrect-box p {
-            background-color: #f8d7da;
-            border: 1px solid #f1aeb5;
-            color: #58151c;
-        }
-
-        #controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        #controls button, #controls a {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1em;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-decoration: none; /* Para o link parecer botão */
-            display: inline-block; /* Para o link parecer botão */
-        }
-
-        #controls button:hover, #controls a:hover {
-            background-color: #0056b3;
-        }
-
-        #controls button:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        code {
-            background-color: #e9ecef;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.95em;
-            color: #c7254e;
-        }
-        pre code { display: block; padding: 10px; }
-
-        /* Estilos para o relatório final */
-        #final-report h2, #final-report h3 {
-            text-align: center;
-            color: #333;
-        }
-        #report-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin: 30px 0;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-        }
-        .report-item {
-            text-align: center;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        .report-item strong {
-            display: block;
-            font-size: 2em;
-            margin-bottom: 5px;
-        }
-        .report-item span {
-            font-size: 0.9em;
-            color: #6c757d;
-        }
-        .report-item-acertos { background-color: #d1e7dd; color: #0a3622; }
-        .report-item-erros { background-color: #f8d7da; color: #58151c; }
-        .report-item-nota { background-color: #cfe2ff; color: #052c65; font-size: 1.2em; }
-
-        #detailed-review {
-            margin-top: 40px;
-            border-top: 2px solid #eee;
-            padding-top: 20px;
-        }
-        #detailed-review h3 { margin-bottom: 25px; }
-        .review-item {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .review-item h4 { margin-top: 0; color: #444; }
-        .resposta-usuario { margin-bottom: 5px; font-weight: bold; }
-        .resposta-certa { color: #155724; }
-        .resposta-errada { color: #721c24; }
-        .resposta-correta-final { font-style: italic; color: #155724; margin-top: 0; margin-bottom: 10px; }
-        .explicacao {
-            font-size: 0.9em;
-            color: #555;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            border-left: 3px solid #007bff;
-        }
-
-        /* Estilos para Input tipo 'fill' */
-        input[type="text"].option {
-            width: calc(100% - 38px); /* Ajusta largura considerando padding */
-            font-size: 1em;
-            cursor: text;
-        }
-
-        /* --- Menu Lateral Toggle --- */
-        #menu-toggle {
+        /* --- Estilos do Menu Hambúrguer --- */
+        .hamburger-btn {
             position: fixed;
             top: 15px;
             left: 15px;
-            font-size: 24px;
-            cursor: pointer;
             z-index: 1001;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px 10px;
+            background: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            display: none; /* Só aparece em mobile */
-        }
-        #menu-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 28px;
+            padding: 10px;
             cursor: pointer;
-            display: none; /* Só aparece em mobile */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .hamburger-btn span {
+            display: block;
+            width: 22px;
+            height: 3px;
+            background: #333;
+            margin: 4px 0;
+        }
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100%;
+            background: #fff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .nav-drawer.open {
+            transform: translateX(0);
+        }
+        .nav-drawer h3 {
+            padding: 20px;
+            margin: 0;
+            border-bottom: 1px solid #eee;
+        }
+        #question-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #question-list li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+        }
+        #question-list li a:hover {
+            background: #f8f9fa;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        .overlay.open {
+            display: block;
+        }
+        /* --- Fim dos Estilos do Menu --- */
+
+       .quiz-container {
+            background: #fff;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            margin: 20px auto; 
         }
 
-
-        /* --- Estilos Responsivos (Mobile) --- */
-        @media (max-width: 1024px) {
-            #menu-toggle {
-                display: block;
-            }
-
-            #side-menu {
-                position: fixed;
-                left: 0;
-                top: 0;
-                height: 100vh;
-                z-index: 1000;
-                transform: translateX(-100%);
-                border-right: 2px solid #ccc;
-            }
-
-            #menu-close {
-                display: block;
-            }
-
-            body.side-menu-open #side-menu {
-                transform: translateX(0);
-            }
-
-            #main-content {
-                padding: 60px 10px 20px 10px; /* Adiciona padding superior para não sobrepor o toggle */
-                align-items: flex-start; /* Alinha no topo em mobile */
-            }
-
-            #quiz-container {
-                padding: 20px;
-            }
-
-            #final-report h2 { font-size: 1.5em; }
-            #report-details { grid-template-columns: 1fr; }
-            .report-item strong { font-size: 1.8em; }
-            .report-item-nota { grid-column: 1 / 1; } /* Reset para coluna única */
+       .error-container {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #c62828;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        #quiz-content {
+            display: none; 
         }
 
+       .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            gap: 15px; 
+        }
+        #question-title {
+            font-size: 22px;
+            color: #333;
+            margin-left: 40px; 
+            flex-grow: 1; 
+            word-break: break-word; 
+        }
+        #question-title code { 
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        #question-title pre { 
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-size: 0.9em;
+        }
+        #progress {
+            font-size: 16px;
+            color: #555;
+            white-space: nowrap; 
+            flex-shrink: 0; 
+            padding-top: 4px; 
+        }
+
+       .answers {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* --- CORREÇÃO (Estilo do Botão) --- */
+       .answer-btn {
+            display: flex; /* MUDADO: de 'block' para 'flex' */
+            align-items: flex-start; /* Alinha no topo se o texto quebrar */
+            width: 100%;
+            background: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+        /* --- FIM DA CORREÇÃO --- */
+
+       .answer-btn:hover:not([disabled]) {
+            background: #e9ecef;
+            border-color: #b1b9c1;
+        }
+        
+        /* --- NOVO: Estilos para a letra e o texto da opção --- */
+       .option-key {
+            font-weight: bold;
+            color: #333; /* Cor escura para a letra */
+            margin-right: 10px; /* Espaço entre a letra e o texto */
+            flex-shrink: 0; /* Impede que a letra "achate" */
+        }
+       .option-text {
+            flex-grow: 1; /* Ocupa o espaço restante */
+            color: #555; /* Cor um pouco mais clara para o texto */
+            word-break: break-word; /* Quebra o texto se for longo */
+        }
+        /* --- FIM DOS NOVOS ESTILOS --- */
+        
+       .answer-btn.selected {
+            background-color: #d0e7ff; 
+            border-color: #007bff;
+        }
+        
+       .answer-btn.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            font-weight: bold;
+        }
+        /* Quando o botão está correto, força a cor dos filhos */
+       .answer-btn.correct .option-key,
+       .answer-btn.correct .option-text {
+            color: #155724;
+            font-weight: bold;
+        }
+
+       .answer-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            font-weight: bold;
+        }
+        /* Quando o botão está incorreto, força a cor dos filhos */
+       .answer-btn.incorrect .option-key,
+       .answer-btn.incorrect .option-text {
+            color: #721c24;
+            font-weight: bold;
+        }
+
+       .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7; 
+        }
+       .answer-input {
+            display: block;
+            width: 100%;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            box-sizing: border-box; 
+        }
+       .answer-input.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            font-weight: bold;
+        }
+       .answer-input.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            font-weight: bold;
+        }
+       .submit-fill-btn {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            width: auto; 
+            float: right;
+            margin-top: 10px; 
+        }
+       .submit-fill-btn:hover:not([disabled]) {
+            background-color: #0056b3;
+        }
+       .correct-answer-text {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #155724; 
+            clear: both;
+            padding-top: 10px;
+        }
+        
+       .explanation-container {
+            background: #e7f3fe; 
+            border: 1px solid #b0c4de; 
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            clear: both; 
+        }
+       .explanation-container strong {
+            color: #0056b3; 
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+       .quiz-footer {
+            margin-top: 20px;
+            text-align: right;
+            clear: both;
+        }
+        #next-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none; 
+        }
+        #next-btn:hover {
+            background-color: #0056b3;
+        }
+       .score-container {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-    <div id="menu-toggle">&#9776;</div>
-
-    <nav id="side-menu">
-        <div id="menu-close">&times;</div>
-        <h3>Questões</h3>
-        <div id="nav-container">
-            </div>
+    <button id="menu-toggle" class="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div id="nav-overlay" class="overlay"></div>
+    <nav id="nav-menu" class="nav-drawer">
+        <h3>Navegar Questões</h3>
+        <ul id="question-list">
+            </ul>
     </nav>
-
-    <main id="main-content">
-        <div id="quiz-container">
-            <h2>Carregando questões...</h2>
+    <div class="quiz-container">
+        <div class="error-container" id="error-box" style="display: none;">
+            <h2>Erro ao Carregar o Quiz</h2>
+            <p id="error-message"></p>
+            <p>Por favor, volte ao <a href="index.html">menu principal</a> e tente novamente.</p>
         </div>
-    </main>
 
-<script>
-    // --- NOVO CÓDIGO DE CARREGAMENTO DINÂMICO ---
+        <div id="quiz-content">
+            <div class="question-header">
+                <h2 id="question-title">Carregando pergunta...</h2>
+                <p id="progress">Pergunta 1/X</p>
+            </div>
+            
+            <div id="answers" class="answers"></div>
+            
+            <div id="explanation-box" class="explanation-container" style="display: none;">
+                </div>
 
-    // 1. Variável global para os dados do quiz (agora começa vazia)
-    let quizData = [];
+            <div class="quiz-footer">
+                <button id="next-btn">Próxima</button>
+            </div>
+        </div>
 
-    // 2. Função para carregar o script de dados correto
-    function loadQuizData(assunto) {
-        return new Promise((resolve, reject) => {
-            let scriptSrc = '';
-            let quizTitle = 'Quiz';
+        <div id="score-box" class="score-container" style="display: none;">
+            <h2 id="score-title">Quiz Finalizado!</h2>
+            <p id="score-text">Você acertou X de Y perguntas.</p>
+            <a href="index.html" id="restart-btn" class="answer-btn" style="text-align: center; background-color: #007bff; color: white;">Jogar Novamente</a>
+        </div>
+    </div>
 
-            // Mapeia o parâmetro da URL para o nome do arquivo .js e define o título
-            if (assunto === 'lpic201') {
-                scriptSrc = 'dados_lpic201.js';
-                quizTitle = 'LPIC-2 201-450';
-            } else if (assunto === 'lpic202') {
-                scriptSrc = 'dados_lpic202.js';
-                quizTitle = 'LPIC-2 202-450';
+    <script>
+        // Elementos da UI
+        const errorBox = document.getElementById('error-box');
+        const errorMessage = document.getElementById('error-message');
+        const quizContent = document.getElementById('quiz-content');
+        const scoreBox = document.getElementById('score-box');
+        
+        const questionTitleEl = document.getElementById('question-title');
+        const progressEl = document.getElementById('progress');
+        const answersEl = document.getElementById('answers');
+        const nextBtn = document.getElementById('next-btn');
+        const explanationBox = document.getElementById('explanation-box'); 
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navOverlay = document.getElementById('nav-overlay');
+        const questionList = document.getElementById('question-list');
+        const scoreTitleEl = document.getElementById('score-title');
+        const scoreTextEl = document.getElementById('score-text');
+
+        // Estado do Quiz
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let quizData = []; 
+
+        function showUIError(message) {
+            quizContent.style.display = 'none';
+            scoreBox.style.display = 'none';
+            errorMessage.textContent = message;
+            errorBox.style.display = 'block';
+            menuToggle.style.display = 'none'; 
+        }
+
+        function startQuiz() {
+            quizData.sort(() => Math.random() - 0.5); 
+            currentQuestionIndex = 0;
+            score = 0;
+            nextBtn.innerHTML = "Próxima";
+            populateNavMenu(); 
+            showQuestion();
+            menuToggle.style.display = 'block'; 
+        }
+
+        function showQuestion() {
+            resetState();
+            const currentQuestion = quizData[currentQuestionIndex];
+            const questionNumber = currentQuestionIndex + 1;
+            
+            questionTitleEl.innerHTML = `${questionNumber}. ${currentQuestion.pergunta}`;
+            progressEl.innerText = `Pergunta ${questionNumber}/${quizData.length}`;
+
+            const correctAnswers = currentQuestion.respostaCorreta;
+            const isMultiAnswer = Array.isArray(correctAnswers);
+
+            if (currentQuestion.tipo === 'fill') {
+                const input = document.createElement("input");
+                input.type = "text";
+                input.id = "fill-answer-input";
+                input.placeholder = "Digite sua resposta aqui...";
+                input.classList.add("answer-input"); 
+                input.addEventListener("keypress", (e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault(); 
+                        const submitBtn = document.getElementById('fill-submit-btn');
+                        if (submitBtn && !submitBtn.disabled) {
+                            submitBtn.click();
+                        }
+                    }
+                });
+
+                const submitBtn = document.createElement("button");
+                submitBtn.innerText = "Verificar";
+                submitBtn.classList.add("answer-btn", "submit-fill-btn"); 
+                submitBtn.id = "fill-submit-btn";
+                submitBtn.addEventListener("click", checkFillAnswer);
+
+                answersEl.appendChild(input);
+                answersEl.appendChild(submitBtn);
+
+            } else if (isMultiAnswer) {
+                for (const key in currentQuestion.opcoes) {
+                    const button = document.createElement("button");
+                    
+                    // --- CORREÇÃO (HTML do Botão) ---
+                    // Adiciona <span>s com classes para a letra e o texto
+                    button.innerHTML = `<span class="option-key">${key.toUpperCase()}:</span> <span class="option-text">${currentQuestion.opcoes[key]}</span>`;
+                    // --- FIM DA CORREÇÃO ---
+                    
+                    button.classList.add("answer-btn");
+                    button.dataset.key = key;
+                    button.addEventListener("click", toggleAnswer); 
+                    answersEl.appendChild(button);
+                }
+                const submitBtn = document.createElement("button");
+                submitBtn.innerText = "Verificar Respostas";
+                submitBtn.classList.add("answer-btn", "submit-fill-btn"); 
+                submitBtn.id = "multi-submit-btn";
+                submitBtn.addEventListener("click", checkMultiAnswer);
+                answersEl.appendChild(submitBtn);
+
             } else {
-                reject(new Error('Assunto de quiz inválido ou não encontrado na URL! Verifique o link no menu.'));
+                for (const key in currentQuestion.opcoes) {
+                    const button = document.createElement("button");
+                    
+                    // --- CORREÇÃO (HTML do Botão) ---
+                    // Adiciona <span>s com classes para a letra e o texto
+                    button.innerHTML = `<span class="option-key">${key.toUpperCase()}:</span> <span class="option-text">${currentQuestion.opcoes[key]}</span>`;
+                    // --- FIM DA CORREÇÃO ---
+                    
+                    button.classList.add("answer-btn");
+                    button.dataset.key = key;
+                    
+                    if (key === correctAnswers) {
+                        button.dataset.correct = "true";
+                    }
+                    button.addEventListener("click", selectAnswer); 
+                    answersEl.appendChild(button);
+                }
+            }
+        }
+
+        function resetState() {
+            nextBtn.style.display = 'none';
+            explanationBox.style.display = 'none';
+            explanationBox.innerHTML = '';
+            
+            while (answersEl.firstChild) {
+                answersEl.removeChild(answersEl.firstChild);
+            }
+        }
+
+        function selectAnswer(e) {
+            // e.target pode ser o <span>, precisamos garantir que é o botão
+            const selectedBtn = e.target.closest('.answer-btn'); 
+            const isCorrect = selectedBtn.dataset.correct === "true";
+
+            if (isCorrect) {
+                selectedBtn.classList.add("correct");
+                score++;
+            } else {
+                selectedBtn.classList.add("incorrect");
+            }
+
+            Array.from(answersEl.children).forEach(button => {
+                // Só desabilita botões de resposta, não o botão de submit
+                if (button.classList.contains('answer-btn') && !button.id.includes('submit')) { 
+                    if (button.dataset.correct === "true") {
+                        button.classList.add("correct");
+                    }
+                    button.disabled = true;
+                }
+            });
+            
+            showExplanation(); 
+            nextBtn.style.display = 'block';
+        }
+
+        function checkFillAnswer() {
+            const inputEl = document.getElementById('fill-answer-input');
+            const submitBtn = document.getElementById('fill-submit-btn');
+            
+            const userAnswer = inputEl.value.trim(); 
+            const currentQuestion = quizData[currentQuestionIndex];
+            const correctAnswer = currentQuestion.respostaCorreta.trim(); 
+
+            if (userAnswer === correctAnswer) {
+                inputEl.classList.add("correct");
+                score++;
+            } else {
+                inputEl.classList.add("incorrect");
+                const correctAnswerEl = document.createElement("div");
+                correctAnswerEl.innerHTML = `Resposta correta: <strong>${currentQuestion.respostaCorreta}</strong>`;
+                correctAnswerEl.classList.add('correct-answer-text');
+                answersEl.appendChild(correctAnswerEl);
+            }
+            
+            showExplanation();
+
+            inputEl.disabled = true;
+            submitBtn.disabled = true;
+            nextBtn.style.display = 'block';
+        }
+
+        function toggleAnswer(e) {
+            // e.target pode ser o <span>, garante que pegamos o botão
+            e.target.closest('.answer-btn').classList.toggle('selected');
+        }
+
+        function checkMultiAnswer() {
+            const currentQuestion = quizData[currentQuestionIndex];
+            const correctAnswers = currentQuestion.respostaCorreta; 
+            
+            const buttons = Array.from(answersEl.querySelectorAll('.answer-btn'));
+            let allCorrect = true;
+            let correctSelectedCount = 0;
+
+            buttons.forEach(button => {
+                const key = button.dataset.key;
+                if (!key) return; 
+
+                const isCorrect = correctAnswers.includes(key);
+                const isSelected = button.classList.contains('selected');
+
+                if (isCorrect) {
+                    button.classList.add('correct');
+                    if (isSelected) {
+                        correctSelectedCount++;
+                    } else {
+                        allCorrect = false; 
+                    }
+                } else if (isSelected) {
+                    button.classList.add('incorrect');
+                    allCorrect = false; 
+                }
+                
+                button.disabled = true;
+            });
+            
+            if (allCorrect && correctSelectedCount === correctAnswers.length) {
+                score++;
+            }
+
+            document.getElementById('multi-submit-btn').disabled = true;
+            
+            showExplanation();
+            nextBtn.style.display = 'block';
+        }
+        
+        function showExplanation() {
+            const explanation = quizData[currentQuestionIndex].explicacao;
+            if (explanation) {
+                explanationBox.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                explanationBox.style.display = 'block';
+            }
+        }
+
+        function populateNavMenu() {
+            questionList.innerHTML = ''; 
+            quizData.forEach((question, index) => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = '#';
+                
+                const cleanText = question.pergunta.replace(/<[^>]+>/g, ''); 
+                a.textContent = `Questão ${index + 1}: ${cleanText.substring(0, 30)}...`;
+                
+                a.dataset.index = index;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    jumpToQuestion(index);
+                });
+                li.appendChild(a);
+                questionList.appendChild(li);
+            });
+        }
+
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            showQuestion();
+            closeNavMenu();
+        }
+
+        function openNavMenu() {
+            navMenu.classList.add('open');
+            navOverlay.classList.add('open');
+        }
+
+        function closeNavMenu() {
+            navMenu.classList.remove('open');
+            navOverlay.classList.remove('open');
+        }
+
+        function showScore() {
+            resetState();
+            quizContent.style.display = 'none';
+            scoreTextEl.innerText = `Você acertou ${score} de ${quizData.length} perguntas.`;
+            scoreBox.style.display = 'block';
+            menuToggle.style.display = 'none'; 
+        }
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        nextBtn.addEventListener("click", () => {
+            if (currentQuestionIndex < quizData.length) {
+                handleNextButton();
+            } else {
+                startQuiz();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            menuToggle.addEventListener('click', openNavMenu);
+            navOverlay.addEventListener('click', closeNavMenu);
+            menuToggle.style.display = 'none'; 
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const assunto = urlParams.get('assunto');
+
+            if (!assunto) {
+                showUIError("Nenhum assunto de quiz foi especificado na URL.");
                 return;
             }
 
-            // Atualiza o título da página
-            document.title = quizTitle;
+            const scriptPath = `dados_${assunto}.js`;
+            const scriptElement = document.createElement('script');
+            scriptElement.src = scriptPath;
 
-            // Cria uma tag <script> dinamicamente para carregar os dados
-            const script = document.createElement('script');
-            script.src = scriptSrc;
-            script.async = true; // Garante carregamento assíncrono
-
-            // Quando o script carregar, a variável global 'quizData' estará preenchida
-            script.onload = () => {
-                // Adiciona uma verificação extra para garantir que quizData foi populado
-                if (typeof quizData !== 'undefined' && quizData.length > 0) {
-                    console.log(`Dados do quiz '${assunto}' carregados com ${quizData.length} questões.`);
-                    resolve(); // Informa que o carregamento foi concluído
+            scriptElement.onload = () => {
+                if (typeof perguntas!== 'undefined' && perguntas.length > 0) {
+                    quizData = perguntas;
+                    quizContent.style.display = 'block'; 
+                    startQuiz();
                 } else {
-                    console.error(`Erro: O script ${scriptSrc} carregou, mas a variável quizData está vazia ou indefinida.`);
-                    reject(new Error(`Falha ao processar os dados do arquivo ${scriptSrc}. Verifique o conteúdo do arquivo.`));
+                    showUIError(`O arquivo de dados '${scriptPath}' está vazio ou não definiu a variável 'perguntas' corretamente.`);
                 }
             };
 
-            // Informa se houver um erro no carregamento do arquivo .js
-            script.onerror = (event) => {
-                 console.error(`Erro ao carregar o script: ${scriptSrc}`, event);
-                 reject(new Error(`Falha ao carregar o arquivo de questões ${scriptSrc}. Verifique se o arquivo existe e o caminho está correto.`));
-            }
+            scriptElement.onerror = () => {
+                showUIError(`Falha ao carregar o arquivo de dados do quiz: '${scriptPath}'. Verifique se o arquivo existe e o caminho está correto.`);
+            };
 
-            // Adiciona o script à página
-            document.head.appendChild(script);
+            document.head.appendChild(scriptElement);
         });
-    }
-
-    // 3. Função principal de inicialização
-    async function initializeQuiz() {
-        const quizContainer = document.getElementById('quiz-container');
-        try {
-            // Pega o parâmetro 'assunto' da URL (ex: ?assunto=lpic201)
-            const params = new URLSearchParams(window.location.search);
-            const assunto = params.get('assunto');
-
-            if (!assunto) {
-                throw new Error('Nenhum assunto de quiz foi especificado na URL. Use os links do menu principal.');
-            }
-
-            // Mostra um indicador de carregamento
-            quizContainer.innerHTML = '<h2>Carregando questões...</h2>';
-
-            // Espera os dados (perguntas) serem carregados
-            await loadQuizData(assunto);
-
-            // Verifica se quizData realmente tem dados após o await
-            if (!quizData || quizData.length === 0) {
-                throw new Error('Os dados do quiz não foram carregados corretamente ou estão vazios.');
-            }
-
-            // --- SEU CÓDIGO ORIGINAL CONTINUA DAQUI ---
-
-            // 1. Embaralha a ORDEM das questões
-            shuffleArray(quizData);
-            // 2. Embaralha as OPÇÕES DENTRO das questões
-            shuffleQuizData(quizData);
-
-            // Inicia o quiz e popula o menu
-            populateNavMenu(); // Garante que answerLog seja inicializado com o tamanho correto
-            renderQuiz(); // Renderiza a primeira questão (índice 0)
-
-        } catch (error) {
-            // Mostra uma mensagem de erro amigável se algo falhar
-            console.error("Erro durante a inicialização do Quiz:", error); // Log detalhado do erro
-            document.getElementById('main-content').style.alignItems = 'flex-start';
-            quizContainer.innerHTML =
-                `<div style="text-align: center; color: #721c24; background: #ffebeb; padding: 20px; border-radius: 8px;">
-                    <h2>Erro ao Carregar o Quiz</h2>
-                    <p>${error.message}</p>
-                    <p>Por favor, volte ao <a href="index.html" style="color: #0056b3;">menu principal</a> e tente novamente.</p>
-                </div>`;
-            // Esconde o menu lateral se o quiz falhar
-            const sideMenu = document.getElementById('side-menu');
-             if (sideMenu) sideMenu.style.display = 'none';
-        }
-    }
-
-    // --- FIM DO NOVO CÓDIGO ---
-
-
-    // --- CÓDIGO DE EMBARALHAMENTO ---
-    function shuffleArray(array) {
-        if (!array || array.length === 0) {
-           console.warn("shuffleArray chamado com array vazio ou nulo.");
-           return;
-        }
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
-    function shuffleQuizData(data) {
-         if (!data || data.length === 0) {
-           console.warn("shuffleQuizData chamado com dados vazios ou nulos.");
-           return;
-        }
-        const labels = ['A', 'B', 'C', 'D', 'E', 'F'];
-        data.forEach((question, index) => {
-            // Adiciona verificação para question nulo/undefined
-            if (!question) {
-                console.warn(`Item indefinido encontrado no índice ${index} em shuffleQuizData.`);
-                return; // Pula este item problemático
-            }
-            // A verificação original continua
-            if (question.tipo === 'fill' || !question.opcoes) { return; }
-
-            const originalAnswers = Array.isArray(question.respostaCorreta) ? question.respostaCorreta : [question.respostaCorreta];
-            let optionsList = Object.entries(question.opcoes).map(([key, text]) => ({ text: text, isCorrect: originalAnswers.includes(key) }));
-            shuffleArray(optionsList); // Embaralha a lista de opções
-            const newOpcoes = {};
-            const newRespostaCorreta = [];
-            const originalWasArray = Array.isArray(question.respostaCorreta);
-            optionsList.forEach((option, index) => {
-                const newKey = labels[index];
-                newOpcoes[newKey] = option.text;
-                if (option.isCorrect) { newRespostaCorreta.push(newKey); }
-            });
-            question.opcoes = newOpcoes;
-            // Define a nova resposta correta baseada nas novas labels
-            if (originalWasArray || newRespostaCorreta.length > 1) {
-                question.respostaCorreta = newRespostaCorreta;
-            } else {
-                 // Garante que haja pelo menos uma resposta correta antes de atribuir [0]
-                question.respostaCorreta = newRespostaCorreta.length > 0 ? newRespostaCorreta[0] : undefined;
-                if (question.respostaCorreta === undefined) {
-                     console.warn(`Questão ${question.id || index} ficou sem resposta correta após embaralhar opções.`);
-                }
-            }
-        });
-    }
-
-    // --- LÓGICA PRINCIPAL DO QUIZ ---
-    let currentQuestionIndex = 0;
-    let answerLog = []; // Inicializado como vazio, será dimensionado em populateNavMenu
-    let isCurrentQuestionAnswered = false;
-
-    // --- Lógica do Menu Mobile ---
-    function toggleMenu() {
-        document.body.classList.toggle('side-menu-open');
-    }
-
-    // --- FUNÇÕES DE NAVEGAÇÃO ---
-    function populateNavMenu() {
-        // Verifica se quizData está pronto
-        if (!quizData || quizData.length === 0) {
-            console.error("populateNavMenu chamado antes de quizData estar pronto.");
-            return;
-        }
-        // Inicialização correta do answerLog
-        answerLog = new Array(quizData.length).fill(null);
-        const navContainer = document.getElementById('nav-container');
-        if (!navContainer) return; // Segurança extra
-
-        let navHTML = '';
-        for (let i = 0; i < quizData.length; i++) {
-            navHTML += `<div class="nav-item" data-index="${i}">${i + 1}</div>`;
-        }
-        navContainer.innerHTML = navHTML;
-
-        navContainer.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const index = parseInt(item.dataset.index);
-                 if (!isNaN(index)) { // Verifica se o índice é válido
-                    jumpToQuestion(index);
-                    // Fecha o menu em mobile ao clicar num item
-                    if (window.innerWidth <= 1024 && document.body.classList.contains('side-menu-open')) {
-                        toggleMenu();
-                    }
-                }
-            });
-        });
-         // Certifica que o estado inicial do menu (item 1 como 'current') seja definido
-        updateSideMenuState();
-    }
-
-    function jumpToQuestion(index) {
-        if (index >= 0 && index < quizData.length) {
-            currentQuestionIndex = index;
-            renderQuiz();
-        } else {
-            console.warn(`Tentativa de pular para índice inválido: ${index}`);
-        }
-    }
-
-    function updateSideMenuState() {
-        // Verifica se quizData está pronto
-        if (!quizData || quizData.length === 0) return;
-
-        for (let i = 0; i < quizData.length; i++) {
-            const item = document.querySelector(`.nav-item[data-index="${i}"]`);
-            if (!item) continue;
-            item.classList.remove('current', 'answered');
-            if (answerLog[i] !== null) {
-                item.classList.add('answered');
-            }
-            if (i === currentQuestionIndex) {
-                item.classList.add('current');
-            }
-        }
-    }
-
-    // --- FUNÇÕES PRINCIPAIS ---
-
-    function renderQuiz() {
-        console.log('Rendering quiz. Index:', currentQuestionIndex, 'quizData Length:', quizData.length);
-        isCurrentQuestionAnswered = false;
-
-        // Verifica se quizData e o índice são válidos antes de prosseguir
-        if (!quizData || currentQuestionIndex < 0 || currentQuestionIndex >= quizData.length) {
-             console.error(`Erro: Tentando renderizar índice inválido ${currentQuestionIndex}. Data length é ${quizData ? quizData.length : 'undefined'}.`);
-             const quizContainer = document.getElementById('quiz-container');
-             quizContainer.innerHTML =
-                `<div style="text-align: center; color: #dc3545; background: #f8d7da; padding: 20px; border-radius: 8px;">
-                    <h2>Erro Interno</h2>
-                    <p>Índice da questão (${currentQuestionIndex + 1}) está fora dos limites.</p>
-                    <p>Por favor, <a href="index.html" style="color: #0056b3;">volte ao menu principal</a>.</p>
-                </div>`;
-             const sideMenu = document.getElementById('side-menu');
-             if (sideMenu) sideMenu.style.display = 'none';
-             return;
-        }
-
-        const currentQuestion = quizData[currentQuestionIndex];
-
-        // *** VERIFICAÇÃO ADICIONADA ***
-        if (!currentQuestion) {
-            console.error(`Error: currentQuestion is undefined at index ${currentQuestionIndex}. Data length is ${quizData.length}.`);
-            const quizContainer = document.getElementById('quiz-container');
-            quizContainer.innerHTML =
-                `<div style="text-align: center; color: #dc3545; background: #f8d7da; padding: 20px; border-radius: 8px;">
-                    <h2>Erro Interno</h2>
-                    <p>Falha ao carregar os dados da questão ${currentQuestionIndex + 1}. O objeto da questão está indefinido.</p>
-                    <p>Isso pode indicar um problema no arquivo de dados .js.</p>
-                    <p>Por favor, <a href="index.html" style="color: #0056b3;">volte ao menu principal</a> e tente novamente.</p>
-                </div>`;
-            const sideMenu = document.getElementById('side-menu');
-            if (sideMenu) sideMenu.style.display = 'none';
-            return; // Interrompe a execução
-        }
-        // *** FIM DA VERIFICAÇÃO ***
-
-        console.log('Current question object:', currentQuestion);
-
-        let optionsHTML = '';
-
-        if (currentQuestion.tipo === 'fill') {
-             // Garante que respostaCorreta exista e seja string para 'fill'
-             if (typeof currentQuestion.respostaCorreta !== 'string') {
-                 console.error(`Questão tipo 'fill' (${currentQuestionIndex}) não tem 'respostaCorreta' como string.`);
-                 // Poderia exibir um erro aqui, mas vamos permitir continuar com input vazio
-             }
-            const savedAnswer = answerLog[currentQuestionIndex] || '';
-            optionsHTML = `<input type="text" id="fill-answer" class="option" placeholder="Digite sua resposta..." value="${savedAnswer}">`;
-        } else if (currentQuestion.opcoes && typeof currentQuestion.opcoes === 'object') {
-             // Garante que respostaCorreta exista para múltipla escolha
-             if (typeof currentQuestion.respostaCorreta === 'undefined') {
-                  console.error(`Questão múltipla escolha (${currentQuestionIndex}) não tem 'respostaCorreta' definida.`);
-                  // Poderia exibir um erro, mas vamos renderizar opções sem saber a correta
-             }
-            for (const key in currentQuestion.opcoes) {
-                // Fallback seguro para includes
-                const isSelected = answerLog[currentQuestionIndex] && Array.isArray(answerLog[currentQuestionIndex]) && answerLog[currentQuestionIndex].includes(key) ? 'selected' : '';
-                optionsHTML += `<div class="option ${isSelected}" data-key="${key}"><strong>${key}.</strong>&nbsp; ${currentQuestion.opcoes[key]}</div>`;
-            }
-        } else {
-             // Se não for 'fill' e não tiver 'opcoes', é um erro de dados
-             console.error(`Questão ${currentQuestionIndex} tem formato inválido: falta 'tipo: fill' ou 'opcoes'. Objeto:`, currentQuestion);
-             optionsHTML = '<p style="color: red;">Erro: Formato inválido para esta questão.</p>';
-        }
-
-
-        const nextButtonText = (currentQuestionIndex === quizData.length - 1) ? 'Finalizar Quiz' : 'Próxima Questão';
-
-        const quizContainer = document.getElementById('quiz-container');
-        quizContainer.innerHTML = `
-            <a href="index.html" style="float: left; font-size: 0.9em; text-decoration: none; color: #007bff;">&larr; Voltar ao Menu</a>
-            <div id="question-counter">Questão ${currentQuestionIndex + 1} de ${quizData.length}</div>
-            <h2 id="question">${currentQuestion.pergunta || 'Erro: Pergunta não encontrada.'}</h2>
-            <div id="options-container">${optionsHTML}</div>
-            <div id="feedback-container"></div>
-            <div id="controls">
-                <button id="prev-btn">Anterior</button>
-                <button id="next-btn">${nextButtonText}</button>
-            </div>
-        `;
-
-        addEventListeners();
-        updateUIState();
-        updateSideMenuState();
-    }
-
-
-    function addEventListeners() {
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const fillAnswerInput = document.getElementById('fill-answer');
-        const options = document.querySelectorAll('.option:not(input)'); // Seleciona apenas divs de opção
-
-        if (prevBtn) prevBtn.addEventListener('click', navigatePrev);
-        if (nextBtn) nextBtn.addEventListener('click', handleNextButtonClick);
-
-        // Verifica se currentQuestion existe antes de adicionar listeners dependentes dela
-        const currentQuestion = quizData ? quizData[currentQuestionIndex] : undefined;
-        if (!currentQuestion) return; // Não adiciona listeners se a questão for inválida
-
-        if (fillAnswerInput) {
-            fillAnswerInput.focus();
-            fillAnswerInput.addEventListener('input', (event) => {
-                answerLog[currentQuestionIndex] = event.target.value.trim() || null;
-                updateUIState();
-            });
-            fillAnswerInput.addEventListener('keyup', (event) => {
-                const nextButton = document.getElementById('next-btn');
-                // Verifica se nextButton existe e não está desabilitado
-                if (event.key === 'Enter' && nextButton && !nextButton.disabled) {
-                    handleNextButtonClick();
-                }
-            });
-        } else {
-            options.forEach(option => {
-                option.addEventListener('click', () => {
-                     // Verifica novamente se currentQuestion existe (importante para callbacks)
-                     const currentQ = quizData ? quizData[currentQuestionIndex] : undefined;
-                     if (currentQ) {
-                        selectOption(option, option.dataset.key, Array.isArray(currentQ.respostaCorreta));
-                     }
-                });
-            });
-        }
-    }
-
-    function updateUIState() {
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        
-        // Se os botões não existem (ex: erro anterior), não faz nada
-        if (!prevBtn || !nextBtn) return; 
-
-        prevBtn.disabled = currentQuestionIndex === 0;
-
-        // Verifica se quizData e currentQuestion existem
-        const currentQuestion = quizData ? quizData[currentQuestionIndex] : undefined;
-        if (!currentQuestion) {
-             nextBtn.disabled = true; // Desabilita se a questão não carregou
-             nextBtn.textContent = 'Erro';
-             return;
-        }
-
-        const isAnswered = !!answerLog[currentQuestionIndex];
-        const isMulti = Array.isArray(currentQuestion.respostaCorreta);
-
-        if (isCurrentQuestionAnswered) {
-            nextBtn.textContent = (currentQuestionIndex === quizData.length - 1) ? 'Finalizar Quiz' : 'Próxima Questão';
-            nextBtn.disabled = false;
-        } else if (currentQuestion.tipo === 'fill' || isMulti) {
-            nextBtn.textContent = 'Verificar';
-            nextBtn.disabled = !isAnswered;
-        } else {
-             // Caso de escolha única, não respondida ainda
-            nextBtn.textContent = (currentQuestionIndex === quizData.length - 1) ? 'Finalizar Quiz' : 'Próxima Questão';
-             // Habilita o botão 'Próxima' assim que uma opção é selecionada (feito em selectOption),
-             // mas aqui garantimos que começa desabilitado se não respondido.
-             nextBtn.disabled = !isAnswered; 
-        }
-    }
-
-
-    function selectOption(optionDiv, key, isMultipleChoice) {
-        if (isCurrentQuestionAnswered) return;
-
-        if (isMultipleChoice) {
-            optionDiv.classList.toggle('selected');
-        } else {
-            // Desmarca qualquer outra selecionada antes de marcar a nova
-            document.querySelectorAll('.option.selected').forEach(el => el.classList.remove('selected'));
-            optionDiv.classList.add('selected');
-            isCurrentQuestionAnswered = true; // Marca como respondida para escolha única
-        }
-
-        // Atualiza o log de respostas
-        let selectedKeys = [];
-        document.querySelectorAll('.option.selected').forEach(el => selectedKeys.push(el.dataset.key));
-        answerLog[currentQuestionIndex] = selectedKeys.length > 0 ? selectedKeys : null;
-
-        // Para escolha única, verifica a resposta imediatamente
-        if (!isMultipleChoice) {
-            checkAnswer();
-            updateSideMenuState(); // Atualiza o menu lateral para refletir a resposta
-        }
-
-        updateUIState(); // Atualiza o estado dos botões (habilita 'Verificar' ou 'Próxima')
-    }
-
-     function handleNextButtonClick() {
-        // Verifica se quizData e currentQuestion existem
-        const currentQuestion = quizData ? quizData[currentQuestionIndex] : undefined;
-        if (!currentQuestion) {
-            console.error("handleNextButtonClick: currentQuestion is invalid.");
-            return; // Impede a ação se a questão atual for inválida
-        }
-
-        const isMulti = Array.isArray(currentQuestion.respostaCorreta);
-
-        // Se for tipo 'fill' ou múltipla escolha e ainda não foi verificada
-        if (!isCurrentQuestionAnswered && (currentQuestion.tipo === 'fill' || isMulti)) {
-            isCurrentQuestionAnswered = true; // Marca como respondida/verificada
-            checkAnswer();
-            updateSideMenuState(); // Atualiza o menu lateral
-        }
-        // Se já foi respondida/verificada OU é escolha única (já verificada em selectOption)
-        else {
-            if (currentQuestionIndex < quizData.length - 1) {
-                currentQuestionIndex++;
-                renderQuiz(); // Vai para a próxima questão
-            } else {
-                showFinalReport(); // Mostra o relatório final
-            }
-        }
-        updateUIState(); // Atualiza o estado dos botões após a ação
-    }
-
-
-    function navigatePrev() {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            renderQuiz();
-        }
-    }
-
-    function checkAnswer() {
-        const question = quizData[currentQuestionIndex];
-        const userAnswer = answerLog[currentQuestionIndex];
-
-        // Verifica se a questão e a resposta correta existem
-        if (!question || typeof question.respostaCorreta === 'undefined') {
-             console.error(`checkAnswer: Questão ${currentQuestionIndex} ou sua resposta correta está indefinida.`);
-             return; // Não pode verificar
-        }
-
-        // Normaliza correctAnswer para ser sempre um array
-        const correctAnswer = Array.isArray(question.respostaCorreta) ? question.respostaCorreta : [question.respostaCorreta];
-
-        // Normaliza userAnswer para ser sempre um array (ou vazio se null)
-        const sortedUserAnswer = Array.isArray(userAnswer) ? [...userAnswer].sort() : (userAnswer ? [userAnswer] : []);
-        const sortedCorrectAnswer = [...correctAnswer].sort();
-
-        let isCorrect = false;
-        if (question.tipo === 'fill') {
-             // Comparação case-insensitive e trim para 'fill'
-            isCorrect = userAnswer && typeof userAnswer === 'string' &&
-                        userAnswer.trim().toLowerCase() === String(correctAnswer[0]).trim().toLowerCase();
-        } else {
-            // Comparação exata para múltipla escolha (arrays ordenados)
-            isCorrect = JSON.stringify(sortedUserAnswer) === JSON.stringify(sortedCorrectAnswer);
-        }
-
-        const feedbackContainer = document.getElementById('feedback-container');
-        if (!feedbackContainer) return; // Segurança
-
-        // Garante que a explicação exista, senão usa uma string vazia
-        const explicacao = question.explicacao || "";
-        let feedbackHTML = `<p><strong>${isCorrect ? 'Correto!' : 'Incorreto.'}</strong> ${explicacao}</p>`;
-
-        feedbackContainer.className = isCorrect ? 'feedback-correct-box' : 'feedback-incorrect-box';
-
-        if (question.tipo === 'fill') {
-            const input = document.getElementById('fill-answer');
-            if (input) {
-                input.disabled = true; // Desabilita o input após verificar
-                input.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
-                if (!isCorrect) {
-                     // Mostra a resposta correta se errar no 'fill'
-                     feedbackHTML = `<p><strong>Incorreto.</strong> ${explicacao}<br><strong>Resposta correta:</strong> <code>${correctAnswer[0]}</code></p>`;
-                }
-            }
-        } else {
-             // Desabilita cliques e aplica feedback visual nas opções de múltipla escolha
-            document.querySelectorAll('.option:not(input)').forEach(option => {
-                 if (!option) return;
-                 option.style.pointerEvents = 'none'; // Impede cliques futuros
-                 // option.classList.remove('selected'); // Remove seleção visual para clareza
-
-                 const key = option.dataset.key;
-                 const isUserSelection = userAnswer && Array.isArray(userAnswer) && userAnswer.includes(key); // Verifica se userAnswer é array
-                 const isCorrectAnswer = correctAnswer.includes(key);
-
-                 // Aplica classes de feedback
-                 if (isCorrectAnswer) {
-                     option.classList.add('feedback-correct');
-                 } else if (isUserSelection && !isCorrectAnswer) {
-                     option.classList.add('feedback-incorrect');
-                 }
-            });
-        }
-
-        feedbackContainer.innerHTML = feedbackHTML;
-    }
-
-
-    function showFinalReport() {
-        const sideMenu = document.getElementById('side-menu');
-        const mainContent = document.getElementById('main-content');
-        const quizContainer = document.getElementById('quiz-container');
-
-        if (sideMenu) sideMenu.style.display = 'none'; // Esconde menu
-        if (mainContent) mainContent.style.justifyContent = 'center'; // Centraliza relatório
-        if (!quizContainer) return; // Sai se o container não existir
-
-        let totalScore = 0;
-        let detailedReviewHTML = '';
-
-        // Verifica se quizData está válido
-         if (!quizData || quizData.length === 0) {
-             quizContainer.innerHTML = `<p style="color: red;">Erro ao gerar relatório: Dados do quiz não encontrados.</p>`;
-             return;
-         }
-
-
-        quizData.forEach((question, index) => {
-             // Verifica se a questão atual é válida
-             if (!question || typeof question.respostaCorreta === 'undefined') {
-                 console.warn(`Pulando questão ${index + 1} no relatório: dados inválidos.`);
-                 detailedReviewHTML += `<div class="review-item"><h4 style="color: red;">${index + 1}. Erro ao carregar esta questão.</h4></div>`;
-                 return; // Pula para a próxima questão
-             }
-
-            const userAnswer = answerLog[index];
-            const correctAnswer = Array.isArray(question.respostaCorreta) ? question.respostaCorreta : [question.respostaCorreta];
-
-            let questionScore = 0.0;
-            let isFullyCorrect = false;
-
-            const userAnswerAsArray = Array.isArray(userAnswer) ? [...userAnswer] : (userAnswer ? [userAnswer] : []);
-
-            if (question.tipo === 'fill') {
-                isFullyCorrect = userAnswer && typeof userAnswer === 'string' &&
-                                 userAnswer.trim().toLowerCase() === String(correctAnswer[0]).trim().toLowerCase();
-                if (isFullyCorrect) {
-                    questionScore = 1.0;
-                }
-            } else { // Múltipla escolha
-                const totalCorrectNeeded = correctAnswer.length;
-                if (totalCorrectNeeded === 0) {
-                     console.warn(`Questão ${index + 1} de múltipla escolha não tem resposta correta definida.`);
-                     // Decide como pontuar: 0 ou talvez pular? Vamos dar 0.
-                     questionScore = 0.0;
-                     isFullyCorrect = userAnswerAsArray.length === 0; // Considera correto se o usuário não marcou nada? Opcional.
-                } else {
-                    const sortedCorrectAnswer = [...correctAnswer].sort();
-                    const sortedUserAnswer = [...userAnswerAsArray].sort();
-                    isFullyCorrect = JSON.stringify(sortedUserAnswer) === JSON.stringify(sortedCorrectAnswer);
-
-                    if (totalCorrectNeeded === 1) { // Escolha única
-                        if (isFullyCorrect) questionScore = 1.0;
-                    } else { // Múltiplas respostas corretas
-                        let correctSelectedCount = 0;
-                        userAnswerAsArray.forEach(ans => {
-                            if (correctAnswer.includes(ans)) {
-                                correctSelectedCount++;
-                            }
-                        });
-                        questionScore = (correctSelectedCount / totalCorrectNeeded);
-                         // Garante que não exceda 1.0 devido a possíveis problemas de dados
-                        questionScore = Math.min(questionScore, 1.0);
-                    }
-                }
-            }
-
-            totalScore += questionScore;
-
-            // Geração do HTML de revisão
-            let userAnswerText;
-            if (userAnswer === null || userAnswer === undefined || (Array.isArray(userAnswer) && userAnswer.length === 0) ) {
-                userAnswerText = '<em>Não respondida</em>';
-            } else {
-                userAnswerText = Array.isArray(userAnswer) ? userAnswer.join(', ') : userAnswer;
-            }
-
-            const correctAnswerText = correctAnswer.join(', ');
-            const resultClass = isFullyCorrect ? 'resposta-certa' : 'resposta-errada';
-            const explicacao = question.explicacao || "Explicação não disponível."; // Fallback
-
-            detailedReviewHTML += `
-                <div class="review-item">
-                    <h4>${index + 1}. ${question.pergunta || 'Erro: Pergunta não encontrada.'}</h4>
-                    <p class="resposta-usuario ${resultClass}">Sua resposta: ${userAnswerText}</p>
-                    ${!isFullyCorrect ? `<p class="resposta-correta-final">Resposta correta: ${correctAnswerText}</p>` : ''}
-                    <p class="explicacao">${explicacao}</p>
-                </div>
-            `;
-        });
-
-        const totalQuestions = quizData.length;
-        const correctAnswersFloat = totalScore;
-        const incorrectAnswersFloat = totalQuestions - totalScore;
-        const correctPercentage = totalQuestions > 0 ? ((totalScore / totalQuestions) * 100).toFixed(1) : "0.0";
-        const finalGrade = totalQuestions > 0 ? ((totalScore / totalQuestions) * 10).toFixed(1) : "0.0";
-
-        quizContainer.innerHTML = `
-            <div id="final-report">
-                <h2>Relatório Final</h2>
-                <p>Confira o seu desempenho detalhado abaixo:</p>
-                <div id="report-details">
-                    <div class="report-item report-item-acertos"><strong>${correctAnswersFloat.toFixed(1)}</strong><span>Pontos (de ${totalQuestions})</span></div>
-                    <div class="report-item report-item-erros"><strong>${incorrectAnswersFloat.toFixed(1)}</strong><span>Pontos Perdidos</span></div>
-                    <div class="report-item report-item-nota" style="grid-column: 1 / -1;"><strong>${finalGrade} / 10.0</strong><span>Nota Final (${correctPercentage}%)</span></div>
-                </div>
-                <div id="detailed-review">
-                    <h3>Revisão das Questões</h3>
-                    ${detailedReviewHTML}
-                </div>
-                <div id="controls" style="justify-content: center; margin-top: 30px;">
-                    <button onclick="location.reload()">Reiniciar Quiz</button>
-                    <a href="index.html" style="background-color: #6c757d; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; margin-left: 15px;">Voltar ao Menu</a>
-                </div>
-            </div>
-        `;
-    }
-
-    // --- Event Listeners para Menu Mobile ---
-     const menuToggle = document.getElementById('menu-toggle');
-     const menuClose = document.getElementById('menu-close');
-
-     if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
-     if (menuClose) menuClose.addEventListener('click', toggleMenu);
-
-
-    // --- INICIA O QUIZ ---
-    // Chama a função principal que primeiro carrega os dados e DEPOIS inicia o quiz
-     // Adicionado DOMContentLoaded para garantir que o HTML esteja pronto
-     document.addEventListener('DOMContentLoaded', initializeQuiz);
-
-
-</script>
-
+    </script>
 </body>
 </html>
