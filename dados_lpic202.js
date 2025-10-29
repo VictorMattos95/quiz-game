@@ -1,6 +1,6 @@
 // Conteúdo do arquivo: dados_lpic202.js
 
-const quizData = [
+const perguntas = [
   {
     "id": 1,
     "pergunta": "Em um roteador Linux, o encaminhamento de pacotes para IPv4 foi ativado. Após uma reinicialização, a máquina deixou de encaminhar pacotes IP de outros hosts. O comando: <code>echo 1 > /proc/sys/net/ipv4/ip_forward</code> resolve temporariamente esse problema. Qual das opções a seguir é a melhor maneira de garantir que essa configuração seja salva após as reinicializações do sistema?",

@@ -1,6 +1,6 @@
 // Conteúdo do arquivo: dados_lpic201.js
 
-const quizData = [
+const perguntas = [
   {
     "id": 1,
     "pergunta": "Qual dos seguintes comandos apaga o conteúdo da partição <code>/dev/sdb3</code>?",
