@@ -218,7 +218,6 @@
             font-weight: bold;
         }
         
-        /* --- NOVO: Estilo para Resposta Correta "Esquecida" --- */
        .answer-btn.missed {
             background-color: #fff; /* Fundo branco */
             border: 2px dashed #155724; /* Borda verde tracejada */
@@ -230,7 +229,6 @@
             color: #155724;
             font-weight: bold;
         }
-        /* --- FIM DO NOVO ESTILO --- */
         
        .answer-btn:disabled {
             cursor: not-allowed;
@@ -317,6 +315,40 @@
         }
         #restart-btn {
             text-align: center;
+        }
+
+        /* *** CORREÇÃO APLICADA (LAYOUT RESPONSIVO) ***
+         Adicionado @media query para corrigir o layout em dispositivos móveis.
+        */
+        @media (max-width: 650px) {
+            
+            .quiz-container {
+                padding: 15px;
+                margin: 10px auto;
+            }
+
+            .question-header {
+                flex-direction: column-reverse; /* Inverte a ordem e empilha */
+                align-items: stretch; /* Ocupa largura total */
+                gap: 5px; 
+                margin-bottom: 15px;
+            }
+
+            #question-title {
+                margin-left: 0; /* Remove margem desnecessária */
+                font-size: 20px; 
+            }
+            
+            #progress {
+                text-align: right; /* Alinha progresso à direita */
+                padding-top: 0; 
+                width: 100%; 
+            }
+
+            .hamburger-btn {
+                top: 10px;
+                left: 10px;
+            }
         }
 
     </style>
@@ -522,21 +554,41 @@
             nextBtn.style.display = 'block';
         }
 
+        /* *** CORREÇÃO APLICADA (BUG 1 - Versão Case-Sensitive) ***
+         Função 'checkFillAnswer' substituída.
+         - Mantém a verificação exata (case-sensitive) conforme solicitado.
+         - Adiciona suporte para 'respostaCorreta' ser um array de respostas válidas (ex: "ErrorLog", "CustomLog").
+        */
         function checkFillAnswer() {
             const inputEl = document.getElementById('fill-answer-input');
             const submitBtn = document.getElementById('fill-submit-btn');
             
+            // Verificação case-sensitive (sem .toLowerCase())
             const userAnswer = inputEl.value.trim(); 
             const currentQuestion = quizData[currentQuestionIndex];
-            const correctAnswer = currentQuestion.respostaCorreta.trim(); 
+            const correctAnswers = currentQuestion.respostaCorreta;
 
-            if (userAnswer === correctAnswer) {
+            let isCorrect = false;
+
+            if (Array.isArray(correctAnswers)) {
+                // Se a resposta correta for um array, verifica se a resposta (exata) do usuário está nele
+                isCorrect = correctAnswers.some(ans => ans === userAnswer);
+            } else {
+                // Se for uma string única, apenas compara (exato)
+                isCorrect = (correctAnswers === userAnswer);
+            }
+
+            if (isCorrect) {
                 inputEl.classList.add("correct");
                 score++;
             } else {
                 inputEl.classList.add("incorrect");
+                
+                // Exibe a primeira resposta correta (ou a única)
+                const displayAnswer = Array.isArray(correctAnswers) ? correctAnswers[0] : correctAnswers;
+                
                 const correctAnswerEl = document.createElement("div");
-                correctAnswerEl.innerHTML = `Resposta correta: <strong>${currentQuestion.respostaCorreta}</strong>`;
+                correctAnswerEl.innerHTML = `Resposta correta: <strong>${displayAnswer}</strong>`;
                 correctAnswerEl.classList.add('correct-answer-text');
                 answersEl.appendChild(correctAnswerEl);
             }
@@ -552,14 +604,12 @@
             e.target.closest('.answer-btn').classList.toggle('selected');
         }
 
-        // --- CORREÇÃO (Lógica Visual de Múltipla Resposta) ---
         function checkMultiAnswer() {
             const currentQuestion = quizData[currentQuestionIndex];
             const correctAnswers = currentQuestion.respostaCorreta; // Array, ex: ["D", "E"]
             const buttons = Array.from(answersEl.querySelectorAll('.answer-btn'));
             const selectedAnswers = []; 
 
-            // 1. Coleta todas as respostas selecionadas (pelas chaves originais)
             buttons.forEach(button => {
                 const key = button.dataset.key;
                 if (key && button.classList.contains('selected')) {
@@ -567,7 +617,6 @@
                 }
             });
 
-            // 2. Compara os arrays para pontuação (lógica inalterada)
             const sortedCorrect = [...correctAnswers].sort();
             const sortedSelected = [...selectedAnswers].sort();
             const isPerfectMatch = JSON.stringify(sortedCorrect) === JSON.stringify(sortedSelected);
@@ -576,34 +625,27 @@
                 score++;
             }
 
-            // 3. Aplica o feedback visual com a NOVA LÓGICA
             buttons.forEach(button => {
                 const key = button.dataset.key;
-                if (!key) return; // Ignora o botão de submit
+                if (!key) return; 
 
                 const isCorrectAnswer = correctAnswers.includes(key);
                 const isSelected = button.classList.contains('selected');
 
                 if (isSelected) {
-                    // O usuário selecionou esta opção
                     if (isCorrectAnswer) {
-                        button.classList.add('correct'); // Acertou (Verde)
+                        button.classList.add('correct'); 
                     } else {
-                        button.classList.add('incorrect'); // Errou (Vermelho)
+                        button.classList.add('incorrect'); 
                     }
                 } else {
-                    // O usuário NÃO selecionou esta opção
                     if (isCorrectAnswer) {
-                        // O usuário *esqueceu* de marcar esta.
-                        // Aplica o novo estilo!
-                        button.classList.add('missed'); // Borda verde tracejada
+                        button.classList.add('missed'); 
                     }
-                    // Se não foi selecionada E não era correta, não faz nada.
                 }
                 
                 button.disabled = true;
             });
-            // --- FIM DA CORREÇÃO ---
 
             document.getElementById('multi-submit-btn').disabled = true;
             showExplanation();
@@ -671,12 +713,11 @@
             }
         }
 
+        /* *** CORREÇÃO APLICADA (BUG 3) ***
+         Simplificado o listener. O 'else' era código inalcançável.
+        */
         nextBtn.addEventListener("click", () => {
-            if (currentQuestionIndex < quizData.length) {
-                handleNextButton();
-            } else {
-                startQuiz();
-            }
+            handleNextButton();
         });
 
         document.addEventListener('DOMContentLoaded', () => {

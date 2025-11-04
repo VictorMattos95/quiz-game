@@ -410,7 +410,7 @@ const perguntas = [
     "id": 33,
     "pergunta": "PREENCHA A LACUNA - Qual diretiva de configuração do servidor Apache HTTPD define onde os arquivos de log são armazenados? (Especifique UMA das diretivas sem nenhuma outra opção.)",
     "tipo": "fill",
-    "respostaCorreta": "ErrorLog",
+    "respostaCorreta": ["ErrorLog", "CustomLog", "TransferLog"],
     "explicacao": "<code>ErrorLog</code> define o caminho para o arquivo de log de erros. <code>CustomLog</code> ou <code>TransferLog</code> são diretivas válidas usadas para definir os arquivos de log de acesso."
   },
   {
@@ -1187,9 +1187,9 @@ const perguntas = [
     "pergunta": "Um servidor BIND deve ser atualizado para usar TSIG. Quais parâmetros de configuração devem ser adicionados se o servidor usar o algoritmo <code>hmac-md5</code> e a chave <code>skrKc4DoTzi/takIlPi7JZA==</code>?",
     "opcoes": {
       "A": "<pre><code>TSIG server.example.com. {\n  algorithm hmac-md5;\n  secret \"skrKc4DoTzi/takIlPi7JZA == \";\n};\n</code></pre>",
-      "B": "<pre><code>key. server. example.com. {\n  algorithm hmac-md5;\n  secret skrKc4DoTzi/takIlPi7JZA ==;\n};\n</code></pre>",
-      "C": "<pre><code>key. server. example.com. {\n  algorithm hmac-md5;\n  secret \"skrKc4DoTzi/takIlPi7JZA == \";\n};\n</code></pre>",
-      "D": "<pre><code>key.server. example.com. {\n  algorithm=hmac-md5;\n  secret=\"skrKc4DoTzi/takIlPi7JZA == \";\n};\n</code></pre>",
+      "B": "<pre><code>key.server.example.com. {\n  algorithm hmac-md5;\n  secret skrKc4DoTzi/takIlPi7JZA ==;\n};\n</code></pre>",
+      "C": "<pre><code>key.server.example.com. {\n  algorithm hmac-md5;\n  secret \"skrKc4DoTzi/takIlPi7JZA == \";\n};\n</code></pre>",
+      "D": "<pre><code>key.server.example.com. {\n  algorithm=hmac-md5;\n  secret=\"skrKc4DoTzi/takIlPi7JZA == \";\n};\n</code></pre>",
       "E": "<pre><code>key.server.example.com.\n  algorithm hmac-md5\n  secret \"skrKc4DoTzi/takIlPi7JZA == \";\n</code></pre>"
     },
     "respostaCorreta": "C",
@@ -1333,19 +1333,6 @@ const perguntas = [
     "explicacao": "O atributo <code>objectClass</code> define o 'schema' da entrada. Ele especifica quais atributos são *obrigatórios* (MUST) e quais são *opcionais* (MAY) para aquela entrada."
   },
   {
-    "id": 112,
-    "pergunta": "Qual dos seguintes comandos é usado para alterar senhas de usuários em um diretório OpenLDAP?",
-    "opcoes": {
-      "A": "<code>setent</code>",
-      "B": "<code>ldpasswd</code>",
-      "C": "<code>olppasswd</code>",
-      "D": "<code>ldappasswd</code>",
-      "E": "<code>ldapchpw</code>"
-    },
-    "respostaCorreta": "D",
-    "explicacao": "O comando <code>ldappasswd</code> é o utilitário de linha de comando cliente usado para vincular (bind) a um servidor LDAP e alterar a senha de um usuário. (Esta é uma duplicata da questão 52)."
-  },
-  {
     "id": 113,
     "pergunta": "Qual das seguintes afirmações está correta sobre este trecho de um arquivo LDIF?\n<code>dn: cn=PrintOperators, ou=Groups, o=IT, DC=mycompany, DC=example, DC=com</code>",
     "opcoes": {
@@ -1409,7 +1396,7 @@ const perguntas = [
   },
   {
     "id": 118,
-    "pergunta": "Selecione a alternativa que mostra a maneira correta de desabilitar o login para todos os usuários, exceto o usuário root.",
+    "pergunta": "Selecione η alternativa que mostra a maneira correta de desabilitar o login para todos os usuários, exceto o usuário root.",
     "opcoes": {
       "A": "O uso do módulo <code>pam_block</code>...",
       "B": "O uso do módulo <code>pam_deny</code>...",
@@ -1431,12 +1418,5 @@ const perguntas = [
     },
     "respostaCorreta": ["B", "C", "D"],
     "explicacao": "OpenLDAP suporta vários backends. <code>bdb</code> (ou <code>hdb</code>) é o backend de banco de dados tradicional. <code>ldap</code> (D) é um backend de proxy que encaminha para outro servidor LDAP. <code>passwd</code> (C) é um backend que atende a partir do arquivo <code>/etc/passwd</code> local."
-  },
-  {
-    "id": 120,
-    "pergunta": "PREENCHA A LACUNA - Qual comando cria um par de chaves SSH? (Especifique APENAS o comando, sem nenhum caminho ou parâmetro)",
-    "tipo": "fill",
-    "respostaCorreta": "ssh-keygen",
-    "explicacao": "O comando <code>ssh-keygen</code> é a ferramenta padrão usada para criar, gerenciar e converter chaves de autenticação para o protocolo SSH. (Esta é uma duplicata da questão 10)."
   }
 ];
