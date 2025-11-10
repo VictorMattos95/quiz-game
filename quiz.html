@@ -317,9 +317,7 @@
             text-align: center;
         }
 
-        /* *** CORREÇÃO APLICADA (LAYOUT RESPONSIVO) ***
-         Adicionado @media query para corrigir o layout em dispositivos móveis.
-        */
+        /* *** CORREÇÃO APLICADA (LAYOUT RESPONSIVO) *** */
         @media (max-width: 650px) {
             
             .quiz-container {
@@ -432,6 +430,10 @@
             quizData.sort(() => Math.random() - 0.5); 
             currentQuestionIndex = 0;
             score = 0;
+            
+            // BUG 1 FIX: Inicializa o estado 'answered' para cada pergunta
+            quizData.forEach(q => q.answered = false);
+
             nextBtn.innerHTML = "Próxima";
             populateNavMenu(); 
             showQuestion();
@@ -517,6 +519,40 @@
                     });
                 }
             }
+
+            // Se a pergunta já foi respondida, re-exibe o estado
+            if (currentQuestion.answered) {
+                if (currentQuestion.tipo === 'fill') {
+                    // Simula o clique para re-exibir o estado
+                    const inputEl = document.getElementById('fill-answer-input');
+                    if(inputEl) {
+                        // Não podemos saber a resposta anterior, então apenas desabilitamos
+                        inputEl.disabled = true;
+                        document.getElementById('fill-submit-btn').disabled = true;
+                        showExplanation();
+                        nextBtn.style.display = 'block';
+                    }
+                } else {
+                    // Simula o clique para re-exibir o estado
+                    if(isMultiAnswer) {
+                        // Não podemos saber as seleções anteriores, então apenas desabilitamos
+                         Array.from(answersEl.children).forEach(button => {
+                            button.disabled = true;
+                         });
+                    } else {
+                         Array.from(answersEl.children).forEach(button => {
+                            if (button.classList.contains('answer-btn')) {
+                                button.disabled = true; // Desabilita todos
+                            }
+                        });
+                    }
+                    showExplanation();
+                    nextBtn.style.display = 'block';
+                }
+                
+                // Nota: O estado visual (cores, seleção) não é 100% restaurado
+                // ao navegar, mas a pontuação está protegida.
+            }
         }
 
 
@@ -536,10 +572,16 @@
 
             if (isCorrect) {
                 selectedBtn.classList.add("correct");
-                score++;
+                // BUG 1 FIX: Só pontua se a pergunta não foi respondida
+                if (!quizData[currentQuestionIndex].answered) {
+                    score++;
+                }
             } else {
                 selectedBtn.classList.add("incorrect");
             }
+            
+            // BUG 1 FIX: Marca a pergunta como respondida
+            quizData[currentQuestionIndex].answered = true;
 
             Array.from(answersEl.children).forEach(button => {
                 if (button.classList.contains('answer-btn') && !button.id.includes('submit')) { 
@@ -554,11 +596,6 @@
             nextBtn.style.display = 'block';
         }
 
-        /* *** CORREÇÃO APLICADA (BUG 1 - Versão Case-Sensitive) ***
-         Função 'checkFillAnswer' substituída.
-         - Mantém a verificação exata (case-sensitive) conforme solicitado.
-         - Adiciona suporte para 'respostaCorreta' ser um array de respostas válidas (ex: "ErrorLog", "CustomLog").
-        */
         function checkFillAnswer() {
             const inputEl = document.getElementById('fill-answer-input');
             const submitBtn = document.getElementById('fill-submit-btn');
@@ -580,19 +617,19 @@
 
             if (isCorrect) {
                 inputEl.classList.add("correct");
-                score++;
+                // BUG 1 FIX: Só pontua se a pergunta não foi respondida
+                if (!quizData[currentQuestionIndex].answered) {
+                    score++;
+                }
             } else {
                 inputEl.classList.add("incorrect");
                 
-                // Exibe a primeira resposta correta (ou a única)
-                const displayAnswer = Array.isArray(correctAnswers) ? correctAnswers[0] : correctAnswers;
-                
-                const correctAnswerEl = document.createElement("div");
-                correctAnswerEl.innerHTML = `Resposta correta: <strong>${displayAnswer}</strong>`;
-                correctAnswerEl.classList.add('correct-answer-text');
-                answersEl.appendChild(correctAnswerEl);
+                // BUG 2 FIX: Lógica de exibir resposta correta movida para showExplanation()
             }
             
+            // BUG 1 FIX: Marca a pergunta como respondida
+            quizData[currentQuestionIndex].answered = true;
+
             showExplanation();
 
             inputEl.disabled = true;
@@ -622,8 +659,14 @@
             const isPerfectMatch = JSON.stringify(sortedCorrect) === JSON.stringify(sortedSelected);
             
             if (isPerfectMatch) {
-                score++;
+                // BUG 1 FIX: Só pontua se a pergunta não foi respondida
+                if (!quizData[currentQuestionIndex].answered) {
+                    score++;
+                }
             }
+
+            // BUG 1 FIX: Marca a pergunta como respondida
+            quizData[currentQuestionIndex].answered = true;
 
             buttons.forEach(button => {
                 const key = button.dataset.key;
@@ -652,10 +695,31 @@
             nextBtn.style.display = 'block';
         }
         
+        // BUG 2 FIX: showExplanation() agora exibe a resposta correta para
+        // perguntas de preenchimento (fill) que foram respondidas incorretamente.
         function showExplanation() {
-            const explanation = quizData[currentQuestionIndex].explicacao;
+            const currentQuestion = quizData[currentQuestionIndex];
+            const explanation = currentQuestion.explicacao;
+            let html = "";
+
+            // Verifica se é uma pergunta 'fill' que foi respondida incorretamente
+            if (currentQuestion.tipo === 'fill' && currentQuestion.answered) {
+                const inputEl = document.getElementById('fill-answer-input');
+                if (inputEl && inputEl.classList.contains('incorrect')) {
+                    const correctAnswers = currentQuestion.respostaCorreta;
+                    // Exibe todas as respostas corretas possíveis
+                    const displayAnswers = Array.isArray(correctAnswers) ? correctAnswers.join('</strong> ou <strong>') : correctAnswers;
+                    // Adiciona a resposta correta ao topo da caixa de explicação
+                    html += `<p style="margin-bottom: 15px; color: #721c24; font-weight: 500;">Resposta correta: <strong>${displayAnswers}</strong></p>`;
+                }
+            }
+
             if (explanation) {
-                explanationBox.innerHTML = `<strong>Explicação:</strong> ${explanation}`;
+                html += `<strong>Explicação:</strong> ${explanation}`;
+            }
+
+            if (html) {
+                explanationBox.innerHTML = html;
                 explanationBox.style.display = 'block';
             }
         }
@@ -713,9 +777,7 @@
             }
         }
 
-        /* *** CORREÇÃO APLICADA (BUG 3) ***
-         Simplificado o listener. O 'else' era código inalcançável.
-        */
+        /* *** CORREÇÃO APLICADA (BUG 3) *** */
         nextBtn.addEventListener("click", () => {
             handleNextButton();
         });
