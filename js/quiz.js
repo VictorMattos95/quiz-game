@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // (MELHORIA 5) Lógica de Fetch com caminhos relativos à raiz
-    const jsonPath = `/data/dados_${assunto}.json`;
+    const jsonPath = `data/dados_${assunto}.json`;
 
     fetch(jsonPath)
         .then(response => {
