@@ -1,0 +1,708 @@
+[
+  {
+    "id": 1,
+    "pergunta": "Qual dos seguintes comandos apaga o conteúdo da partição <code>/dev/sdb3</code>?",
+    "opcoes": {
+      "A": "<code>rm /dev/sdb3</code>",
+      "B": "<code>dd if=/dev/zero of=/dev/sdb3</code>",
+      "C": "<code>dd of=/dev/zero if=/dev/sdb3</code>",
+      "D": "<code>umount /dev/sdb3</code>"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "O comando 'dd' é usado para copiar dados. 'if=/dev/zero' define a fonte como um fluxo de zeros, e 'of=/dev/sdb3' define o destino como a partição, efetivamente sobrescrevendo e apagando seu conteúdo."
+  },
+  {
+    "id": 2,
+    "pergunta": "Qual dos seguintes arquivos será procurado e utilizado pelo GNU make, se existir, a menos que um arquivo diferente seja especificado na linha de comando ao tentar compilar software a partir do código-fonte? (Escolha duas.)",
+    "opcoes": {
+      "A": "<code>configure</code>",
+      "B": "<code>config.h.in</code>",
+      "C": "<code>makefile</code>",
+      "D": "<code>Makefile</code>",
+      "E": "<code>Makefile.in</code>"
+    },
+    "respostaCorreta": ["C", "D"],
+    "explicacao": "Por padrão, o GNU make procura por 'Makefile' e 'makefile' no diretório atual para encontrar as instruções de compilação."
+  },
+  {
+    "id": 3,
+    "pergunta": "Qual comando é usado para enviar mensagens a todos os usuários conectados no momento? (Especifique SOMENTE o comando, sem nenhum caminho ou parâmetro.)",
+    "tipo": "fill",
+    "respostaCorreta": "wall",
+    "explicacao": "O comando 'wall' (write to all) envia uma mensagem para o terminal de todos os usuários que estão logados no sistema."
+  },
+  {
+    "id": 4,
+    "pergunta": "Qual dos seguintes comandos restaura apenas os arquivos que contêm 'lpi' no nome do arquivo <code>lpifiles.tar.gz</code>?",
+    "opcoes": {
+      "A": "<code>tar xvzf lpifiles.tar.gz --wildcards '*lpi*'</code>",
+      "B": "<code>tar xvzwf lpifiles.tar.gz '*lpi*'</code>",
+      "C": "<code>tar -xvfz lpifiles.tar.gz --deep '*lpi*'</code>",
+      "D": "<code>tar -xvzf lpifiles.tar.gz --subdirs '*lpi*'</code>",
+      "E": "<code>tar xvzf lpifiles.tar.gz --globbing '*lpi*'</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "A opção '--wildcards' no comando tar permite o uso de padrões de curinga para extrair seletivamente arquivos de um arquivo compactado."
+  },
+  {
+    "id": 5,
+    "pergunta": "Um usuário comum acabou de executar <code>./configure && make && make install</code> para compilar e instalar um programa. No entanto, a instalação falha. O que pode ser feito para instalar o programa? (Escolha duas opções.)",
+    "opcoes": {
+      "A": "Instalar os binários manualmente com <code>suinstall</code>",
+      "B": "Executar <code>make install</code> com privilégios de root",
+      "C": "Não executar <code>./configure</code> para manter a configuração padrão para uma instalação correta",
+      "D": "Executar <code>./configure</code> novamente com a opção <code>--prefix</code>, onde o usuário tem permissão de gravação",
+      "E": "Executar <code>make install_local</code> para instalar em <code>/usr/local/</code>"
+    },
+    "respostaCorreta": ["B", "D"],
+    "explicacao": "A falha geralmente ocorre por falta de permissão para escrever nos diretórios padrão do sistema. Executar 'make install' como root (com 'sudo') resolve isso. Alternativamente, usar a opção '--prefix' no './configure' para um diretório pessoal permite a instalação sem privilégios de root."
+  },
+  {
+    "id": 6,
+    "pergunta": "O seguinte comando foi executado com sucesso: <code>cd /opt; tar xvf /dev/nst0;</code> O que acontecerá se a sequência de comandos for executada novamente?",
+    "opcoes": {
+      "A": "Um erro informando que não há fita presente é gerado porque a fita foi ejetada após ser usada.",
+      "B": "O conteúdo de /opt será restaurado novamente.",
+      "C": "Todo o conteúdo de /opt será substituído pelo conteúdo do próximo arquivo na fita.",
+      "D": "O conteúdo de /opt terá conteúdo adicional adicionado do próximo arquivo na fita."
+    },
+    "respostaCorreta": "D",
+    "explicacao": "O dispositivo /dev/nst0 é uma unidade de fita 'no-rewind' (sem rebobinar). Após a primeira extração, a fita para no final do arquivo. Executar o comando novamente continuará a leitura a partir daquele ponto, adicionando o conteúdo do próximo arquivo."
+  },
+  {
+    "id": 7,
+    "pergunta": "Qual comando descarta blocos não utilizados em um sistema de arquivos montado para oferecer suporte a dispositivos SSD? (Especifique SOMENTE o comando, sem nenhum caminho ou parâmetro.)",
+    "tipo": "fill",
+    "respostaCorreta": "fstrim",
+    "explicacao": "O comando 'fstrim' informa a um dispositivo de armazenamento (como um SSD) quais blocos de dados não estão mais em uso. Isso permite que o dispositivo otimize o desempenho e a longevidade através do processo de 'garbage collection'."
+  },
+  {
+    "id": 8,
+    "pergunta": "Qual comando único simula um dispositivo com falha em um array RAID 5?",
+    "opcoes": {
+      "A": "<code>mdadm --remove /dev/md0 /dev/sdd1</code>",
+      "B": "<code>mdadm --zero-superblock /dev/sdf3</code>",
+      "C": "<code>mdadm --force-fault /dev/md2 /dev/sde2</code>",
+      "D": "<code>mdadm --fail /dev/md0 /dev/sdc1</code>",
+      "E": "<code>mdadm /dev/md0 --offline /dev/sdc1</code>"
+    },
+    "respostaCorreta": "D",
+    "explicacao": "O comando 'mdadm' com a opção '--fail' é usado especificamente para marcar um dispositivo dentro de um array RAID como defeituoso, o que é útil para testar a redundância e os procedimentos de recuperação."
+  },
+  {
+    "id": 9,
+    "pergunta": "Qual é o número mínimo de discos necessários em um conjunto RAID5 totalmente redundante?",
+    "opcoes": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O RAID 5 requer um mínimo de três discos. Os dados e a paridade são distribuídos entre todos os discos, permitindo que o array sobreviva à falha de um único disco."
+  },
+  {
+    "id": 10,
+    "pergunta": "Um sistema possui um disco rígido e um gravador de CD, ambos conectados a controladores SATA. Qual dispositivo representa o gravador de CD?",
+    "opcoes": {
+      "A": "<code>/dev/hdb</code>",
+      "B": "<code>/dev/sdd</code>",
+      "C": "<code>/dev/scd1</code>",
+      "D": "<code>/dev/sr0</code>",
+      "E": "<code>/dev/sr1</code>"
+    },
+    "respostaCorreta": "D",
+    "explicacao": "No Linux moderno, dispositivos SATA (discos e drives ópticos) são tratados como dispositivos SCSI. Discos rígidos são nomeados como /dev/sdX e drives ópticos (CD/DVD) são nomeados como /dev/srX. /dev/hdb seria um dispositivo PATA/IDE."
+  },
+  {
+    "id": 11,
+    "pergunta": "Qual ação deve ser executada após aumentar o tamanho de um volume lógico?",
+    "opcoes": {
+      "A": "Executar <code>vgresize</code>",
+      "B": "Aumentar o tamanho do sistema de arquivos usado para o volume lógico",
+      "C": "Executar <code>lvresize</code>",
+      "D": "Remontar o volume lógico"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "Aumentar o volume lógico (com lvextend/lvresize) apenas aloca mais espaço no nível do LVM. É necessário usar uma ferramenta como 'resize2fs' (para ext4) ou 'xfs_growfs' (para XFS) para que o sistema de arquivos expanda e utilize o novo espaço."
+  },
+  {
+    "id": 12,
+    "pergunta": "Quais informações são encontradas no seguinte trecho do arquivo <code>/proc/mdstat</code>? (Escolha duas.)<br><pre><code>Personalities : [raid6] [raid5] [raid4]\\nmd0 : active raid5 sdb1[3] (S) sdc1[7] sdal[4] (S) sdd1[6] sde1[5]\\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1046528 blocks super 1.2 level 5, 512k chunk, algorithm 2 [3/2] [UU_]\\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[===>..........] recovery = 15.9% (83808/523264) finish=0.1min\\nspeed=71880K/sec\\nunused devices: &lt;none&gt;</code></pre>",
+    "opcoes": {
+      "A": "Um dos discos em /dev/md0 falhou e um disco reserva é usado para recriar a redundância completa",
+      "B": "O disco reserva /dev/sda1 é usado para restaurar a redundância completa após a recuperação atual",
+      "C": "A informação [UU_] significa que o RAID está sem um disco e não é totalmente redundante",
+      "D": "O dispositivo está usando metadados da versão 1.2 para permitir que o LILO e o GRUB Legacy usem /dev/md0 como partição de inicialização.",
+      "E": "A informação [3/2] significa que 3 discos RAID pertencem ao array e 2 discos são reservas."
+    },
+    "respostaCorreta": ["A", "C"],
+    "explicacao": "O status '[UU_]' indica um array de 3 discos onde o terceiro está ausente ou falhou (representado pelo '_'). A linha 'recovery = 15.9%' mostra que o processo de reconstrução está em andamento, o que implica que um disco falhou e está sendo recriado."
+  },
+  {
+    "id": 13,
+    "pergunta": "Qual comando removerá um volume físico de um grupo de volumes? (Especifique SOMENTE o comando, sem nenhum caminho ou parâmetro.)",
+    "tipo": "fill",
+    "respostaCorreta": "vgreduce",
+    "explicacao": "O comando 'vgreduce' é usado para remover um ou mais volumes físicos (PVs) de um grupo de volumes (VG), depois que os dados foram movidos para fora dele."
+  },
+  {
+    "id": 14,
+    "pergunta": "Qual comando é usado para fazer uma cópia exata, em um único ponto no tempo, de um volume lógico, permitindo que o volume lógico original seja atualizado?",
+    "opcoes": {
+      "A": "<code>lvcclone</code>",
+      "B": "<code>lvcreate</code>",
+      "C": "<code>lvm2</code>",
+      "D": "<code>lvsnap</code>",
+      "E": "<code>lvsnapshot</code>"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "Para criar um snapshot LVM (uma cópia point-in-time), usa-se o comando 'lvcreate' com a opção '-s' ou '--snapshot'."
+  },
+  {
+    "id": 15,
+    "pergunta": "Qual dos seguintes comandos cria um subvolume Btrfs chamado <code>volume</code> em <code>/mnt</code>?",
+    "opcoes": {
+      "A": "<code>btrfs subvolume add -n volume /mnt</code>",
+      "B": "<code>btrfs create subvolume /mnt volume</code>",
+      "C": "<code>btrfs-subvolume create /mnt/volume</code>",
+      "D": "<code>btrfs subvolume new volume /mnt</code>",
+      "E": "<code>btrfs subvolume create /mnt/volume</code>"
+    },
+    "respostaCorreta": "E",
+    "explicacao": "A sintaxe correta para criar um subvolume Btrfs é 'btrfs subvolume create <caminho_completo_do_subvolume>'. Neste caso, '/mnt/volume'."
+  },
+  {
+    "id": 16,
+    "pergunta": "Qual palavra-chave está faltando na seguinte linha de <code>/etc/fstab</code> para conceder ao usuário fred acesso de gravação aos arquivos no sistema de arquivos vfat em <code>/dev/sdb1</code>:<br><code>/dev/sdb1 /mnt/usbflash vfat defaults, _________=fred, umask=022, 0 0</code><br>(Especifique SOMENTE o nome da opção, sem caminho ou parâmetros.)",
+    "tipo": "fill",
+    "respostaCorreta": "uid",
+    "explicacao": "Sistemas de arquivos como VFAT não possuem permissões no estilo Unix. Para definir o proprietário dos arquivos, a opção de montagem 'uid' é usada, seguida pelo nome do usuário (uid=fred)."
+  },
+  {
+    "id": 17,
+    "pergunta": "Devido ao uso extremo do sistema, um sistema Linux requer algum espaço de swap adicional. Para inicializar 5 GB de espaço de swap adicional, qual combinação de comandos deve ser usada?",
+    "opcoes": {
+      "A": "<code>dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; mkswap /tmp/swapfile; mount /tmp/swapfile</code>",
+      "B": "<code>dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; swapon /tmp/swapfile</code>",
+      "C": "<code>dd if=/dev/zero of=/tmp/swapfile bs=1024 count=5120000; mkswap /tmp/swapfile; swapon /tmp/swapfile</code>",
+      "D": "<code>touch -5G /tmp/swapfile; swapon /tmp/swapfile</code>",
+      "E": "<code>mkswap /tmp/swapfile 512000; swapon /tmp/swapfile</code>"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O processo correto é: 1) Criar um arquivo do tamanho desejado com 'dd'. 2) Formatar o arquivo como uma área de swap com 'mkswap'. 3) Ativar o arquivo de swap com 'swapon'."
+  },
+  {
+    "id": 18,
+    "pergunta": "Qual é a finalidade de uma unidade de montagem do sistema?",
+    "opcoes": {
+      "A": "Ela é usada pelo comando systemd-mount e permite que os usuários montem partições em pontos de montagem de sua escolha.",
+      "B": "Ela é usada apenas para montar sistemas de arquivos de rede em pontos de montagem locais. Não pode ser usada para mídia local.",
+      "C": "Ela é criada pelo comando systemd-fstab-generator para integrar entradas de /etc/fstab no processo de inicialização do sistema.",
+      "D": "Ela é usada pelo comando mount ao usar o comando systemd-mount para montar e desmontar sistemas de arquivos."
+    },
+    "respostaCorreta": "C",
+    "explicacao": "As 'mount units' (arquivos .mount) são a forma como o systemd gerencia pontos de montagem. Durante a inicialização, o 'systemd-fstab-generator' lê o /etc/fstab e converte dinamicamente cada entrada em uma 'mount unit', integrando assim a montagem de sistemas de arquivos ao sistema de inicialização e gerenciamento de dependências do systemd."
+  },
+  {
+    "id": 19,
+    "pergunta": "Qual comando garante que os sistemas de arquivos sejam gravados no disco após muitas operações de gravação? (Especifique SOMENTE o comando, sem nenhum caminho ou parâmetro.)",
+    "tipo": "fill",
+    "respostaCorreta": "sync",
+    "explicacao": "O comando 'sync' força a escrita imediata de todos os dados em buffer (no cache de memória) para o disco, sincronizando os sistemas de arquivos."
+  },
+  {
+    "id": 20,
+    "pergunta": "Qual componente de um sistema o <code>smartd</code> monitora?",
+    "opcoes": {
+      "A": "CPU",
+      "B": "RAM",
+      "C": "Discos rígidos",
+      "D": "Tráfego Ethernet"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O daemon 'smartd' faz parte do pacote smartmontools e é usado para monitorar a saúde de discos rígidos (HDDs e SSDs) usando a tecnologia S.M.A.R.T."
+  },
+  {
+    "id": 21,
+    "pergunta": "Como o rótulo <code>root</code> pode ser adicionado ao sistema de arquivos ext4 em <code>/dev/sda1</code>?",
+    "opcoes": {
+      "A": "<code>relabel /dev/sda1 root</code>",
+      "B": "<code>tune2fs -L root /dev/sda1</code>",
+      "C": "<code>echo 'root' > /proc/fs/sda1/label</code>",
+      "D": "<code>labelfs --device /dev/sda1 root</code>"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "O comando 'tune2fs' é usado para ajustar parâmetros em sistemas de arquivos ext2/ext3/ext4. A opção '-L' define o rótulo (label) do volume."
+  },
+  {
+    "id": 22,
+    "pergunta": "Qual subcomando do <code>cryptsetup</code> exibe informações sobre uma partição LUKS criptografada?",
+    "opcoes": {
+      "A": "<code>luksDump</code>",
+      "B": "<code>luksInfo</code>",
+      "C": "<code>luksDebug</code>",
+      "D": "<code>luksLS</code>",
+      "E": "<code>luksShow</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O comando 'cryptsetup luksDump /dev/partition' exibe informações detalhadas do cabeçalho de um dispositivo LUKS, como versão, cifras e slots de chave."
+  },
+  {
+    "id": 23,
+    "pergunta": "Qual dos seguintes é um padrão de sistema de arquivos de CD-ROM?",
+    "opcoes": {
+      "A": "OSI 9660",
+      "B": "ISO 9660",
+      "C": "<code>SR0FS</code>",
+      "D": "ISO 8859",
+      "E": "ROM-EO"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "ISO 9660 é o padrão estabelecido pela Organização Internacional para Padronização (ISO) para sistemas de arquivos em mídias de CD-ROM."
+  },
+  {
+    "id": 24,
+    "pergunta": "Qual dos seguintes sistemas de inicialização vem com um carregador de boot UEFI próprio?",
+    "opcoes": {
+      "A": "systemd",
+      "B": "SysVinit",
+      "C": "Upstart",
+      "D": "OpenRC",
+      "E": "launchd"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O systemd inclui o 'systemd-boot' (anteriormente gummiboot), um gerenciador de boot UEFI simples para carregar kernels Linux."
+  },
+  {
+    "id": 25,
+    "pergunta": "Qual o efeito da opção 'f' do comando <code>update-rc.d</code> nos arquivos dos diretórios <code>/etc/rcX.d/</code> e <code>/etc/init.d/</code>?",
+    "opcoes": {
+      "A": "Ela forçará a remoção dos links simbólicos em /etc/rcX.d/ mesmo quando os links forem somente leitura.",
+      "B": "Ela removerá os links simbólicos em /etc/rcX.d/ e o script de inicialização em /etc/init.d/.",
+      "C": "Ela removerá o script de inicialização em /etc/init.d/ e os links simbólicos em /etc/rcX.d/, além de atualizar as informações de pacote dos arquivos instalados.",
+      "D": "Ela forçará a remoção dos links simbólicos em /etc/rcX.d/ mesmo que o script de inicialização correspondente ainda exista em /etc/init.d/."
+    },
+    "respostaCorreta": "D",
+    "explicacao": "A opção '-f' (force) para 'update-rc.d remove' força a remoção dos links simbólicos de runlevel, mesmo que o script original em /etc/init.d/ ainda esteja presente."
+  },
+  {
+    "id": 26,
+    "pergunta": "Qual comando é usado para instalar um carregador de boot GRUB no registro mestre de inicialização?",
+    "opcoes": {
+      "A": "<code>grub-install</code>",
+      "B": "<code>grub-mkconfig</code>",
+      "C": "<code>grub-install-mbr</code>",
+      "D": "<code>grub-glue-mbr</code>",
+      "E": "<code>grub-mbr-setup</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O comando 'grub-install' (ex: 'grub-install /dev/sda') é a ferramenta padrão para instalar o bootloader GRUB no MBR de um dispositivo de armazenamento."
+  },
+  {
+    "id": 27,
+    "pergunta": "Se o arquivo que contém o kernel do Linux for excluído, o que acontece quando o sistema inicializa?",
+    "opcoes": {
+      "A": "O sistema inicia normally, pois o gerenciador de inicialização copia o kernel para o registro mestre de inicialização do disco rígido",
+      "B": "Em vez do kernel, o initramfs é carregado e instruído a montar o sistema de arquivos raiz e reinstalar o kernel a partir do pacote original ou da fonte.",
+      "C": "O gerenciador de inicialização monta o sistema de arquivos raiz como somente leitura e inicia /bin/sh diretamente para permitir que o administrador reinstale o kernel.",
+      "D": "Sem um kernel, o sistema não inicializa e, dependendo do gerenciador de inicialização, um erro é exibido."
+    },
+    "respostaCorreta": "D",
+    "explicacao": "O kernel é o núcleo do sistema operacional. O bootloader (como o GRUB) é responsável por carregar o kernel na memória. Se o arquivo do kernel não for encontrado, o processo de boot falha e uma mensagem de erro é exibida."
+  },
+  {
+    "id": 28,
+    "pergunta": "Qual diretório contém os arquivos de unidade systemd específicos do sistema? (Especifique o caminho completo para o diretório.)",
+    "tipo": "fill",
+    "respostaCorreta": "/lib/systemd/system",
+    "explicacao": "O diretório /lib/systemd/system contém os arquivos de 'unit' padrão fornecidos pelos pacotes de software instalados. Modificações e personalizações devem ser colocadas em /etc/systemd/system."
+  },
+  {
+    "id": 29,
+    "pergunta": "Um servidor Linux executando systemd inicializou em <code>rescue.target</code> para manutenção. Quais comandos são usados para restaurar o servidor ao seu destino usual? (Escolha dois.)",
+    "opcoes": {
+      "A": "<code>telinit 0</code>",
+      "B": "<code>systemctl default</code>",
+      "C": "<code>sync</code>",
+      "D": "<code>systemctl emergency</code>",
+      "E": "<code>systemctl reboot</code>"
+    },
+    "respostaCorreta": ["B", "E"],
+    "explicacao": "Para sair do modo de resgate (rescue.target) e retornar à operação normal, você pode usar 'systemctl default' (B) para carregar o 'target' padrão (geralmente graphical.target ou multi-user.target) sem reiniciar. Alternativamente, 'systemctl reboot' (E) reiniciará o sistema, que então inicializará no 'target' padrão."
+  },
+  {
+    "id": 30,
+    "pergunta": "Qual é o arquivo de configuração principal para o processo init do SystemV? (Especifique o nome completo do arquivo, incluindo o caminho.)",
+    "tipo": "fill",
+    "respostaCorreta": "/etc/inittab",
+    "explicacao": "No antigo sistema de inicialização SysVinit, o arquivo /etc/inittab era o principal arquivo de configuração que definia o runlevel padrão e o que fazer em cada runlevel."
+  },
+  {
+    "id": 31,
+    "pergunta": "Qual é a finalidade de um <code>initramfs</code> durante a inicialização do sistema Linux?",
+    "opcoes": {
+      "A": "Ele carrega os módulos necessários e inicia subsistemas como o LVM para tornar o sistema de arquivos raiz acessível ao kernel.",
+      "B": "Ele move o kernel da memória normal do sistema para a memória initram para acelerar o acesso ao kernel.",
+      "C": "Ele copia o conteúdo do sistema de arquivos raiz para a RAM para acelerar o sistema e reduzir as gravações em disco.",
+      "D": "Ele cria um disco RAM para armazenar dados voláteis em diretórios como /tmp para reduzir as gravações em disco."
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O initramfs (Initial RAM File System) é um sistema de arquivos temporário na memória que contém os drivers e ferramentas necessários para montar o sistema de arquivos raiz real, especialmente quando este reside em LVM, RAID ou partições criptografadas."
+  },
+  {
+    "id": 32,
+    "pergunta": "Qual dos seguintes é um aplicativo de espaço do usuário usado para modificar entradas EFI em um sistema Linux?",
+    "opcoes": {
+      "A": "<code>efieditor</code>",
+      "B": "<code>configefi</code>",
+      "C": "<code>efimanager</code>",
+      "D": "<code>efibootmgr</code>",
+      "E": "<code>efibootedit</code>"
+    },
+    "respostaCorreta": "D",
+    "explicacao": "O utilitário 'efibootmgr' é a ferramenta de linha de comando padrão no Linux para interagir com o firmware UEFI, permitindo gerenciar as entradas de boot."
+  },
+  {
+    "id": 33,
+    "pergunta": "Em qual árvore de diretórios os arquivos são modificados ao alterar os parâmetros do kernel usando o comando <code>sysctl</code>?",
+    "opcoes": {
+      "A": "<code>/sys/kernel/</code>",
+      "B": "<code>/proc/kernel/</code>",
+      "C": "<code>/proc/sys/</code>",
+      "D": "<code>/lib/sys/</code>",
+      "E": "<code>/sys/proc/</code>"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O comando 'sysctl' lê e modifica os parâmetros do kernel expostos como arquivos virtuais no diretório /proc/sys/."
+  },
+  {
+    "id": 34,
+    "pergunta": "Qual é a finalidade do comando <code>udevadm monitor</code>?",
+    "opcoes": {
+      "A": "Ele monitora eventos do kernel produzidos por uma regra do udev e imprime informações no console.",
+      "B": "Ele monitora o diretório /dev/ em busca de novos dispositivos.",
+      "C": "Ele monitora o processo udev e imprime estatísticas de desempenho no console.",
+      "D": "Ele se comunica com o D-Bus para configurar novos dispositivos."
+    },
+    "respostaCorreta": "A",
+    "explicacao": "'udevadm monitor' é uma ferramenta de depuração que escuta e exibe os eventos do kernel (uevents) e os eventos do udev, mostrando em tempo real o que acontece durante a detecção de dispositivos."
+  },
+  {
+    "id": 35,
+    "pergunta": "Como o código-fonte dos principais módulos do kernel Linux é distribuído?",
+    "opcoes": {
+      "A": "Ele está incluído no código-fonte do kernel Linux",
+      "B": "Os módulos do kernel são baixados sob demanda, à medida que são usados durante a compilação",
+      "C": "Os módulos do kernel têm seu próprio ciclo de lançamento e podem ser mantidos separadamente do código-fonte do kernel Linux",
+      "D": "Ele é fornecido como um download separado, juntamente com o código-fonte do kernel Linux para a mesma versão"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "Os módulos que fazem parte da árvore principal do kernel (in-tree) são distribuídos e versionados junto com o código-fonte do próprio kernel."
+  },
+  {
+    "id": 36,
+    "pergunta": "Após baixar o <code>patch-4.6.4.xz</code> de http://kernel.org, quais são os próximos passos para preparar a compilação de um kernel Linux versão 4.6.4? (Escolha dois.)",
+    "opcoes": {
+      "A": "Descompacte o arquivo e mova o diretório resultante para <code>/usr/src/linux</code>",
+      "B": "Aplique o arquivo de patch ao diretório de origem do kernel que contém a versão 4.6.0 do kernel",
+      "C": "Aplique o arquivo de patch ao diretório de origem do kernel que contém a versão 4.6.3 do kernel",
+      "D": "Descompacte o arquivo usando <code>xz</code> para obter o arquivo de patch descompactado",
+      "E": "Use <code>patch</code> para aplicar o arquivo de patch descompactado ao diretório de origem de qualquer versão anterior do kernel"
+    },
+    "respostaCorreta": ["C", "D"],
+    "explicacao": "Arquivos de patch do kernel são incrementais, eles atualizam de uma versão específica para a próxima. Primeiro, o arquivo '.xz' deve ser descompactado (D). Em seguida, o patch 'patch-4.6.4' deve ser aplicado sobre a árvore de código-fonte da versão imediatamente anterior, a '4.6.3' (C)."
+  },
+  {
+    "id": 37,
+    "pergunta": "Após compilar e instalar manualmente um novo kernel, o que deve ser feito em relação ao <code>initramfs</code>?",
+    "opcoes": {
+      "A": "O initramfs é independente do kernel e não deve ser modificado, a menos que a configuração de hardware da máquina tenha sido alterada.",
+      "B": "Como o initramfs contém módulos do kernel, um novo initramfs deve ser criado para o novo kernel.",
+      "C": "Durante a compilação do kernel Linux, um novo initramfs é criado automaticamente. O novo initramfs precisa apenas ser instalado.",
+      "D": "O sistema deve ser reiniciado, pois o initramfs se reconfigura para o novo kernel durante a inicialização do sistema."
+    },
+    "respostaCorreta": "B",
+    "explicacao": "O 'initramfs' contém módulos do kernel essenciais (como drivers de disco ou sistema de arquivos) necessários para montar o sistema de arquivos raiz. Como um novo kernel terá novos módulos, um novo 'initramfs' deve ser criado (usando ferramentas como 'mkinitcpio' ou 'dracut') para corresponder à versão do novo kernel."
+  },
+  {
+    "id": 38,
+    "pergunta": "Qual dos seguintes comandos exibe o caminho físico do módulo do kernel denominado <code>dummy</code>?",
+    "opcoes": {
+      "A": "<code>modprobe -i dummy</code>",
+      "B": "<code>modinfo -n dummy</code>",
+      "C": "<code>modpath -v dummy</code>",
+      "D": "<code>depmod -n dummy</code>",
+      "E": "<code>modshow -p dummy</code>"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "O comando 'modinfo' é usado para exibir informações sobre um módulo do kernel. A opção '-n' (ou '--filename') exibe especificamente o caminho completo do arquivo do módulo no sistema de arquivos."
+  },
+  {
+    "id": 39,
+    "pergunta": "Qual dos seguintes parâmetros instrui o kernel, na inicialização, a usar apenas um dos processadores disponíveis?",
+    "opcoes": {
+      "A": "<code>maxcpus=1</code>",
+      "B": "<code>usecpus=1</code>",
+      "C": "<code>smpcpus=1</code>",
+      "D": "<code>vcpumx=1</code>",
+      "E": "<code>vmxcpus=1</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O parâmetro de boot do kernel 'maxcpus=N' informa ao kernel para usar no máximo N núcleos de CPU, mesmo que mais estejam disponíveis fisicamente."
+  },
+  {
+    "id": 40,
+    "pergunta": "Após a instalação de um kernel autocompilado, os módulos que precisam ser carregados não podem ser encontrados. Qual alvo de compilação (make target) provavelmente foi esquecido durante a instalação do kernel? (Especifique SOMENTE o alvo, sem nenhum comando ou parâmetro.)",
+    "tipo": "fill",
+    "respostaCorreta": "modules_install",
+    "explicacao": "O processo de compilação do kernel é separado da instalação dos módulos. Após o 'make', o comando 'make modules_install' deve ser executado para copiar os módulos compilados para o diretório /lib/modules/."
+  },
+  {
+    "id": 41,
+    "pergunta": "Em um servidor executando o kernel Linux 3.4.50-11, qual arquivo no diretório <code>/boot</code> contém os parâmetros de configuração do kernel?",
+    "opcoes": {
+      "A": "<code>config-linux-3.4.50-11</code>",
+      "B": "<code>config-3.4.50-11</code>",
+      "C": "<code>system-3.4.50-11</code>",
+      "D": "<code>vmlinuz-3.4.50-11</code>",
+      "E": "<code>rc.config-3.4.50-11</code>"
+    },
+    "respostaCorreta": "B",
+    "explicacao": "Muitas distribuições Linux armazenam o arquivo de configuração (.config) usado para compilar um kernel específico no diretório /boot com o nome 'config-<versão-do-kernel>'."
+  },
+  {
+    "id": 42,
+    "pergunta": "Qual dos seguintes comandos fornece, por padrão, os PIDs dos processos classificados por aqueles que usam mais ciclos de CPU no sistema Linux?",
+    "opcoes": {
+      "A": "<code>top</code>",
+      "B": "<code>uptime</code>",
+      "C": "<code>ps aux</code>",
+      "D": "<code>vmstat</code>",
+      "E": "<code>freemem</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O comando 'top' exibe uma visão dinâmica dos processos do sistema e, por padrão, os ordena pela porcentagem de uso da CPU em ordem decrescente."
+  },
+  {
+    "id": 43,
+    "pergunta": "Na saída de <code>sar -b</code>, o que significa <code>tps</code>?",
+    "opcoes": {
+      "A": "Terabyte por segundo",
+      "B": "Tráfego por segundo",
+      "C": "Transferências por segundo",
+      "D": "Total de dados por segundo"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "Na saída do 'sar -b' (estatísticas de I/O de bloco), a coluna 'tps' representa 'Transfers Per Second', ou seja, o número de transferências por segundo emitidas para os dispositivos."
+  },
+  {
+    "id": 44,
+    "pergunta": "Na saída a seguir do comando uptime, as médias de carga representam as médias de carga do sistema para quais períodos de tempo?<br><code>12:10:05 up 18 days, 19:00, 2 users, load average: 0.47, 24.71, 35.31</code>",
+    "opcoes": {
+      "A": "1, 5 e 15 minutos",
+      "B": "1, 15 e 30 minutos",
+      "C": "5, 20 e 25 segundos",
+      "D": "15, 30 e 60 minutos",
+      "E": "15, 45 e 90 segundos"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "A média de carga (load average) em sistemas Unix/Linux é tradicionalmente exibida para os últimos 1, 5 e 15 minutos, respectivamente."
+  },
+  {
+    "id": 45,
+    "pergunta": "Qual das seguintes propriedades deve ser registrada para monitorar a qualidade de um link de rede? (Escolha duas.)",
+    "opcoes": {
+      "A": "Largura de banda em ambas as direções",
+      "B": "Número de nós usando o link",
+      "C": "Latência efetiva",
+      "D": "Número de pacotes IPv4 e IPv6",
+      "E": "Número de portas TCP utilizadas"
+    },
+    "respostaCorreta": ["A", "C"],
+    "explicacao": "A qualidade de um link de rede é primariamente medida por sua largura de banda (throughput) e sua latência (delay/atraso). Perda de pacotes e jitter também são métricas importantes."
+  },
+  {
+    "id": 46,
+    "pergunta": "Qual comando reporta informações sobre uso de memória, paginação e entrada/saída de blocos?",
+    "opcoes": {
+      "A": "<code>free</code>",
+      "B": "<code>memshow</code>",
+      "C": "<code>lsof</code>",
+      "D": "<code>pidof</code>",
+      "E": "<code>vmstat</code>"
+    },
+    "respostaCorreta": "E",
+    "explicacao": "O comando 'vmstat' (virtual memory statistics) fornece um relatório abrangente sobre processos, memória, paginação (swap), I/O de bloco e atividade da CPU."
+  },
+  {
+    "id": 47,
+    "pergunta": "Para coletar dados de desempenho com o <code>sar</code> por um longo período de tempo, qual comando deve ser executado periodicamente no cron?",
+    "opcoes": {
+      "A": "<code>sa1</code>",
+      "B": "<code>sarmon</code>",
+      "C": "<code>sarec</code>",
+      "D": "<code>sadf</code>",
+      "E": "<code>sarcron</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O utilitário 'sa1' é projetado para ser executado pelo cron. Ele coleta e armazena os contadores do sistema em um arquivo de dados binário, que pode ser analisado posteriormente pelo comando 'sar'."
+  },
+  {
+    "id": 48,
+    "pergunta": "Quais comandos abaixo são úteis para coletar dados sobre conexões remotas de sistemas de arquivos? (Escolha dois.)",
+    "opcoes": {
+      "A": "<code>pidstat</code>",
+      "B": "<code>nfsiostat</code>",
+      "C": "<code>sadf</code>",
+      "D": "<code>cifsiostat</code>",
+      "E": "<code>fsiostat</code>"
+    },
+    "respostaCorreta": ["B", "D"],
+    "explicacao": "'nfsiostat' exibe estatísticas para sistemas de arquivos montados via NFS. 'cifsiostat' exibe estatísticas para sistemas de arquivos montados via CIFS/SMB."
+  },
+  {
+    "id": 49,
+    "pergunta": "Um servidor de aplicativos web contém 64 GB de RAM e duas partições de swap em discos rígidos comuns, cada uma com 64 GB. No último mês, o número médio de sessões de usuário neste servidor aumentou 20%. Ao mesmo tempo, o uso médio de RAM aumentou de 65% para 75%, enquanto o espaço de swap é quase inexistente. Espera-se que o número de sessões de usuário continue a aumentar em cerca de 15% a 20% a cada mês. Qual das seguintes reações seria apropriada em resposta a essas observações? (Escolha duas opções.)",
+    "opcoes": {
+      "A": "Adiar qualquer atualização de hardware até que haja um consumo significativo de espaço de swap para garantir o uso eficiente do hardware disponível.",
+      "B": "Criar um dispositivo RAID 1 nas duas partições de swap para evitar perda de dados caso o espaço de swap precise ser usado no futuro.",
+      "C": "Considerar a instalação de um servidor de aplicativos adicional para distribuir a carga se o crescimento esperado continuar por vários meses.",
+      "D": "Mover os scripts e o conteúdo do aplicativo web para um disco RAM para garantir acesso rápido e evitar a necessidade de espaço de swap.",
+      "E": "Atualizar o hardware para aumentar la quantidade de RAM disponível e evitar o uso de espaço de swap."
+    },
+    "respostaCorreta": ["C", "E"],
+    "explicacao": "Com o uso de RAM já em 75% e projetado para crescer, o sistema está se aproximando da saturação de memória. Adicionar mais RAM (E) é uma solução vertical direta. Distribuir a carga para outro servidor (C) é uma estratégia de escalabilidade horizontal."
+  },
+  {
+    "id": 50,
+    "pergunta": "Quais dos seguintes arquivos de configuração são usados pelo <code>tcpwrapper</code>?",
+    "opcoes": {
+      "A": "<code>/etc/tcpd.allow</code> e <code>etc/tcpd.deny</code>",
+      "B": "<code>/etc/tcpwrapper.allow</code> e <code>/etc/tcpwrapper.deny</code>",
+      "C": "<code>/etc/hosts.allow</code> e <code>/etc/hosts.deny</code>",
+      "D": "<code>/etc/access.allow</code> e <code>/etc/access.deny</code>",
+      "E": "<code>/etc/service.allow</code> e <code>/etc/service.deny</code>"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O TCP Wrapper, uma ferramenta de controle de acesso à rede, usa os arquivos /etc/hosts.allow e /etc/hosts.deny para definir quais hosts/redes têm ou não permissão para acessar serviços de rede."
+  },
+  {
+    "id": 51,
+    "pergunta": "Qual programa lista informações sobre arquivos e conexões de rede abertos por processos? (Especifique SOMENTE o comando, sem caminho ou parâmetros.)",
+    "tipo": "fill",
+    "respostaCorreta": "lsof",
+    "explicacao": "O comando 'lsof' (LiSt Open Files) é usado para listar todos os arquivos abertos e os processos que os abriram, incluindo arquivos, diretórios, sockets de rede, etc."
+  },
+  {
+    "id": 52,
+    "pergunta": "Um cliente de rede possui uma interface Ethernet (eth0) configurada com um endereço IP na sub-rede 192.168.0.0/24. Essa sub-rede possui um roteador, com o endereço IP 192.168.0.1, que a conecta à Internet. Qual dos seguintes comandos pode ser usado no cliente para permitir que ele use o roteador como seu gateway padrão? (Escolha dois.)",
+    "opcoes": {
+      "A": "<code>route add default gw 192.168.0.1 eth0</code>",
+      "B": "<code>ifconfig eth0 defaultroute 192.168.0.1</code>",
+      "C": "<code>ip route add default via 192.168.0.1</code>",
+      "D": "<code>echo defaultroute 192.168.0.1 >>/etc/resolv.conf</code>",
+      "E": "<code>route add defaultgw=192.168.0.1 if=eth0</code>"
+    },
+    "respostaCorreta": ["A", "C"],
+    "explicacao": "'route add default gw ...' é a sintaxe do antigo pacote 'net-tools'. 'ip route add default via ...' é a sintaxe do pacote moderno 'iproute2'. Ambos os comandos adicionam uma rota padrão à tabela de roteamento."
+  },
+  {
+    "id": 53,
+    "pergunta": "Os usuários da rede local reclamam que a resolução de nomes não é rápida o suficiente. Qual comando mostra o tempo necessário para resolver uma consulta DNS? (Especifique o comando sem o caminho.)",
+    "tipo": "fill",
+    "respostaCorreta": "dig",
+    "explicacao": "O comando 'dig' (Domain Information Groper) é uma ferramenta poderosa para consultas DNS. Sua saída inclui uma seção que mostra o 'Query time', indicando quanto tempo a consulta levou."
+  },
+  {
+    "id": 54,
+    "pergunta": "Qual das palavras-chave de filtro abaixo poderia ser usada no seguinte comando: <code>tcpdump -i eth0 ____________ 203.0.113.8</code> (Escolha três.)",
+    "opcoes": {
+      "A": "<code>host</code>",
+      "B": "<code>ip</code>",
+      "C": "<code>src</code>",
+      "D": "<code>dst</code>",
+      "E": "<code>ipv6</code>"
+    },
+    "respostaCorreta": ["A", "C", "D"],
+    "explicacao": "O tcpdump usa uma linguagem de filtro. 'host' filtra pelo IP de origem ou destino. 'src' e 'dst' são qualificadores que especificam se o endereço é a fonte (source) ou o destino (destination)."
+  },
+  {
+    "id": 55,
+    "pergunta": "Qual dos seguintes comandos adiciona um endereço IPv6 estático à interface de rede <code>eth0</code>?",
+    "opcoes": {
+      "A": "<code>ip add addr 2001:db8::1337/64 dev eth0</code>",
+      "B": "<code>ip -6 add addr 2001:db8::1337/64 dev eth0</code>",
+      "C": "<code>ip addr add 2001:db8::1as-is7/64 dev eth0</code>",
+      "D": "<code>ip -6 addr add new 2001:db8::1337/64 dev eth0</code>",
+      "E": "<code>ip addr add -6 2001:db8::1337/64 dev eth0</code>"
+    },
+    "respostaCorreta": "C",
+    "explicacao": "O comando 'ip addr add' é a ferramenta moderna para adicionar endereços a interfaces. Ele detecta automaticamente se o endereço é IPv4 ou IPv6 com base em seu formato, tornando 'ip addr add 2001:db8::1337/64 dev eth0' a sintaxe correta e mais comum."
+  },
+  {
+    "id": 56,
+    "pergunta": "Em um nó Linux com múltiplas interfaces de rede ativas, cada uma com uma rota padrão para a Internet, qual rota padrão é preferida?",
+    "opcoes": {
+      "A": "A rota padrão com o maior valor de métrica",
+      "B": "A rota padrão com o maior valor de MTU",
+      "C": "A rota padrão com o menor valor de TTL",
+      "D": "A rota padrão com o maior valor de TTL",
+      "E": "A rota padrão com o menor valor de métrica"
+    },
+    "respostaCorreta": "E",
+    "explicacao": "A métrica de uma rota é um valor que indica o 'custo' de usar essa rota. Quando múltiplas rotas para o mesmo destino existem, o sistema sempre prefere a rota com o menor valor de métrica."
+  },
+  {
+    "id": 57,
+    "pergunta": "A seguir, um trecho da saída do comando <code>tcpdump -nli eth1</code>:<br><pre><code>13:03:17.277327 IP 192.168.123.5.1065 > 192.168.5.112.21: Flags [.], ack 1 (truncated)\\n13:03:17.598624 IP 192.168.5.112.21 > 192.168.123.5.1065: Flags [P.], seq (truncated)</code></pre>Qual serviço de rede ou protocolo foi utilizado?",
+    "opcoes": {
+      "A": "FTP",
+      "B": "HTTP",
+      "C": "SSH",
+      "D": "DNS",
+      "E": "DHCP"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "A saída mostra a comunicação de e para a porta 21 (indicada por '.21' após o endereço IP). A porta 21 é a porta padrão para o serviço FTP (File Transfer Protocol)."
+  },
+  {
+    "id": 58,
+    "pergunta": "O que deve ser feito para garantir que uma máquina cliente utilize o servidor de nomes recursivo em execução no endereço IP 192.168.0.1? (Escolha duas opções.)",
+    "opcoes": {
+      "A": "Adicionar o servidor de nomes 192.168.0.1 a <code>/etc/resolv.conf</code>",
+      "B": "Executar <code>route add nameserver 192.168.0.1</code>",
+      "C": "Executar <code>ifconfig eth0 nameserver 192.168.0.1</code>",
+      "D": "Garantir que o serviço DNS esteja listado na entrada hosts do arquivo <code>/etc/nsswitch.conf</code>",
+      "E": "Executar <code>bind add nameserver 192.168.0.1</code>"
+    },
+    "respostaCorreta": ["A", "D"],
+    "explicacao": "O arquivo '/etc/resolv.conf' é onde os endereços dos servidores DNS são configurados. O arquivo '/etc/nsswitch.conf' define a ordem de consulta para resolução de nomes; a entrada 'hosts' deve incluir 'dns' para que o sistema consulte os servidores DNS."
+  },
+  {
+    "id": 59,
+    "pergunta": "Qual dos seguintes comandos mostra as capacidades e frequências utilizáveis para a interface sem fio <code>wlan0</code>?",
+    "opcoes": {
+      "A": "<code>iw phy phy0 info</code>",
+      "B": "<code>iw dev wlan0 info</code>",
+      "C": "<code>iw dev wlan0 show</code>",
+      "D": "<code>iw phy wlan0 show</code>",
+      "E": "<code>iw phy0 show</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O comando 'iw phy <nome_phy>' mostra as capacidades do dispositivo de hardware físico. Cada dispositivo físico (phy0, phy1) pode ter uma ou mais interfaces virtuais (wlan0). Para ver as capacidades de hardware, você deve consultar o dispositivo 'phy'."
+  },
+  {
+    "id": 60,
+    "pergunta": "Qual dos seguintes comandos lista endereços IPv4 e endereços MAC de nós de rede que o sistema local viu em suas redes IP diretamente conectadas?",
+    "opcoes": {
+      "A": "<code>arp</code>",
+      "B": "<code>ifconfig</code>",
+      "C": "<code>ipadm</code>",
+      "D": "<code>iwlist</code>"
+    },
+    "respostaCorreta": "A",
+    "explicacao": "O comando 'arp' exibe e manipula o cache ARP (Address Resolution Protocol) do sistema. Este cache mapeia endereços IP para seus endereços MAC correspondentes na rede local."
+  }
+]
