@@ -1,28 +1,55 @@
-/* Estilos da página principal (index.html) */
-
+/* Ajuste no Body para permitir rolagem e fluxo normal */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    /* Removemos o height: 100vh fixo e o display flex centralizado do body 
+       para permitir que o grid cresça naturalmente */
+    min-height: 100vh; 
     margin: 0;
-    padding: 20px;
+    padding: 40px 20px; /* Um pouco mais de espaço nas bordas */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
 
+/* Novo Wrapper para segurar múltiplos cards */
+.main-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem linha se não houver espaço */
+    gap: 30px; /* Espaço entre os cards */
+    justify-content: center; /* Centraliza os cards na tela */
+    width: 100%;
+    max-width: 1200px; /* Limite máximo de largura para telas grandes */
+}
+
+/* Ajuste leve na .container para ela se comportar como um Card */
 .container {
     text-align: center;
     background-color: #fff;
-    /* Mais padding e borda mais arredondada */
-    padding-bottom: 30px; /* Reduz padding-bottom para que a imagem "grude" menos */
+    padding-bottom: 30px;
     border-radius: 12px;
-    /* Sombra mais suave */
     box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-    max-width: 450px;
-    width: 100%;
+    
+    /* --- CORREÇÃO FLEXBOX --- */
+    /* Removemos o width: 100% fixo que forçava a quebra de linha */
+    /* Usamos 'flex' para definir o comportamento: */
+    /* crescer (1), encolher (1), tamanho base (300px) */
+    flex: 1 1 300px; 
+    max-width: 400px; /* O limite máximo continua o mesmo */
+    /* ------------------------ */
+
     box-sizing: border-box;
-    overflow: hidden; /* Garante que a imagem arredondada não "escape" */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Título da Página Principal (Opcional, para dar um cabeçalho) */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #212529;
 }
 
 /* --- Estilos da Imagem de Capa --- */
