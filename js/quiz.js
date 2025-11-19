@@ -12,19 +12,103 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextBtn = document.getElementById('next-btn');
     const explanationBox = document.getElementById('explanation-box'); 
     const menuToggle = document.getElementById('menu-toggle');
+    // (NOVO) Botão de Tema
+    const themeToggle = document.getElementById('theme-toggle'); 
     const navMenu = document.getElementById('nav-menu');
     const navOverlay = document.getElementById('nav-overlay');
     const questionList = document.getElementById('question-list');
     const scoreTextEl = document.getElementById('score-text');
-    const scoreContainer = document.getElementById('score-box'); // Container da pontuação
+    const scoreContainer = document.getElementById('score-box');
 
     // --- Estado do Quiz ---
     let currentQuestionIndex = 0;
     let score = 0;
     let quizData = []; 
-    let assunto = ''; // lpic201 ou lpic202
-    let quizStateKey = ''; // Chave do localStorage (ex: 'quizState_lpic201')
-    let reviewMode = false; // Modo de revisão
+    let assunto = ''; 
+    let quizStateKey = ''; 
+    let reviewMode = false;
+
+    // --- (A) Algoritmo Fisher-Yates (Shuffle Real) ---
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // --- (4) Lógica do Dark Mode ---
+    function initTheme() {
+        const savedTheme = localStorage.getItem('quizTheme');
+        // Se não houver salvo, verifica preferência do sistema
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.body.classList.add('dark-mode');
+            if(themeToggle) themeToggle.innerText = '☀️';
+        } else {
+            document.body.classList.remove('dark-mode');
+            if(themeToggle) themeToggle.innerText = '🌙';
+        }
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('quizTheme', isDark ? 'dark' : 'light');
+            themeToggle.innerText = isDark ? '☀️' : '🌙';
+        });
+    }
+
+    // --- (B) Acessibilidade e Atalhos de Teclado ---
+    document.addEventListener('keydown', (e) => {
+        // Se o quiz não estiver visível, ignora
+        if (quizContent.style.display === 'none') return;
+
+        const key = e.key.toLowerCase();
+        
+        // Mapeamento: Teclas 1-5 ou A-E para selecionar opções
+        const mapKeys = {
+            '1': 0, 'a': 0,
+            '2': 1, 'b': 1,
+            '3': 2, 'c': 2,
+            '4': 3, 'd': 3,
+            '5': 4, 'e': 4
+        };
+
+        if (mapKeys.hasOwnProperty(key)) {
+            const buttons = answersEl.querySelectorAll('.answer-btn');
+            const index = mapKeys[key];
+            // Clica no botão se ele existir e não estiver desativado
+            if (buttons[index] && !buttons[index].disabled) {
+                buttons[index].click();
+            }
+        }
+
+        // Tecla Enter: Funciona para "Verificar", "Próxima" ou Submeter input de texto
+        if (key === 'enter') {
+            // Cenário 1: Campo de texto (Fill in the blank)
+            const fillInput = document.getElementById('fill-answer-input');
+            const fillSubmit = document.getElementById('fill-submit-btn');
+            if (fillInput && fillSubmit && !fillSubmit.disabled) {
+                fillSubmit.click();
+                return;
+            }
+
+            // Cenário 2: Múltipla escolha (Botão Verificar)
+            const multiBtn = document.getElementById('multi-submit-btn');
+            if (multiBtn && !multiBtn.disabled) {
+                multiBtn.click();
+                return;
+            }
+
+            // Cenário 3: Botão Próxima (se estiver visível)
+            if (nextBtn.style.display !== 'none') {
+                handleNextButton();
+            }
+        }
+    });
 
     // --- Funções de Erro e Navegação ---
 
@@ -34,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         errorMessage.textContent = message;
         errorBox.style.display = 'block';
         menuToggle.style.display = 'none'; 
+        if(themeToggle) themeToggle.style.display = 'none';
     }
 
     function openNavMenu() {
@@ -49,9 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Funções de Persistência (LocalStorage) ---
 
     function saveQuizState() {
-        if (reviewMode) return; // Não salva o estado no modo de revisão
+        if (reviewMode) return; 
 
-        // Salva um objeto mais leve
         const state = {
             currentQuestionIndex: currentQuestionIndex,
             score: score,
@@ -59,8 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: q.id,
                 answered: q.answered,
                 isCorrect: q.isCorrect,
-                userAnswer: q.userAnswer, // Salva a resposta do usuário
-                optionOrder: q.optionOrder // Salva a ordem das opções
+                userAnswer: q.userAnswer, 
+                optionOrder: q.optionOrder 
             }))
         };
         localStorage.setItem(quizStateKey, JSON.stringify(state));
@@ -73,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             return JSON.parse(savedState);
         } catch (e) {
-            console.error("Erro ao carregar estado do quiz:", e);
+            console.error("Erro ao carregar estado:", e);
             localStorage.removeItem(quizStateKey);
             return null;
         }
@@ -93,7 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentQuestionIndex = resumeState.currentQuestionIndex;
             score = resumeState.score;
             
-            // Mapeia o estado salvo
             const stateMap = new Map();
             resumeState.questions.forEach(q => {
                 stateMap.set(q.id, { 
@@ -104,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Reordena o quizData para corresponder à ordem salva e aplica o estado
+            // Reordena o quizData para corresponder à ordem salva
             quizData.sort((a, b) => {
                 const indexA = resumeState.questions.findIndex(item => item.id === a.id);
                 const indexB = resumeState.questions.findIndex(item => item.id === b.id);
@@ -125,26 +208,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } else {
-            // Inicia um novo quiz
-            quizData.sort(() => Math.random() - 0.5); 
+            // (A) Usa o novo algoritmo de Shuffle
+            shuffleArray(quizData);
             currentQuestionIndex = 0;
             score = 0;
             quizData.forEach(q => {
                 q.answered = false;
                 q.isCorrect = undefined;
                 delete q.userAnswer;
-                delete q.optionOrder; // Limpa a ordem das opções
+                delete q.optionOrder; 
             });
-            clearQuizState(); // Limpa qualquer estado antigo
+            clearQuizState(); 
         }
         
         scoreContainer.style.display = 'none';
         quizContent.style.display = 'block';
-        nextBtn.innerHTML = "Próxima";
+        nextBtn.innerHTML = "Próxima (Enter)";
         
         populateNavMenu(); 
         showQuestion();
         menuToggle.style.display = 'block'; 
+        if(themeToggle) themeToggle.style.display = 'block';
     }
 
     function startReviewMode() {
@@ -154,10 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreContainer.style.display = 'none';
         quizContent.style.display = 'block';
         menuToggle.style.display = 'block';
+        if(themeToggle) themeToggle.style.display = 'block';
         nextBtn.innerHTML = "Próxima Revisão";
         
-        populateNavMenu(); // Atualiza o menu com os ícones de acerto/erro
-        showQuestion(); // Mostra a primeira pergunta no modo de revisão
+        populateNavMenu(); 
+        showQuestion(); 
     }
 
 
@@ -166,21 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentQuestion = quizData[currentQuestionIndex];
         const questionNumber = currentQuestionIndex + 1;
         
+        // (C) Segurança: Mantemos innerHTML pois o conteúdo vem de JSONs controlados por você
+        // e contêm tags como <code> necessárias para TI.
         questionTitleEl.innerHTML = `${questionNumber}. ${currentQuestion.pergunta}`;
         progressEl.innerText = `Pergunta ${questionNumber}/${quizData.length}`;
 
-        // (MELHORIA 6) Adiciona imagem se existir
         if (currentQuestion.imagem) {
             const imgEl = document.createElement('img');
-            imgEl.src = `images/${currentQuestion.imagem}`; // Assumindo que estão na pasta images/
+            imgEl.src = `images/${currentQuestion.imagem}`; 
             imgEl.alt = "Contexto visual para a pergunta";
             imgEl.style.width = "100%"; 
-            imgEl.style.maxWidth = "600px"; // Limite
+            imgEl.style.maxWidth = "600px"; 
             imgEl.style.margin = "15px auto";
             imgEl.style.display = "block";
             imgEl.style.borderRadius = "8px";
             imgEl.style.border = "1px solid #eee";
-            answersEl.before(imgEl); // Insere a imagem antes das respostas
+            answersEl.before(imgEl); 
         }
 
         const correctAnswers = currentQuestion.respostaCorreta;
@@ -192,15 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
             input.id = "fill-answer-input";
             input.placeholder = "Digite sua resposta aqui...";
             input.classList.add("answer-input"); 
-            input.addEventListener("keypress", (e) => {
-                if (e.key === "Enter") {
-                    e.preventDefault(); 
-                    const submitBtn = document.getElementById('fill-submit-btn');
-                    if (submitBtn && !submitBtn.disabled) {
-                        submitBtn.click();
-                    }
-                }
-            });
+            // Foca no input automaticamente (UX)
+            setTimeout(() => input.focus(), 100);
 
             const submitBtn = document.createElement("button");
             submitBtn.innerText = "Verificar";
@@ -212,17 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
             answersEl.appendChild(submitBtn);
 
         } else {
-            // *** ESTA É A PARTE QUE FALTAVA ***
             const displayKeys = ['A', 'B', 'C', 'D', 'E', 'F', 'G']; 
             
             let originalKeys = Object.keys(currentQuestion.opcoes);
 
-            // Se não tivermos um "order" salvo, embaralha e salva
+            // (A) Embaralha as opções se ainda não tiver ordem salva
             if (!currentQuestion.optionOrder) {
-                originalKeys.sort(() => Math.random() - 0.5);
+                shuffleArray(originalKeys);
                 currentQuestion.optionOrder = originalKeys;
             } else {
-                originalKeys = currentQuestion.optionOrder; // Usa a ordem salva
+                originalKeys = currentQuestion.optionOrder; 
             }
 
             if (isMultiAnswer) {
@@ -262,16 +340,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     answersEl.appendChild(button);
                 });
             }
-            // *** FIM DA PARTE QUE FALTAVA ***
         }
 
-        // Se a pergunta já foi respondida (vindo do localStorage ou modo de revisão)
         if (currentQuestion.answered) {
             showAnswerState();
         }
     }
 
-    // Mostra o estado salvo (cores, etc.)
     function showAnswerState() {
         const currentQuestion = quizData[currentQuestionIndex];
         const correctAnswers = currentQuestion.respostaCorreta;
@@ -293,11 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
             const buttons = Array.from(answersEl.querySelectorAll('.answer-btn'));
-            const userAnswer = currentQuestion.userAnswer; // Pode ser string ou array
+            const userAnswer = currentQuestion.userAnswer; 
 
             buttons.forEach(button => {
                 const key = button.dataset.key;
-                if (!key) return; // Ignora o botão de submit
+                if (!key) return; 
 
                 button.disabled = true;
 
@@ -307,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (isSelected) {
                         button.classList.add(isCorrectAnswer ? 'correct' : 'incorrect');
-                        button.classList.add('selected'); // Adiciona para o modo de revisão
+                        button.classList.add('selected');
                     } else if (isCorrectAnswer) {
                         button.classList.add('missed');
                     }
@@ -329,6 +404,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showExplanation(); 
         nextBtn.style.display = 'block';
+        // (B) Acessibilidade: Foca no botão "Próxima" para agilizar navegação
+        nextBtn.focus();
     }
 
 
@@ -341,7 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
             answersEl.removeChild(answersEl.firstChild);
         }
 
-        // Remove imagem da pergunta anterior
         const oldImg = quizContent.querySelector('img');
         if (oldImg) {
             oldImg.remove();
@@ -356,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentQuestion = quizData[currentQuestionIndex];
 
         currentQuestion.answered = true;
-        currentQuestion.userAnswer = selectedBtn.dataset.key; // Salva a resposta
+        currentQuestion.userAnswer = selectedBtn.dataset.key; 
 
         if (isCorrect) {
             selectedBtn.classList.add("correct");
@@ -376,10 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        showExplanation(); 
-        nextBtn.style.display = 'block';
-        updateNavItemStatus(currentQuestionIndex, currentQuestion.isCorrect);
-        saveQuizState();
+        finishAnswerTurn();
     }
 
     function checkFillAnswer() {
@@ -392,8 +465,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const correctAnswers = currentQuestion.respostaCorreta;
 
         currentQuestion.answered = true;
-        currentQuestion.userAnswer = userAnswer; // Salva a resposta
+        currentQuestion.userAnswer = userAnswer;
 
+        // (3) Case Sensitive mantido conforme solicitação (sem normalização)
         let isCorrect = false;
         if (Array.isArray(correctAnswers)) {
             isCorrect = correctAnswers.some(ans => ans === userAnswer);
@@ -410,13 +484,9 @@ document.addEventListener('DOMContentLoaded', () => {
             currentQuestion.isCorrect = false;
         }
         
-        showExplanation();
-
         inputEl.disabled = true;
         submitBtn.disabled = true;
-        nextBtn.style.display = 'block';
-        updateNavItemStatus(currentQuestionIndex, currentQuestion.isCorrect);
-        saveQuizState();
+        finishAnswerTurn();
     }
 
     function toggleAnswer(e) {
@@ -440,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         currentQuestion.answered = true;
-        currentQuestion.userAnswer = selectedAnswers; // Salva as respostas
+        currentQuestion.userAnswer = selectedAnswers; 
 
         const sortedCorrect = [...correctAnswers].sort();
         const sortedSelected = [...selectedAnswers].sort();
@@ -469,9 +539,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         document.getElementById('multi-submit-btn').disabled = true;
+        finishAnswerTurn();
+    }
+
+    // Função auxiliar para centralizar o que acontece ao finalizar uma pergunta
+    function finishAnswerTurn() {
         showExplanation();
         nextBtn.style.display = 'block';
-        updateNavItemStatus(currentQuestionIndex, currentQuestion.isCorrect);
+        nextBtn.focus(); // Acessibilidade
+        updateNavItemStatus(currentQuestionIndex, quizData[currentQuestionIndex].isCorrect);
         saveQuizState();
     }
     
@@ -484,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion.tipo === 'fill' && currentQuestion.answered && !currentQuestion.isCorrect) {
             const correctAnswers = currentQuestion.respostaCorreta;
             const displayAnswers = Array.isArray(correctAnswers) ? correctAnswers.join('</strong> ou <strong>') : correctAnswers;
-            html += `<p style="margin-bottom: 15px; color: #155724; font-weight: 500;">Resposta correta: <strong>${displayAnswers}</strong></p>`;
+            html += `<p style="margin-bottom: 15px; color: #dc3545; font-weight: 500;">Resposta correta: <strong>${displayAnswers}</strong></p>`;
         }
 
         if (explanation) {
@@ -504,7 +580,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const a = document.createElement('a');
             a.href = '#';
             
-            // (MELHORIA 3) Adiciona ícone de status
             let statusIcon = '';
             if (question.answered) {
                 statusIcon = question.isCorrect ? ' ✔' : ' ✘';
@@ -524,13 +599,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // (MELHORIA 3) Atualiza o item do menu após a resposta
     function updateNavItemStatus(index, isCorrect) {
         const navItem = questionList.querySelector(`a[data-index="${index}"]`);
         if (navItem) {
             const statusIcon = isCorrect ? ' ✔' : ' ✘';
             navItem.style.color = isCorrect ? '#155724' : '#721c24';
-            // Remove o ícone antigo se houver
             navItem.textContent = navItem.textContent.replace(/ [✔✘]$/, '');
             navItem.textContent += statusIcon;
         }
@@ -560,15 +633,12 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreTextEl.innerText = `Você acertou ${score} de ${quizData.length} perguntas (${correctPercentage.toFixed(0)}%).`;
         scoreBox.style.display = 'block';
         menuToggle.style.display = 'none'; 
-        clearQuizState(); // Limpa o progresso ao finalizar
+        if(themeToggle) themeToggle.style.display = 'none';
+        clearQuizState(); 
 
-        // (MELHORIA 2) Adiciona botões de "Revisar" e "Jogar Novamente"
-        
-        // Limpa botões antigos da tela de score
         const oldButtons = scoreContainer.querySelectorAll('.action-btn');
         oldButtons.forEach(btn => btn.remove());
 
-        // Botão de Reiniciar
         const restartBtn = document.createElement("a");
         restartBtn.href = "#";
         restartBtn.id = "restart-btn";
@@ -577,16 +647,15 @@ document.addEventListener('DOMContentLoaded', () => {
         restartBtn.style.marginRight = "10px";
         restartBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            startQuiz(); // Inicia um novo quiz (sem estado)
+            startQuiz(); 
         });
 
-        // Botão de Revisão
         const reviewBtn = document.createElement("a");
         reviewBtn.href = "#";
         reviewBtn.id = "review-btn";
         reviewBtn.classList.add("action-btn");
         reviewBtn.innerText = "Revisar Prova";
-        reviewBtn.style.background = "#6c757d"; // Cor cinza
+        reviewBtn.style.background = "#6c757d"; 
         reviewBtn.addEventListener('click', (e) => {
             e.preventDefault();
             startReviewMode();
@@ -601,14 +670,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestionIndex < quizData.length) {
             showQuestion();
             if (!reviewMode) {
-                saveQuizState(); // Salva o progresso ao avançar
+                saveQuizState(); 
             }
         } else {
             if (reviewMode) {
-                // Se terminou a revisão, volta para a tela de score
                 quizContent.style.display = 'none';
                 scoreContainer.style.display = 'block';
                 menuToggle.style.display = 'none';
+                if(themeToggle) themeToggle.style.display = 'none';
             } else {
                 showScore();
             }
@@ -621,20 +690,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Inicialização ---
 
+    initTheme(); // Inicializa o Dark Mode
     menuToggle.addEventListener('click', openNavMenu);
     navOverlay.addEventListener('click', closeNavMenu);
     menuToggle.style.display = 'none'; 
+    if(themeToggle) themeToggle.style.display = 'none';
 
     const urlParams = new URLSearchParams(window.location.search);
     assunto = urlParams.get('assunto');
-    quizStateKey = `quizState_${assunto}`; // Chave única por assunto
+    quizStateKey = `quizState_${assunto}`; 
 
     if (!assunto) {
         showUIError("Nenhum assunto de quiz foi especificado na URL.");
         return;
     }
 
-    // (MELHORIA 5) Lógica de Fetch com caminhos relativos à raiz
     const jsonPath = `data/dados_${assunto}.json`;
 
     fetch(jsonPath)
@@ -646,20 +716,30 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             if (data && data.length > 0) {
+                
+                // [NOVA CORREÇÃO 3] Atualiza o Título da Aba
+                // Converte "lpic101" para "LPIC-101" para ficar bonito
+                const titleMap = {
+                    'lpic101': 'LPIC-1 Exame 101',
+                    'lpic102': 'LPIC-1 Exame 102',
+                    'lpic201': 'LPIC-2 Exame 201',
+                    'lpic202': 'LPIC-2 Exame 202'
+                };
+                // Se estiver no mapa usa ele, senão usa o texto puro em maiúsculo
+                document.title = `Quiz ${titleMap[assunto] || assunto.toUpperCase()}`;
                 quizData = data;
                 
-                // (MELHORIA 1) Verifica se há um quiz salvo
                 const savedState = loadQuizState();
-                if (savedState && savedState.assunto === assunto) {
-                    // Se encontrou, pergunta ao usuário
+                // Verificação extra: só restaura se o número de questões bater (para evitar bugs se o JSON mudar)
+                if (savedState && savedState.questions && savedState.questions.length === quizData.length) {
                     if (confirm("Encontramos um quiz em andamento. Deseja continuar de onde parou?")) {
-                        startQuiz(savedState); // Restaura o progresso
+                        startQuiz(savedState); 
                     } else {
-                        clearQuizState(); // Limpa o progresso e começa de novo
+                        clearQuizState(); 
                         startQuiz();
                     }
                 } else {
-                    startQuiz(); // Começa um quiz novo
+                    startQuiz(); 
                 }
                 
                 quizContent.style.display = 'block'; 

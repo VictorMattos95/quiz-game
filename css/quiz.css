@@ -7,26 +7,42 @@ body {
     padding: 0;
 }
 
-/* --- Estilos do Menu Hambúrguer --- */
+/* --- Estilos do Menu Hambúrguer e Botões de Controle --- */
 .hamburger-btn {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1001;
     background: #fff;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Arredondado */
-    padding: 10px;
+    border-radius: 8px;
+    padding: 0;
+    margin: 0;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 45px;
+    height: 45px;
+    
+    /* Flexbox para centralização */
+    display: flex;
+    flex-direction: column; /* Empilha um em cima do outro */
+    justify-content: center; /* Centraliza Verticalmente */
+    align-items: center;     /* Centraliza Horizontalmente */
+    box-sizing: border-box;
 }
+
 .hamburger-btn span {
     display: block;
-    width: 22px;
+    width: 20px;
     height: 3px;
     background: #333;
-    margin: 4px 0;
+    
+    /* O SEGREDO ESTÁ AQUI: */
+    /* 3px em cima/baixo para espaçamento */
+    /* 'auto' nas laterais força o centro horizontalmente */
+    margin: 3px auto; 
+    
+    border-radius: 2px;
+    transform-origin: center;
 }
+
+/* --- Menu Lateral (Drawer) --- */
 .nav-drawer {
     position: fixed;
     top: 0;
@@ -68,6 +84,8 @@ body {
 #question-list li a:hover {
     background: #f8f9fa;
 }
+
+/* --- Overlay (Fundo escuro quando menu abre) --- */
 .overlay {
     position: fixed;
     top: 0;
@@ -81,8 +99,8 @@ body {
 .overlay.open {
     display: block;
 }
-/* --- Fim dos Estilos do Menu --- */
 
+/* --- Container Principal do Quiz --- */
 .quiz-container {
     background: #fff;
     width: 100%;
@@ -92,20 +110,23 @@ body {
     padding: 30px;
     box-sizing: border-box;
     margin: 20px auto; 
+    margin-top: 80px; /* Espaço extra no topo para não colar nos botões em telas pequenas */
 }
 
+/* --- Mensagens de Erro --- */
 .error-container {
     background-color: #ffebee;
     color: #c62828;
     border: 1px solid #c62828;
     padding: 20px;
-    border-radius: 12px; /* Arredondado */
+    border-radius: 12px;
     text-align: center;
 }
 #quiz-content {
     display: none; 
 }
 
+/* --- Cabeçalho da Questão --- */
 .question-header {
     display: flex;
     justify-content: space-between;
@@ -118,7 +139,7 @@ body {
 #question-title {
     font-size: 22px;
     color: #212529;
-    margin-left: 40px; 
+    margin-left: 0; /* Margem removida pois os botões agora são flutuantes */
     flex-grow: 1; 
     word-break: break-word; 
 }
@@ -146,6 +167,7 @@ body {
     padding-top: 4px; 
 }
 
+/* --- Lista de Respostas --- */
 .answers {
     margin: 0;
     padding: 0;
@@ -156,33 +178,33 @@ body {
     display: flex;
     align-items: flex-start;
     width: 100%;
-    background: #fff; /* Fundo branco para o efeito de "levantar" */
+    background: #fff;
     border: 1px solid #ced4da;
-    border-radius: 8px; /* Mais arredondado */
+    border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
     text-align: left;
     font-size: 16px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out; /* Transição mais suave */
+    transition: all 0.2s ease-in-out;
     box-sizing: border-box;
 }
 .answer-btn:hover:not([disabled]) {
     background: #fff;
-    border-color: #007bff; /* Borda azul no hover */
-    transform: translateY(-2px); /* Efeito de "levantar" */
-    box-shadow: 0 4px 10px rgba(0,123,255,0.1); /* Sombra azul suave */
+    border-color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,123,255,0.1);
 }
 .option-key {
     font-weight: bold;
-    color: #212529; /* Cor mais escura */
+    color: #212529;
     margin-right: 10px;
     flex-shrink: 0;
 }
 .option-text {
     flex-grow: 1;
-    color: #495057; /* Cinza mais escuro */
-    font-weight: 500; /* Texto mais legível */
+    color: #495057;
+    font-weight: 500;
     word-break: break-word;
 }
 .answer-btn.selected {
@@ -190,6 +212,7 @@ body {
     border-color: #007bff;
 }
 
+/* Estados de Resposta (Light Mode) */
 .answer-btn.correct {
     background-color: #d4edda;
     border-color: #c3e6cb;
@@ -212,10 +235,9 @@ body {
     color: #721c24;
     font-weight: bold;
 }
-
 .answer-btn.missed {
-    background-color: #fff; /* Fundo branco */
-    border: 2px dashed #155724; /* Borda verde tracejada */
+    background-color: #fff;
+    border: 2px dashed #155724;
     color: #155724;
     font-weight: bold;
 }
@@ -224,16 +246,17 @@ body {
     color: #155724;
     font-weight: bold;
 }
-
 .answer-btn:disabled {
     cursor: not-allowed;
     opacity: 0.7; 
 }
+
+/* Inputs de Texto (Fill in the blank) */
 .answer-input {
     display: block;
     width: 100%;
     border: 1px solid #ced4da;
-    border-radius: 8px; /* Arredondado */
+    border-radius: 8px;
     padding: 15px;
     margin-bottom: 10px;
     font-size: 16px;
@@ -252,10 +275,11 @@ body {
     font-weight: bold;
 }
 
+/* Área de Explicação */
 .explanation-container {
     background: #e7f3fe; 
     border: 1px solid #b0c4de; 
-    border-radius: 8px; /* Arredondado */
+    border-radius: 8px;
     padding: 20px;
     margin-top: 20px;
     font-size: 16px;
@@ -268,6 +292,8 @@ body {
     display: block;
     margin-bottom: 5px;
 }
+
+/* Rodapé e Botões de Ação */
 .quiz-footer {
     margin-top: 20px;
     text-align: right;
@@ -284,19 +310,19 @@ body {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 12px 25px; /* Padding ajustado */
-    border-radius: 8px; /* Arredondado */
+    padding: 12px 25px;
+    border-radius: 8px;
     font-size: 16px;
-    font-weight: 500; /* Peso da fonte */
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.2s ease-in-out; /* Transição */
+    transition: all 0.2s ease-in-out;
     text-decoration: none;
-    display: inline-block; /* Para o <a> funcionar */
+    display: inline-block;
 }
 .action-btn:hover:not([disabled]) {
     background-color: #0056b3;
-    transform: scale(1.03); /* Efeito "pop" */
-    box-shadow: 0 4px 15px rgba(0,123,255,0.25); /* Sombra azul */
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,123,255,0.25);
 }
 
 .submit-fill-btn {
@@ -312,34 +338,179 @@ body {
     text-align: center;
 }
 
-/* *** CORREÇÃO APLICADA (LAYOUT RESPONSIVO) *** */
+/* --- Layout Responsivo (Celular) --- */
 @media (max-width: 650px) {
-    
     .quiz-container {
         padding: 15px;
-        margin: 10px auto;
+        margin: 60px auto 10px; /* Aumentado topo para não cobrir com botões */
     }
 
     .question-header {
-        flex-direction: column-reverse; /* Inverte a ordem e empilha */
-        align-items: stretch; /* Ocupa largura total */
+        flex-direction: column-reverse;
+        align-items: stretch;
         gap: 5px; 
         margin-bottom: 15px;
     }
 
     #question-title {
-        margin-left: 0; /* Remove margem desnecessária */
         font-size: 20px; 
     }
     
     #progress {
-        text-align: right; /* Alinha progresso à direita */
+        text-align: right;
         padding-top: 0; 
         width: 100%; 
     }
+}
 
-    .hamburger-btn {
-        top: 10px;
-        left: 10px;
-    }
+/* =========================================
+   DARK MODE
+   ========================================= */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Menu e Botões */
+body.dark-mode .nav-drawer,
+body.dark-mode .hamburger-btn {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+body.dark-mode .hamburger-btn span {
+    background: #e0e0e0;
+}
+
+/* Container do Quiz */
+body.dark-mode .quiz-container {
+    background-color: #1e1e1e;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+/* Títulos e Textos */
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode #question-title,
+body.dark-mode .option-key {
+    color: #ffffff;
+}
+
+body.dark-mode .question-header {
+    border-bottom: 1px solid #333;
+}
+
+/* Blocos de Código */
+body.dark-mode #question-title code,
+body.dark-mode #question-title pre {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    color: #f8f8f2; /* Cor clara estilo Drácula/Monokai */
+}
+
+/* Botões de Resposta (Estado Normal) */
+body.dark-mode .answer-btn,
+body.dark-mode .answer-input {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark-mode .answer-btn:hover:not([disabled]) {
+    background-color: #383838;
+    border-color: #007bff;
+}
+
+body.dark-mode .option-text {
+    color: #ccc;
+}
+
+/* Explicação */
+body.dark-mode .explanation-container {
+    background: #1e2a36; /* Azul muito escuro */
+    border-color: #2c4a66;
+    color: #e0e0e0;
+}
+
+body.dark-mode .explanation-container strong {
+    color: #66b0ff;
+}
+
+/* Lista do Menu Lateral */
+body.dark-mode #question-list li a {
+    color: #ccc;
+    border-bottom: 1px solid #333;
+}
+body.dark-mode #question-list li a:hover {
+    background: #2d2d2d;
+}
+
+
+/* ============================================================
+   AJUSTES FINAIS E DEFINITIVOS DE CORES (DARK MODE)
+   ============================================================ */
+
+/* 1. ESTADO INICIAL: Selecionado (Azul) 
+   Aplica-se quando o usuário clica, mas ainda não verificou. 
+   Usa !important para ganhar da cor cinza padrão. */
+body.dark-mode .answer-btn.selected {
+    background-color: #102a43 !important;
+    border-color: #4dabf7 !important;
+    color: #e0e0e0 !important;
+}
+body.dark-mode .answer-btn.selected .option-key {
+    color: #4dabf7 !important;
+    font-weight: bold;
+}
+/* Hover no selecionado */
+body.dark-mode .answer-btn.selected:hover {
+    background-color: #183552 !important;
+    border-color: #4dabf7 !important;
+}
+
+
+/* 2. ESTADOS FINAIS (Pós-Verificação)
+   Aqui usamos seletores mais específicos (.selected.correct) para garantir 
+   que estas cores vençam a cor azul acima. */
+
+/* A) CORRETO (Verde) - Ganha do Azul */
+body.dark-mode .answer-btn.selected.correct,
+body.dark-mode .answer-btn.correct,
+body.dark-mode .answer-input.correct {
+    background-color: #153619 !important;
+    border-color: #28a745 !important;
+    color: #e6f4ea !important;
+}
+body.dark-mode .answer-btn.correct .option-key,
+body.dark-mode .answer-btn.correct .option-text,
+body.dark-mode .answer-btn.selected.correct .option-key {
+    color: #e6f4ea !important;
+}
+
+/* B) INCORRETO (Vermelho) - Ganha do Azul */
+body.dark-mode .answer-btn.selected.incorrect,
+body.dark-mode .answer-btn.incorrect,
+body.dark-mode .answer-input.incorrect {
+    background-color: #42171b !important;
+    border-color: #dc3545 !important;
+    color: #f8d7da !important;
+}
+body.dark-mode .answer-btn.incorrect .option-key,
+body.dark-mode .answer-btn.incorrect .option-text,
+body.dark-mode .answer-btn.selected.incorrect .option-key {
+    color: #f8d7da !important;
+}
+
+/* C) MISSED (Correta não marcada) - Verde Tracejado */
+body.dark-mode .answer-btn.missed {
+    background-color: transparent !important;
+    border-color: #28a745 !important;
+    color: #28a745 !important;
+}
+body.dark-mode .answer-btn.missed .option-key,
+body.dark-mode .answer-btn.missed .option-text {
+    color: #28a745 !important;
 }

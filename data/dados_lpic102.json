@@ -2,7 +2,7 @@
   {
     "id": 1,
     "tipo": "fill",
-    "pergunta": "Qual comando é usado para definir o hostname do sistema local? (Especifique apenas o\ncomando, sem caminho ou parâmetros.)",
+    "pergunta": "Qual comando é usado para definir o hostname do sistema local?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "hostname",
     "explicacao": "O comando 'hostname' é o utilitário padrão usado para exibir ou definir o nome do host do sistema. Em sistemas modernos baseados em systemd, o comando 'hostnamectl' é frequentemente usado para definir o hostname de forma persistente."
   },
@@ -23,20 +23,20 @@
   {
     "id": 3,
     "tipo": "fill",
-    "pergunta": "Qual comando, dependendo de suas opções, pode exibir as conexões TCP abertas, as tabelas\nde roteamento e as estatísticas das interfaces de rede? (Especifique apenas o comando, sem\ncaminho ou parâmetros.)",
+    "pergunta": "Qual comando, dependendo de suas opções, pode exibir as conexões TCP abertas, as tabelas de roteamento e as estatísticas das interfaces de rede?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "netstat",
     "explicacao": "O comando netstat (Network Statistics) é tradicionalmente usado para exibir conexões de rede ativas, tabelas de roteamento e estatísticas de interface. Ele cobre todas as funcionalidades listadas na questão através de suas diversas opções, como -a, -r e -i."
   },
   {
     "id": 4,
     "tipo": "fill",
-    "pergunta": "Qual comando incluído no NetworkManager é uma aplicação curses que fornece acesso fácil\nao NetworkManager via linha de comando? (Especifique apenas o comando, sem caminho ou\nparâmetros.)",
+    "pergunta": "Qual comando incluído no NetworkManager é uma aplicação curses que fornece acesso fácil ao NetworkManager via linha de comando?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "nmtui",
     "explicacao": "nmtui (NetworkManager Text User Interface) é a aplicação curses que permite a configuração interativa e fácil das conexões de rede gerenciadas pelo NetworkManager diretamente no terminal. Ele oferece uma interface semi-gráfica baseada em texto para gerenciar conexões."
   },
   {
     "id": 5,
-    "pergunta": "Qual das seguintes ferramentas, usada para debug de DNS, fornece não apenas a resposta do\nservidor de nomes, mas também detalhes sobre a consulta?",
+    "pergunta": "Qual das seguintes ferramentas, usada para debug de DNS, fornece não apenas a resposta do servidor de nomes, mas também detalhes sobre a consulta?",
     "opcoes": {
       "A": "dnsq",
       "B": "hostname",
@@ -52,10 +52,10 @@
     "id": 6,
     "pergunta": "Qual das seguintes instruções é válida no arquivo /etc/nsswitch.conf?",
     "opcoes": {
-      "A": "<code>multi on</code>",
+      "A": "multi on",
       "B": "192.168.168.4 dns-server",
       "C": "namespaces: net mount procs",
-      "D": "<code>include /etc/nsswitch.d/</code>",
+      "D": "include /etc/nsswitch.d/",
       "E": "hosts: files dns"
     },
     "tipo": "multipla",
@@ -64,7 +64,7 @@
   },
   {
     "id": 7,
-    "pergunta": "Quais dos seguintes tipos de conexão, conforme exibido em nmcli connection show, podem\nexistir no NetworkManager?",
+    "pergunta": "Quais dos seguintes tipos de conexão, conforme exibido em nmcli connection show, podem existir no NetworkManager?<br>(Escolha três.)",
     "opcoes": {
       "A": "tcp",
       "B": "ethernet",
@@ -82,7 +82,7 @@
   },
   {
     "id": 8,
-    "pergunta": "Em uma estação Linux, o comando route demora muito para exibir a tabela de roteamento.\nQual dos seguintes erros isso indica?",
+    "pergunta": "Em uma estação Linux, o comando route demora muito para exibir a tabela de roteamento. Qual dos seguintes erros isso indica?",
     "opcoes": {
       "A": "<code>As informações de roteamento local podem estar corrompidas e devem ser revalidadas usando um protocolo de roteamento.</code>",
       "B": "<code>Um dos roteadores na tabela de roteamento não está disponível, o que faz o mecanismo de detecção de falha automática de roteador (ARF-D) aguardar um timeout.</code>",
@@ -110,7 +110,7 @@
   },
   {
     "id": 10,
-    "pergunta": "Quais dos seguintes subcomandos do nmcli existem? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes subcomandos do nmcli existem?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>nmcli ethernet</code>",
       "B": "<code>nmcli device</code>",
@@ -127,7 +127,7 @@
   },
   {
     "id": 11,
-    "pergunta": "Quais das seguintes alterações podem ocorrer como consequência do uso do comando ip?",
+    "pergunta": "Quais das seguintes alterações podem ocorrer como consequência do uso do comando ip?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>Interfaces de rede podem se tornar ativas ou inativas.</code>",
       "B": "<code>Novos servidores de nomes podem ser adicionados à configuração do resolvedor.</code>",
@@ -145,7 +145,7 @@
   },
   {
     "id": 12,
-    "pergunta": "Quantos endereços IP podem ser usados para hosts únicos dentro da sub-rede IPv4\n192.168.2.128/26?",
+    "pergunta": "Quantos endereços IP podem ser usados para hosts únicos dentro da sub-rede IPv4 192.168.2.128/26?",
     "opcoes": {
       "A": "6",
       "B": "14",
@@ -159,7 +159,7 @@
   },
   {
     "id": 13,
-    "pergunta": "Quais das seguintes redes IPv4 são reservadas pelo IANA para atribuição de endereços\nprivados e roteamento privado?",
+    "pergunta": "Quais das seguintes redes IPv4 são reservadas pelo IANA para atribuição de endereços privados e roteamento privado?<br>(Escolha três.)",
     "opcoes": {
       "A": "10.0.0.0/8",
       "B": "127.0.0.0/8",
@@ -177,7 +177,7 @@
   },
   {
     "id": 14,
-    "pergunta": "Quais dos seguintes comandos configuram interfaces de rede com base nos arquivos de\nconfiguração específicos da distribuição do sistema? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos configuram interfaces de rede com base nos arquivos de configuração específicos da distribuição do sistema?<br>(Escolha dois.)",
     "opcoes": {
       "A": "ifconf",
       "B": "ifdown",
@@ -194,7 +194,7 @@
   },
   {
     "id": 15,
-    "pergunta": "Qual das seguintes afirmações é verdadeira se o UID de um usuário comum for idêntico ao GID\nde um grupo?",
+    "pergunta": "Qual das seguintes afirmações é verdadeira se o UID de um usuário comum for idêntico ao GID de um grupo?",
     "opcoes": {
       "A": "<code>Os UIDs têm precedência sobre os GIDs, portanto o usuário está disponível enquanto o grupo não.</code>",
       "B": "<code>O usuário e o grupo não estão disponíveis para evitar ambiguidade devido ao conflito de IDs.</code>",
@@ -224,11 +224,11 @@
     "id": 17,
     "pergunta": "Qual dos seguintes comandos exibe todos os timers ativos do systemd?",
     "opcoes": {
-      "A": "systemctl-timer show",
+      "A": "<code>systemctl-timer show</code>",
       "B": "<code>timectl list</code>",
       "C": "<code>systemctl -t</code>",
       "D": "<code>systemctl list-timers</code>",
-      "E": "timeq"
+      "E": "<code>timeq</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "D",
@@ -236,7 +236,7 @@
   },
   {
     "id": 18,
-    "pergunta": "Quais das seguintes tarefas o comando date pode realizar? (Escolha dois.)",
+    "pergunta": "Quais das seguintes tarefas o comando date pode realizar?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Definir a data e hora do sistema.</code>",
       "B": "<code>Definir apenas a data do sistema, sem alterar a hora.</code>",
@@ -249,28 +249,29 @@
       "A",
       "E"
     ],
-    "explicacao": "O comando date é usado para exibir a data e hora do sistema, permitindo o uso de especificadores de formato para customização (E). Além disso, ele é a ferramenta padrão para definir ou alterar a data e hora do sistema (A)."
+    "explicacao": "O comando date é usado para exibir a data e hora do sistema, permitindo o uso de especificadores de formato para customização. Além disso, ele é a ferramenta padrão para definir ou alterar a data e hora do sistema."
   },
   {
     "id": 19,
     "tipo": "fill",
-    "pergunta": "Qual arquivo, se presente, deve conter todos os usuários que têm permissão para usar o\nsistema de agendamento cron? (Especifique o caminho completo do arquivo.)",
+    "pergunta": "Qual arquivo, se presente, deve conter todos os usuários que têm permissão para usar o sistema de agendamento cron?<br>(Especifique o caminho completo do arquivo.)",
     "respostaCorreta": "/etc/cron.allow",
     "explicacao": "O arquivo /etc/cron.allow contém a lista de usuários explicitamente permitidos a usar o sistema cron. Se este arquivo estiver presente, apenas os usuários listados nele terão permissão para agendar tarefas."
   },
   {
     "id": 20,
-    "pergunta": "O que pode ser especificado com o comando useradd? (Escolha dois.)",
+    "pergunta": "O que pode ser especificado com o comando useradd?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Comandos que o usuário pode executar usando sudo.</code>",
       "B": "<code>O caminho absoluto para o diretório home do usuário.</code>",
-      "C": "<code>Quais impressoras estão disponíveis para o novo usuário. D. As chaves SSH usadas para login na nova conta.</code>",
-      "D": "<code>O ID numérico do usuário (UID).</code>"
+      "C": "<code>Quais impressoras estão disponíveis para o novo usuário.</code>",
+      "D": "<code>As chaves SSH usadas para login na nova conta.</code>",
+      "E": "<code>O ID numérico do usuário (UID).</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": [
       "B",
-      "D"
+      "E"
     ],
     "explicacao": "O comando useradd permite especificar o caminho absoluto para o diretório home do usuário usando a opção -d. Além disso, o ID numérico do usuário (UID) pode ser definido explicitamente com a opção -u."
   },
@@ -304,23 +305,24 @@
   },
   {
     "id": 23,
-    "pergunta": "Quais dos seguintes campos estão disponíveis no formato padrão tanto do arquivo global\n/etc/crontab quanto dos arquivos crontab específicos de usuário? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes campos estão disponíveis no formato padrão tanto do arquivo global /etc/crontab quanto dos arquivos crontab específicos de usuário?<br>(Escolha dois.)",
     "opcoes": {
       "A": "Year",
       "B": "Minute",
-      "C": "<code>Username D. Effective group ID</code>",
-      "D": "Command"
+      "C": "Username",
+      "D": "Effective group ID",
+      "E": "Command"
     },
     "tipo": "multipla",
     "respostaCorreta": [
       "B",
-      "D"
+      "E"
     ],
     "explicacao": "O formato padrão de uma entrada cron é: minuto hora dia_do_mês mês dia_da_semana [usuário] comando. Tanto o campo 'Minute' quanto o 'Command' são essenciais e presentes em ambos os tipos de crontab, enquanto o campo 'Username' é exclusivo do /etc/crontab."
   },
   {
     "id": 24,
-    "pergunta": "Qual dos seguintes comandos deve ser executado ao iniciar um login shell para alterar o\nidioma das mensagens de um programa internacionalizado para português (pt)?",
+    "pergunta": "Qual dos seguintes comandos deve ser executado ao iniciar um login shell para alterar o idioma das mensagens de um programa internacionalizado para português (pt)?",
     "opcoes": {
       "A": "<code>export LANGUAGE=\"pt\"</code>",
       "B": "<code>export LC_MESSAGES=\"pt\"</code>",
@@ -363,13 +365,13 @@
   {
     "id": 27,
     "tipo": "fill",
-    "pergunta": "Qual comando incluído no systemd permite selecionar mensagens do journal do systemd com\nbase em critérios como tempo ou nome da unidade? (Especifique apenas o comando, sem\ncaminho ou parâmetros.)",
+    "pergunta": "Qual comando incluído no systemd permite selecionar mensagens do journal do systemd com base em critérios como tempo ou nome da unidade?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "journalctl",
     "explicacao": "O comando journalctl é a ferramenta de linha de comando para consultar e exibir o conteúdo do journal do systemd. Ele permite filtrar logs de forma eficiente usando critérios como tempo, unidade de serviço e prioridade."
   },
   {
     "id": 28,
-    "pergunta": "Quais das seguintes afirmações sobre o systemd-journald são verdadeiras?",
+    "pergunta": "Quais das seguintes afirmações sobre o systemd-journald são verdadeiras?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>É incompatível com syslog e não pode ser instalado em um sistema que use o syslog comum.</code>",
       "B": "<code>Processa apenas mensagens do systemd e não mensagens de outras ferramentas.</code>",
@@ -388,13 +390,13 @@
   {
     "id": 29,
     "tipo": "fill",
-    "pergunta": "Qual comando deve ser executado após adicionar um novo alias de e-mail à configuração para\nque a alteração tenha efeito? (Especifique o comando sem caminho, mas incluindo todos os\nparâmetros necessários.)",
+    "pergunta": "Qual comando deve ser executado após adicionar um novo alias de e-mail à configuração para que a alteração tenha efeito?<br>(Especifique o comando sem caminho, mas incluindo todos os parâmetros necessários.)",
     "respostaCorreta": "newaliases",
     "explicacao": "O comando newaliases lê o arquivo de configuração de aliases de e-mail (/etc/aliases) e reconstrói o arquivo de banco de dados binário (DBM). O Agente de Transporte de Correio (MTA) utiliza este arquivo DBM para resolver os aliases de forma eficiente."
   },
   {
     "id": 30,
-    "pergunta": "Qual opção no arquivo de configuração do chrony altera o intervalo inicial de consultas a um\nservidor NTP para acelerar a sincronização inicial?",
+    "pergunta": "Qual opção no arquivo de configuração do chrony altera o intervalo inicial de consultas a um servidor NTP para acelerar a sincronização inicial?",
     "opcoes": {
       "A": "iburst",
       "B": "quickstart",
@@ -408,13 +410,13 @@
   },
   {
     "id": 31,
-    "pergunta": "Qual dos seguintes comandos é usado para rotacionar, comprimir e enviar por e-mail os logs\ndo sistema?",
+    "pergunta": "Qual dos seguintes comandos é usado para rotacionar, comprimir e enviar por e-mail os logs do sistema?",
     "opcoes": {
-      "A": "logrotate",
-      "B": "striplog",
+      "A": "<code>logrotate</code>",
+      "B": "<code>striplog</code>",
       "C": "<code>syslogd --rotate</code>",
-      "D": "rotatelog",
-      "E": "logger"
+      "D": "<code>rotatelog</code>",
+      "E": "<code>logger</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "A",
@@ -437,14 +439,14 @@
   {
     "id": 33,
     "tipo": "fill",
-    "pergunta": "Qual comando, disponível em todos os MTAs compatíveis com sendmail, é usado para listar o\nconteúdo da fila de emails do MTA? (Especifique apenas o comando, sem caminho ou\nparâmetros.)",
+    "pergunta": "Qual comando, disponível em todos os MTAs compatíveis com sendmail, é usado para listar o conteúdo da fila de emails do MTA?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "mailq",
     "explicacao": "O comando `mailq` é o utilitário padrão para listar o conteúdo da fila de emails (queue) em MTAs compatíveis com sendmail. Ele geralmente executa o comando `sendmail bp` internamente para exibir a lista de mensagens pendentes."
   },
   {
     "id": 34,
     "tipo": "fill",
-    "pergunta": "Qual é o diretório de nível superior que contém os arquivos de configuração do CUPS?",
+    "pergunta": "Qual é o diretório de nível superior que contém os arquivos de configuração do CUPS?<br>(Especifique o caminho completo para o diretório.)",
     "respostaCorreta": "/etc/cups/",
     "explicacao": "Os arquivos de configuração de serviços do sistema Linux são tradicionalmente armazenados em /etc. O CUPS armazena seus arquivos de configuração principais, como cupsd.conf, dentro do subdiretório /etc/cups."
   },
@@ -464,12 +466,12 @@
   },
   {
     "id": 36,
-    "pergunta": "Qual das seguintes entradas em /etc/syslog.conf grava todos os eventos relacionados a e-mail\nno arquivo /var/log/maillog e envia todos os eventos críticos para o servidor remoto\nlogger.example.com?",
+    "pergunta": "Qual das seguintes entradas em /etc/syslog.conf grava todos os eventos relacionados a e-mail no arquivo /var/log/maillog e envia todos os eventos críticos para o servidor remoto logger.example.com?",
     "opcoes": {
-      "A": "mail.* /var/log/maillog mail,crit @logger.example.org",
-      "B": "mail.* /var/log/maillog mail.crit syslog://logger.example.org",
+      "A": "<code>mail.* /var/log/maillog mail,crit @logger.example.org</code>",
+      "B": "<code>mail.* /var/log/maillog mail.crit syslog://logger.example.org</code>",
       "C": "<code>mail /var/log/maillog mail.crit @logger.example.org</code>",
-      "D": "mail.* /var/log/maillog mail.crit @logger.example.org",
+      "D": "<code>mail.* /var/log/maillog mail.crit @logger.example.org</code>",
       "E": "<code>mail * /var/log/maillog mail crit @logger.example.org</code>"
     },
     "tipo": "multipla",
@@ -479,7 +481,7 @@
   {
     "id": 37,
     "tipo": "fill",
-    "pergunta": "Qual opção no arquivo /etc/ntp.conf especifica uma fonte NTP externa que será consultada\npara obter informações de horário? (Especifique apenas a opção, sem valores ou parâmetros.)",
+    "pergunta": "Qual opção no arquivo /etc/ntp.conf especifica uma fonte NTP externa que será consultada para obter informações de horário?<br>(Especifique apenas a opção, sem valores ou parâmetros.)",
     "respostaCorreta": "server",
     "explicacao": "A diretiva `server` é utilizada no arquivo /etc/ntp.conf para especificar o endereço de um servidor NTP remoto que será consultado. Esta é a forma padrão de configurar fontes de tempo externas para sincronização."
   },
@@ -513,7 +515,7 @@
   },
   {
     "id": 40,
-    "pergunta": "Quais dos seguintes operadores de comparação do comando test funcionam com elementos\ndo sistema de arquivos? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes operadores de comparação do comando test funcionam com elementos do sistema de arquivos?<br>(Escolha dois.)",
     "opcoes": {
       "A": "-z",
       "B": "-eq",
@@ -558,7 +560,7 @@
   },
   {
     "id": 43,
-    "pergunta": "Qual é a saída produzida pela seguinte sequência de comandos?\necho '1 2 3 4 5 6' | while read a b c; do\necho result $c $b $a;\ndone",
+    "pergunta": "Qual é a saída produzida pela seguinte sequência de comandos?<code><br>echo '1 2 3 4 5 6' | while read a b c; do<br> echo result $c $b $a;<br>done</code>",
     "opcoes": {
       "A": "result: 6 5 4",
       "B": "result: 1 2 3 4 5 6",
@@ -572,11 +574,11 @@
   },
   {
     "id": 44,
-    "pergunta": "Qual dos seguintes arquivos de configuração deve ser modificado para definir variáveis de shell\nglobalmente para todos os usuários?",
+    "pergunta": "Qual dos seguintes arquivos de configuração deve ser modificado para definir variáveis de shell globalmente para todos os usuários?",
     "opcoes": {
       "A": "<code>/etc/profile</code>",
       "B": "<code>/etc/bashrc</code>",
-      "C": "~/.bash_profile",
+      "C": "<code>~/.bash_profile</code>",
       "D": "<code>/etc/.bashrc</code>",
       "E": "<code>/etc/shellenv</code>"
     },
@@ -601,13 +603,13 @@
   {
     "id": 46,
     "tipo": "fill",
-    "pergunta": "Qual comando lista os aliases definidos no shell Bash atual? (Especifique apenas o comando\nsem caminho ou parâmetros.)",
+    "pergunta": "Qual comando lista os aliases definidos no shell Bash atual?<br>(Especifique apenas o comando sem caminho ou parâmetros.)",
     "respostaCorreta": "alias",
     "explicacao": "O comando 'alias', quando executado sem argumentos, exibe a lista completa de aliases definidos no ambiente do shell Bash atual. Ele é o utilitário padrão para gerenciamento de atalhos de comandos."
   },
   {
     "id": 47,
-    "pergunta": "Qual dos seguintes comandos pode ser usado para limitar a quantidade de memória que um\nusuário pode utilizar?",
+    "pergunta": "Qual dos seguintes comandos pode ser usado para limitar a quantidade de memória que um usuário pode utilizar?",
     "opcoes": {
       "A": "umask",
       "B": "usermod",
@@ -649,7 +651,7 @@
   },
   {
     "id": 50,
-    "pergunta": "Dado o seguinte trecho da configuração do sudo:\njane ANY=NOPASSWD: /bin/kill, /bin/id, PASSWD: /sbin/fdisk\nQuais das seguintes afirmações são verdadeiras?",
+    "pergunta": "Dado o seguinte trecho da configuração do <code>sudo</code>:<code><br>jane ANY=NOPASSWD: /bin/kill, /bin/id, PASSWD: /sbin/fdisk<br></code>Quais das seguintes afirmações são verdadeiras?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>Jane pode executar /bin/id apenas após informar sua senha.</code>",
       "B": "<code>Jane pode executar /sbin/fdisk após informar a senha do root.</code>",
@@ -681,7 +683,7 @@
   },
   {
     "id": 52,
-    "pergunta": "Dependendo da configuração do sistema, qual dos seguintes arquivos pode ser usado para\nhabilitar ou desabilitar serviços de rede que estão sendo executados neste host?",
+    "pergunta": "Dependendo da configuração do sistema, qual dos seguintes arquivos pode ser usado para habilitar ou desabilitar serviços de rede que estão sendo executados neste host?",
     "opcoes": {
       "A": "<code>/etc/profile</code>",
       "B": "<code>/etc/xinetd.conf</code>",
@@ -710,20 +712,20 @@
   {
     "id": 54,
     "tipo": "fill",
-    "pergunta": "Ao usar X11 forwarding no SSH, qual variável de ambiente é automaticamente configurada no\nshell remoto para ajudar os aplicativos a se conectarem ao servidor X11 correto? (Especifique\napenas a variável de ambiente sem comandos ou valores adicionais.)",
+    "pergunta": "Ao usar X11 forwarding no SSH, qual variável de ambiente é automaticamente configurada no shell remoto para ajudar os aplicativos a se conectarem ao servidor X11 correto?<br>(Especifique apenas a variável de ambiente sem comandos ou valores adicionais.)",
     "respostaCorreta": "DISPLAY",
     "explicacao": "A variável DISPLAY é configurada automaticamente pelo SSH quando o X11 forwarding está ativo. Ela informa aos aplicativos gráficos remotos o endereço e o número de tela (geralmente localhost:10.0 ou superior) para onde devem enviar suas requisições, que são tuneladas pelo SSH."
   },
   {
     "id": 55,
     "tipo": "fill",
-    "pergunta": "A presença de qual arquivo impedirá temporariamente que todos os usuários, exceto o root,\nfaçam login no sistema?",
+    "pergunta": "A presença de qual arquivo impedirá temporariamente que todos os usuários, exceto o root, façam login no sistema?<br>(Especifique o nome completo do arquivo, incluindo o caminho.)",
     "respostaCorreta": "/etc/nologin",
     "explicacao": "A presença do arquivo /etc/nologin impede que usuários não-root façam login no sistema. Os programas de login (como sshd e login) verificam este arquivo e negam o acesso, permitindo apenas o login do superusuário (root)."
   },
   {
     "id": 56,
-    "pergunta": "Qual dos seguintes comandos pré-carrega e gerencia as chaves SSH existentes que são usadas\npara autenticação automática ao fazer login em outras máquinas usando SSH?",
+    "pergunta": "Qual dos seguintes comandos pré-carrega e gerencia as chaves SSH existentes que são usadas para autenticação automática ao fazer login em outras máquinas usando SSH?",
     "opcoes": {
       "A": "sshd",
       "B": "ssh-keyring",
@@ -737,7 +739,7 @@
   },
   {
     "id": 57,
-    "pergunta": "Em uma máquina executando vários servidores X, como os programas identificam as diferentes\ninstâncias do servidor X11?",
+    "pergunta": "Em uma máquina executando vários servidores X, como os programas identificam as diferentes instâncias do servidor X11?",
     "opcoes": {
       "A": "<code>Por um UUID fixo definido no arquivo de configuração do X11.</code>",
       "B": "<code>Por um nome de display, por exemplo: :1</code>",
@@ -765,10 +767,10 @@
   },
   {
     "id": 59,
-    "pergunta": "O arquivo de configuração X11 xorg.conf é organizado em seções. Como o conteúdo da seção\nSectionName é representado?",
+    "pergunta": "O arquivo de configuração X11 xorg.conf é organizado em seções. Como o conteúdo da seção SectionName é representado?<br>(As aspas simples podem ser ignoradas)",
     "opcoes": {
-      "A": "É colocado entre chaves, como em Section SectionName {…}.",
-      "B": "<code>É colocado entre as tags <Section name=\"SectionName\"> e </Section>.</code>",
+      "A": "<code>É colocado entre chaves, como em Section SectionName {…}.</code>",
+      "B": "<code>É colocado entre as tags '<'Section name=\"SectionName\"'>' e '<'/Section'>'.</code>",
       "C": "<code>É colocado entre uma linha contendo Section \"SectionName\" e uma linha contendo EndSection.</code>",
       "D": "<code>É colocado após a linha [SectionName].</code>",
       "E": "<code>É colocado após uma linha inicial não indentada Section \"SectionName\" e deve ser indentado por exatamente um caractere de tabulação.</code>"
@@ -779,7 +781,7 @@
   },
   {
     "id": 60,
-    "pergunta": "Quais dos seguintes recursos são fornecidos pelo SPICE? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes recursos são fornecidos pelo SPICE?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Conectar dispositivos USB locais a aplicações remotas.</code>",
       "B": "<code>Acessar aplicações gráficas em um host remoto.</code>",
@@ -792,7 +794,7 @@
       "A",
       "B"
     ],
-    "explicacao": "SPICE (Simple Protocol for Independent Computing Environments) é um protocolo de exibição remota otimizado para virtualização de alto desempenho. Ele permite acesso gráfico eficiente a hosts remotos (B) e suporta recursos avançados como redirecionamento de periféricos, incluindo dispositivos USB locais (A)."
+    "explicacao": "SPICE (Simple Protocol for Independent Computing Environments) é um protocolo de exibição remota otimizado para virtualização de alto desempenho. Ele permite acesso gráfico eficiente a hosts remotos e suporta recursos avançados como redirecionamento de periféricos, incluindo dispositivos USB locais."
   },
   {
     "id": 61,
@@ -812,9 +814,10 @@
     "id": 62,
     "pergunta": "Qual das seguintes afirmações é verdadeira em relação ao comando sendmail?",
     "opcoes": {
-      "A": "<code>Com qualquer MTA, o comando sendmail deve ser executado periodicamente pelo daemon cron. B. Ao usar systemd, sendmail é um alias para relayctl.</code>",
-      "B": "<code>O comando sendmail exibe o histórico da fila do MTA indicando quais emails foram enviados com sucesso.</code>",
-      "C": "<code>Está disponível apenas quando o MTA sendmail está instalado.</code>",
+      "A": "<code>Com qualquer MTA, o comando sendmail deve ser executado periodicamente pelo daemon cron.</code>",
+      "B": "<code>Ao usar systemd, sendmail é um alias para relayctl.</code>",
+      "C": "<code>O comando sendmail exibe o histórico da fila do MTA indicando quais emails foram enviados com sucesso.</code>",
+      "D": "<code>Está disponível apenas quando o MTA sendmail está instalado.</code>",
       "E": "<code>Todos os MTAs comuns, incluindo Postfix e Exim, fornecem um comando sendmail.</code>"
     },
     "tipo": "multipla",
@@ -823,7 +826,7 @@
   },
   {
     "id": 63,
-    "pergunta": "Qual arquivo dentro do diretório de configuração do CUPS contém as configurações das\nimpressoras?",
+    "pergunta": "Qual arquivo dentro do diretório de configuração do CUPS contém as configurações das impressoras?",
     "opcoes": {
       "A": "cups-devices.conf",
       "B": "snmp.conf",
@@ -838,13 +841,13 @@
   {
     "id": 64,
     "tipo": "fill",
-    "pergunta": "Qual arquivo é processado pelo comando newaliases? (Especifique o nome completo do\narquivo, incluindo o caminho.)",
+    "pergunta": "Qual arquivo é processado pelo comando newaliases?<br>(Especifique o nome completo do arquivo, incluindo o caminho.)",
     "respostaCorreta": "/etc/aliases",
     "explicacao": "O comando newaliases lê o arquivo de texto /etc/aliases para gerar o banco de dados binário de aliases (geralmente /etc/aliases.db). Este banco de dados é essencial para que os MTAs (Mail Transfer Agents) resolvam endereços de e-mail locais."
   },
   {
     "id": 65,
-    "pergunta": "Quais das seguintes opções são facilidades do syslog?",
+    "pergunta": "Quais das seguintes opções são facilidades do syslog?<br>(Escolha dois.)",
     "opcoes": {
       "A": "local5",
       "B": "accounting",
@@ -861,7 +864,7 @@
   },
   {
     "id": 66,
-    "pergunta": "Quais dos seguintes parâmetros do journalctl são usados para limitar o intervalo de tempo da\nsaída? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes parâmetros do journalctl são usados para limitar o intervalo de tempo da saída?<br>(Escolha dois.)",
     "opcoes": {
       "A": "--since=",
       "B": "--from=",
@@ -892,27 +895,28 @@
   },
   {
     "id": 68,
-    "pergunta": "Quais dos seguintes comandos exibem uma lista de trabalhos na fila de impressão? (Escolha\ndois.)",
+    "pergunta": "Quais dos seguintes comandos exibem uma lista de trabalhos na fila de impressão?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>cups --list</code>",
       "B": "<code>lprm -l</code>",
-      "C": "<code>lpstat D. lpr -q</code>",
-      "D": "lpq"
+      "C": "<code>lpstat</code>",
+      "D": "<code>lpr -q</code>",
+      "E": "<code>lpq</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": [
       "C",
-      "D"
+      "E"
     ],
     "explicacao": "lpstat (System V) e lpq (BSD) são os comandos padrão utilizados no Linux (CUPS) para consultar e exibir o status dos trabalhos pendentes na fila de impressão. Ambos fornecem detalhes sobre os jobs e o estado da impressora."
   },
   {
     "id": 69,
-    "pergunta": "Em um sistema que utiliza systemd-journald, quais dos seguintes comandos adicionam a\nmensagem Howdy ao log do sistema? (Escolha dois.)",
+    "pergunta": "Em um sistema que utiliza systemd-journald, quais dos seguintes comandos adicionam a mensagem Howdy ao log do sistema?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>append Howdy</code>",
       "B": "<code>logger Howdy</code>",
-      "C": "systemd-cat echo Howdy",
+      "C": "<code>systemd-cat echo Howdy</code>",
       "D": "<code>echo Howdy > /dev/journal</code>",
       "E": "<code>journalctl add Howdy</code>"
     },
@@ -925,7 +929,7 @@
   },
   {
     "id": 70,
-    "pergunta": "Quais das seguintes opções no arquivo de configuração do chrony definem fontes de tempo\nremotas? (Escolha dois.)",
+    "pergunta": "Quais das seguintes opções no arquivo de configuração do chrony definem fontes de tempo remotas?<br>(Escolha dois.)",
     "opcoes": {
       "A": "source",
       "B": "clock",
@@ -943,7 +947,7 @@
   {
     "id": 71,
     "tipo": "fill",
-    "pergunta": "Qual comando é usado para sincronizar o relógio de hardware com o relógio do sistema?\n(Especifique apenas o comando, sem caminho ou parâmetros.)",
+    "pergunta": "Qual comando é usado para sincronizar o relógio de hardware com o relógio do sistema?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "hwclock",
     "explicacao": "O comando hwclock é o utilitário padrão do Linux para acessar e manipular o relógio de hardware (RTC). Ele é usado para sincronizar o relógio do sistema com o relógio de hardware, geralmente utilizando o parâmetro --systohc."
   },
@@ -963,7 +967,7 @@
   },
   {
     "id": 73,
-    "pergunta": "Se um alias ls existe, qual dos seguintes comandos atualiza o alias para apontar para o\ncomando ls -l em vez do alvo atual do alias?",
+    "pergunta": "Se um alias ls existe, qual dos seguintes comandos atualiza o alias para apontar para o comando ls -l em vez do alvo atual do alias?",
     "opcoes": {
       "A": "<code>set ls='ls -l'</code>",
       "B": "<code>alias ls='ls -l'</code>",
@@ -1007,10 +1011,10 @@
     "id": 76,
     "pergunta": "Qual dos seguintes arquivos não é lido diretamente por um shell Bash de login?",
     "opcoes": {
-      "A": "~/.bashrc",
-      "B": "~/.bash_profile",
-      "C": "~/.bash_login",
-      "D": "~/.profile",
+      "A": "<code>~/.bashrc</code>",
+      "B": "<code>~/.bash_profile</code>",
+      "C": "<code>~/.bash_login</code>",
+      "D": "<code>~/.profile</code>",
       "E": "<code>/etc/profile</code>"
     },
     "tipo": "multipla",
@@ -1033,7 +1037,7 @@
   },
   {
     "id": 78,
-    "pergunta": "O que é verdadeiro em relação à declaração que começa com #! encontrada na primeira linha\nde um script? (Escolha dois.)",
+    "pergunta": "O que é verdadeiro em relação à declaração que começa com #! encontrada na primeira linha de um script?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Ela impede que os scripts sejam executados até que o ! seja removido.</code>",
       "B": "<code>Ela dispara a instalação do interpretador do script.</code>",
@@ -1046,7 +1050,7 @@
       "C",
       "E"
     ],
-    "explicacao": "A declaração shebang (#!caminho/interpretador) é usada pelo kernel para especificar o caminho do interpretador que deve executar o script (C). Se o script for executado diretamente pelo interpretador (ex: 'bash script.sh'), a linha é tratada como um comentário e ignorada (E)."
+    "explicacao": "A declaração shebang (#!caminho/interpretador) é usada pelo kernel para especificar o caminho do interpretador que deve executar o script. Se o script for executado diretamente pelo interpretador (ex: 'bash script.sh'), a linha é tratada como um comentário e ignorada."
   },
   {
     "id": 79,
@@ -1066,10 +1070,10 @@
     "id": 80,
     "pergunta": "Qual dos seguintes comandos lista todas as variáveis e funções definidas no Bash?",
     "opcoes": {
-      "A": "env",
-      "B": "export",
+      "A": "<code>env</code>",
+      "B": "<code>export</code>",
       "C": "<code>env -a</code>",
-      "D": "set",
+      "D": "<code>set</code>",
       "E": "<code>echo $ENV</code>"
     },
     "tipo": "multipla",
@@ -1080,7 +1084,7 @@
     "id": 81,
     "pergunta": "Qual informação relacionada a uma conta de usuário é modificada usando o comando chage?",
     "opcoes": {
-      "A": "Propriedade padrão para novos arquivos",
+      "A": "<code>Propriedade padrão para novos arquivos</code>",
       "B": "<code>Associação a grupos</code>",
       "C": "<code>Conjunto de comandos disponíveis para o usuário</code>",
       "D": "<code>Informações de expiração da senha</code>",
@@ -1092,7 +1096,7 @@
   },
   {
     "id": 82,
-    "pergunta": "Qual comando é usado para definir restrições sobre o tamanho de um arquivo de core criado\npara um usuário quando um programa falha?",
+    "pergunta": "Qual comando é usado para definir restrições sobre o tamanho de um arquivo de core criado para um usuário quando um programa falha?",
     "opcoes": {
       "A": "core",
       "B": "edquota",
@@ -1106,7 +1110,7 @@
   },
   {
     "id": 83,
-    "pergunta": "Como as senhas shadow melhoram a segurança das senhas em comparação com senhas\npadrão sem shadow?",
+    "pergunta": "Como as senhas shadow melhoram a segurança das senhas em comparação com senhas padrão sem shadow?",
     "opcoes": {
       "A": "<code>Usuários comuns não têm acesso aos hashes das senhas shadow.</code>",
       "B": "<code>Cada senha shadow é válida por 45 dias e deve ser alterada depois desse período.</code>",
@@ -1120,9 +1124,9 @@
   },
   {
     "id": 84,
-    "pergunta": "Após editar a configuração do TCP wrapper para conceder acesso a hosts específicos a um\nserviço, quando essas alterações entram em vigor?",
+    "pergunta": "Após editar a configuração do TCP wrapper para conceder acesso a hosts específicos a um serviço, quando essas alterações entram em vigor?",
     "opcoes": {
-      "A": "A nova configuração entra em vigor após reiniciar o respectivo serviço.",
+      "A": "<code>A nova configuração entra em vigor após reiniciar o respectivo serviço.</code>",
       "B": "<code>A nova configuração entra em vigor no próximo reboot do sistema.</code>",
       "C": "<code>A nova configuração entra em vigor quando a última conexão estabelecida com o serviço for encerrada.</code>",
       "D": "<code>A nova configuração entra em vigor após reiniciar o serviço tcpd.</code>",
@@ -1134,7 +1138,7 @@
   },
   {
     "id": 85,
-    "pergunta": "O que é verdadeiro em relação às chaves públicas e privadas do SSH? (Escolha dois.)",
+    "pergunta": "O que é verdadeiro em relação às chaves públicas e privadas do SSH?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Para cada conta de usuário, existe exatamente um par de chaves que pode ser usado para acessar essa conta.</code>",
       "B": "<code>A chave privada nunca deve ser revelada a ninguém.</code>",
@@ -1151,7 +1155,7 @@
   },
   {
     "id": 86,
-    "pergunta": "Qual dos seguintes comandos encontra todos os arquivos proprietário root que possuem o bit\nSetUID definido?",
+    "pergunta": "Qual dos seguintes comandos encontra todos os arquivos proprietário root que possuem o bit SetUID definido?",
     "opcoes": {
       "A": "<code>find / -user root -perm -4000</code>",
       "B": "<code>find / -user 0 -mode +s</code>",
@@ -1166,14 +1170,14 @@
   {
     "id": 87,
     "tipo": "fill",
-    "pergunta": "Qual comando é usado para adicionar chaves privadas OpenSSH a uma instância em execução\ndo ssh-agent? (Especifique apenas o nome do comando sem caminho.)",
+    "pergunta": "Qual comando é usado para adicionar chaves privadas OpenSSH a uma instância em execução do ssh-agent?<br>(Especifique apenas o nome do comando sem caminho.)",
     "respostaCorreta": "ssh-add",
     "explicacao": "O comando ssh-add é o utilitário cliente usado para adicionar chaves privadas (identidades) ao ssh-agent. O agente armazena essas chaves para evitar a necessidade de digitar a senha repetidamente."
   },
   {
     "id": 88,
     "tipo": "fill",
-    "pergunta": "Qual diretório contém os arquivos de configuração dos serviços do xinetd? (Especifique o\ncaminho completo do diretório.)",
+    "pergunta": "Qual diretório contém os arquivos de configuração dos serviços do xinetd?<br>(Especifique o caminho completo do diretório.)",
     "respostaCorreta": "/etc/xinetd.d/",
     "explicacao": "O diretório /etc/xinetd.d/ é o local padrão onde o super-servidor xinetd armazena os arquivos de configuração individuais para os serviços que ele gerencia. O arquivo de configuração principal do daemon é /etc/xinetd.conf."
   },
@@ -1181,7 +1185,7 @@
     "id": 89,
     "pergunta": "Qual mecanismo o SSH utiliza para interagir com o SSH agent?",
     "opcoes": {
-      "A": "Conectando-se à porta 2222, usada pelo SSH agent do sistema.",
+      "A": "<code>Conectando-se à porta 2222, usada pelo SSH agent do sistema.</code>",
       "B": "<code>Usando o socket fixo .ssh-agent/ipc.</code>",
       "C": "<code>Criando um alias que substitui ssh por chamadas ao ssh-agent.</code>",
       "D": "<code>Iniciando o ssh-agent como um processo filho a cada execução do ssh.</code>",
@@ -1194,7 +1198,7 @@
   {
     "id": 90,
     "tipo": "fill",
-    "pergunta": "Qual parâmetro do comando ssh especifica a localização da chave privada usada para\ntentativas de login? (Especifique apenas o nome da opção, sem valores ou parâmetros.)",
+    "pergunta": "Qual parâmetro do comando ssh especifica a localização da chave privada usada para tentativas de login?<br>(Especifique apenas o nome da opção, sem valores ou parâmetros.)",
     "respostaCorreta": "-i",
     "explicacao": "O parâmetro -i (identity_file) é usado para especificar o caminho para o arquivo de chave privada. Isso permite que o cliente SSH utilize uma chave de identidade diferente das chaves padrão para autenticação baseada em chave."
   },
@@ -1202,7 +1206,7 @@
     "id": 91,
     "pergunta": "Qual das seguintes afirmações é verdadeira sobre o IPv6?",
     "opcoes": {
-      "A": "O IPv6 não suporta mais endereços de broadcast.",
+      "A": "<code>O IPv6 não suporta mais endereços de broadcast.</code>",
       "B": "<code>Com o IPv6, os números de porta TCP da maioria dos serviços foram alterados.</code>",
       "C": "<code>Endereços IPv4 podem ser usados sem qualquer alteração no IPv6.</code>",
       "D": "<code>O IPv6 não suporta mais endereços multicast.</code>",
@@ -1214,7 +1218,7 @@
   },
   {
     "id": 92,
-    "pergunta": "O que é verdadeiro sobre o seguinte comando?\nnmcli device wifi connect WIFIoI",
+    "pergunta": "O que é verdadeiro sobre o seguinte comando?<br><code>nmcli device wifi connect WIFIoI</code>",
     "opcoes": {
       "A": "<code>O NetworkManager abre um novo hotspot público com o SSID WIFIoI.</code>",
       "B": "<code>O NetworkManager cria uma nova interface de rede virtual não configurada chamada WIFIoI.</code>",
@@ -1228,9 +1232,9 @@
   },
   {
     "id": 93,
-    "pergunta": "Qual dos comandos abaixo poderia ter produzido a seguinte saída?\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 40997\n;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp:1280\n;; QUESTION SECTION:\n;www.example.org.\nIN NS\n;; AUTHORITY SECTION:\nexample.org.\n3600 IN\n7200 3600 1209600 3600\n\nSOA\n\n;; Query time: 144 msec\n;; SERVER: 127.0.1.1#53(127.0.1.1)\n;; WHEN: Sat Apr 01 21:22:46 BST 2017\n;; MSG SIZE rcvd: 114\n\nsns.dns.icann.org. noc.dns.icann.org. 2016110776",
+    "pergunta": "Qual dos comandos abaixo poderia ter produzido a seguinte saída?<table border='1' cellpadding='6' cellspacing='0' style='border-collapse: collapse; width: 100%;'><tr><td><code>;; global options: +cmd<br>;; Got answer:<br>;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 40997<br>;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1<br><br>;; OPT PSEUDOSECTION:<br>; EDNS: version: 0, flags:; udp:1280<br>;; QUESTION SECTION:<br>;www.example.org.&nbsp;&nbsp;&nbsp;&nbsp;IN&nbsp;&nbsp;NS<br><br>;; AUTHORITY SECTION:<br>example.org.&nbsp;&nbsp;&nbsp;3600&nbsp;&nbsp;IN&nbsp;&nbsp;SOA sns.dns.icann.org. noc.dns.icann.org. 2016110776 7200 3600 1209600 3600<br><br>;; Query time: 144 msec<br>;; SERVER: 127.0.1.1#53(127.0.1.1)<br>;; WHEN: Sat Apr 01 21:22:46 BST 2017<br>;; MSG SIZE&nbsp;&nbsp;rcvd: 114<br></code></td></tr></table>",
     "opcoes": {
-      "A": "dig -t mx www.example.org",
+      "A": "<code>dig -t mx www.example.org</code>",
       "B": "<code>dig www.example.org</code>",
       "C": "<code>dig -t ns www.example.org</code>",
       "D": "<code>dig -t a www.example.org</code>",
@@ -1243,13 +1247,13 @@
   {
     "id": 94,
     "tipo": "fill",
-    "pergunta": "Qual parâmetro está faltando no comando\nip link set ____ dev eth0\npara ativar a interface de rede eth0 que estava inativa? (Especifique apenas o parâmetro, sem\ncomandos, caminhos ou opções adicionais.)",
+    "pergunta": "Qual parâmetro está faltando no comando<br><code>ip link set ____ dev eth0</code><br>para ativar a interface de rede eth0 que estava inativa?<br>(Especifique apenas o parâmetro, sem comandos, caminhos ou opções adicionais.)",
     "respostaCorreta": "up",
     "explicacao": "O comando `ip link set` é utilizado para alterar o estado de uma interface de rede. O parâmetro `up` é o responsável por ativar (colocar em estado operacional) a interface especificada."
   },
   {
     "id": 95,
-    "pergunta": "Quais dos seguintes estados o NetworkManager pode exibir em relação à conectividade de\nrede do sistema? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes estados o NetworkManager pode exibir em relação à conectividade de rede do sistema?<br>(Escolha dois.)",
     "opcoes": {
       "A": "up",
       "B": "portal",
@@ -1266,7 +1270,7 @@
   },
   {
     "id": 96,
-    "pergunta": "Quais dos seguintes são endereços válidos de host para a sub-rede 203.0.113.64/28? (Escolha\ndois.)",
+    "pergunta": "Quais dos seguintes são endereços válidos de host para a sub-rede 203.0.113.64/28?<br>(Escolha dois.)",
     "opcoes": {
       "A": "203.0.113.64",
       "B": "203.0.113.78",
@@ -1283,7 +1287,7 @@
   },
   {
     "id": 97,
-    "pergunta": "Quais das seguintes palavras-chave podem ser usadas no arquivo /etc/resolv.conf? (Escolha\ndois.)",
+    "pergunta": "Quais das seguintes palavras-chave podem ser usadas no arquivo /etc/resolv.conf?<br>(Escolha dois.)",
     "opcoes": {
       "A": "substitute",
       "B": "lookup",
@@ -1314,9 +1318,9 @@
   },
   {
     "id": 99,
-    "pergunta": "Quais dos seguintes comandos exibem o número de bytes transmitidos e recebidos pela\ninterface de rede eth0? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos exibem o número de bytes transmitidos e recebidos pela interface de rede eth0?<br>(Escolha dois.)",
     "opcoes": {
-      "A": "route -v via eth0",
+      "A": "<code>route -v via eth0</code>",
       "B": "<code>ip stats show dev eth0</code>",
       "C": "<code>netstat -s -i eth0</code>",
       "D": "<code>ifconfig eth0</code>",
@@ -1331,7 +1335,7 @@
   },
   {
     "id": 100,
-    "pergunta": "Dada a seguinte tabela de roteamento:\nKernel IP routing table\nDestination\nGateway\n0.0.0.0\n192.168.178.1\n192.168.1.0\n0.0.0.0\n192.168.2.0\n192.168.1.1\n192.168.178.0 0.0.0.0\n\nGenmask\n0.0.0.0\n255.255.255.0\n255.255.255.0\n255.255.255.0\n\nFlags\nUG\nU\nU\nU\n\nMetric\n0\n0\n0\n9\n\nRef\n0\n0\n0\n0\n\nUse\n0\n0\n0\n0\n\nIface\nwlan0\neth0\neth0\nwlan0\n\nComo um pacote de saída destinado a 192.168.2.150 seria tratado?",
+    "pergunta": "Dada a seguinte tabela de roteamento:<br><br><table border='1' cellpadding='4' cellspacing='0' style='border-collapse: collapse;'><tr><th colspan='8' style='text-align:center;'>Kernel IP routing table</th></tr><tr><th>Destination</th><th>Gateway</th><th>Genmask</th><th>Flags</th><th>Metric</th><th>Ref</th><th>Use</th><th>Iface</th></tr><tr><td>0.0.0.0</td><td>192.168.178.1</td><td>0.0.0.0</td><td>UG</td><td>0</td><td>0</td><td>0</td><td>wlan0</td></tr><tr><td>192.168.1.0</td><td>0.0.0.0</td><td>255.255.255.0</td><td>U</td><td>0</td><td>0</td><td>0</td><td>eth0</td></tr><tr><td>192.168.2.0</td><td>192.168.1.1</td><td>255.255.255.0</td><td>U</td><td>0</td><td>0</td><td>0</td><td>eth0</td></tr><tr><td>192.168.178.0</td><td>0.0.0.0</td><td>255.255.255.0</td><td>U</td><td>9</td><td>0</td><td>0</td><td>wlan0</td></tr></table><br>Como um pacote de saída destinado a 192.168.2.150 seria tratado?",
     "opcoes": {
       "A": "<code>Ele seria enviado ao roteador padrão 192.168.178.1 na interface wlan0.</code>",
       "B": "<code>Ele seria transmitido diretamente na interface eth0.</code>",
@@ -1345,7 +1349,7 @@
   },
   {
     "id": 101,
-    "pergunta": "Quais dos seguintes comandos irão remover o gateway padrão da tabela de roteamento IP do\nsistema? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos irão remover o gateway padrão da tabela de roteamento IP do sistema?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>ifconfig unset default</code>",
       "B": "<code>route del default</code>",
@@ -1363,13 +1367,13 @@
   {
     "id": 102,
     "tipo": "fill",
-    "pergunta": "Qual comando ativa uma interface de rede com base na configuração específica da\ndistribuição, como /etc/network/interfaces ou /etc/sysconfig/network-scripts/ifcfg-eth0?\n(Especifique apenas o comando, sem caminho ou parâmetros.)",
+    "pergunta": "Qual comando ativa uma interface de rede com base na configuração específica da distribuição, como /etc/network/interfaces ou /etc/sysconfig/network-scripts/ifcfg-eth0?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "ifup",
     "explicacao": "O comando ifup é o utilitário padrão usado para ativar interfaces de rede, lendo e aplicando as configurações definidas nos arquivos de configuração persistentes da distribuição. Ele orquestra a subida da interface conforme o perfil definido (ex: /etc/network/interfaces)."
   },
   {
     "id": 103,
-    "pergunta": "O que é verdadeiro sobre o NetworkManager em um sistema Linux que utiliza os mecanismos\nda distribuição para configurar interfaces de rede? (Escolha dois.)",
+    "pergunta": "O que é verdadeiro sobre o NetworkManager em um sistema Linux que utiliza os mecanismos da distribuição para configurar interfaces de rede?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>O NetworkManager reconfigura todas as interfaces de rede para usar DHCP, a menos que sejam especificamente gerenciadas pelo NetworkManager.</code>",
       "B": "<code>O NetworkManager deve ser explicitamente habilitado para cada interface que ele deve gerenciar.</code>",
@@ -1382,7 +1386,7 @@
       "B",
       "C"
     ],
-    "explicacao": "O NetworkManager deve ser explicitamente habilitado para gerenciar uma interface (B) e, por padrão, não altera interfaces que já estão configuradas manualmente pela distribuição (C). A alternativa E está incorreta porque o NetworkManager utiliza seus próprios arquivos de configuração, e não os mecanismos tradicionais da distribuição."
+    "explicacao": "O NetworkManager deve ser explicitamente habilitado para gerenciar uma interface e, por padrão, não altera interfaces que já estão configuradas manualmente pela distribuição. O NetworkManager utiliza seus próprios arquivos de configuração, e não os mecanismos tradicionais da distribuição."
   },
   {
     "id": 104,
@@ -1400,7 +1404,7 @@
   },
   {
     "id": 105,
-    "pergunta": "Quais das seguintes variáveis de ambiente podem ser definidas em locale.conf? (Escolha\nduas.)",
+    "pergunta": "Quais das seguintes variáveis de ambiente podem ser definidas em locale.conf?<br>(Escolha duas.)",
     "opcoes": {
       "A": "LC_ALL",
       "B": "LC_USERNAME",
@@ -1417,7 +1421,7 @@
   },
   {
     "id": 106,
-    "pergunta": "Qual dos seguintes comandos define o fuso horário do sistema para o Horário do Leste do\nCanadá?",
+    "pergunta": "Qual dos seguintes comandos define o fuso horário do sistema para o Horário do Leste do Canadá?",
     "opcoes": {
       "A": "<code>localegen -t -f /usr/share/zoneinfo/Canada/Eastern > /etc/locate.tz</code>",
       "B": "<code>tzconf /etc/localtime</code>",
@@ -1432,7 +1436,7 @@
   {
     "id": 107,
     "tipo": "fill",
-    "pergunta": "Qual opção do comando useradd cria o diretório home de um novo usuário e o preenche com\num conjunto de arquivos padrão? (Especifique apenas o nome da opção, sem valores ou\nparâmetros.)",
+    "pergunta": "Qual opção do comando useradd cria o diretório home de um novo usuário e o preenche com um conjunto de arquivos padrão?<br>(Especifique apenas o nome da opção, sem valores ou parâmetros.)",
     "respostaCorreta": "-m",
     "explicacao": "A opção -m (create-home) instrui o useradd a criar o diretório home do novo usuário. Ao fazer isso, ele copia automaticamente os arquivos de configuração padrão localizados em /etc/skel para o novo diretório."
   },
@@ -1440,7 +1444,7 @@
     "id": 108,
     "pergunta": "Qual das seguintes opções impede que um usuário específico agende tarefas usando o at?",
     "opcoes": {
-      "A": "Adicionando o usuário específico ao arquivo /etc/at.allow.",
+      "A": "<code>Adicionando o usuário específico ao arquivo /etc/at.allow.</code>",
       "B": "<code>Adicionando o usuário específico à seção [deny] no arquivo /etc/atd.conf.</code>",
       "C": "<code>Adicionando o usuário específico ao grupo nojobs.</code>",
       "D": "<code>Adicionando o usuário específico ao arquivo /etc/at.deny.</code>",
@@ -1466,7 +1470,7 @@
   },
   {
     "id": 110,
-    "pergunta": "Quais dos seguintes campos podem ser encontrados no arquivo /etc/group? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes campos podem ser encontrados no arquivo /etc/group?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>O diretório home do grupo</code>",
       "B": "<code>A lista de usuários que pertencem ao grupo</code>",
@@ -1479,7 +1483,7 @@
       "B",
       "C"
     ],
-    "explicacao": "O arquivo /etc/group segue o formato 'nome_do_grupo:senha:GID:lista_de_membros'. Portanto, o nome do grupo (C) e a lista de usuários membros adicionais (B) são campos essenciais neste arquivo."
+    "explicacao": "O arquivo /etc/group segue o formato 'nome_do_grupo:senha:GID:lista_de_membros'. Portanto, o nome do grupo e a lista de usuários membros adicionais são campos essenciais neste arquivo."
   },
   {
     "id": 111,
@@ -1487,8 +1491,9 @@
     "opcoes": {
       "A": "[Events]",
       "B": "[Timer]",
-      "C": "[cron] D. [Schedule]",
-      "D": "[Trigger]"
+      "C": "[cron]",
+      "D": "[Schedule]",
+      "E": "[Trigger]"
     },
     "tipo": "multipla",
     "respostaCorreta": "B",
@@ -1510,7 +1515,7 @@
   },
   {
     "id": 113,
-    "pergunta": "Dada a seguinte entrada no crontab do usuário:\n15 14 * * 1-5 /usr/local/bin/example.sh\nQuando o script /usr/local/bin/example.sh será executado?",
+    "pergunta": "Dada a seguinte entrada no crontab do usuário:<br><code>15 14 * * 1-5 /usr/local/bin/example.sh</code><br>Quando o script /usr/local/bin/example.sh será executado?",
     "opcoes": {
       "A": "<code>Às 14:15, horário local, de janeiro a maio.</code>",
       "B": "<code>Às 15:14, horário local, do dia 1º ao 5º do mês.</code>",
@@ -1524,7 +1529,7 @@
   },
   {
     "id": 114,
-    "pergunta": "Se nem cron.allow nem cron.deny existirem em /etc/, qual das seguintes afirmações é\nverdadeira?",
+    "pergunta": "Se nem cron.allow nem cron.deny existirem em /etc/, qual das seguintes afirmações é verdadeira?",
     "opcoes": {
       "A": "<code>Sem configuração adicional, todos os usuários podem criar crontabs específicos.</code>",
       "B": "<code>Sem configuração adicional, apenas o root pode criar crontabs específicos.</code>",
@@ -1552,7 +1557,7 @@
   },
   {
     "id": 116,
-    "pergunta": "Qual caractere no campo de senha de /etc/passwd é usado para indicar que a senha\ncriptografada está armazenada em /etc/shadow?",
+    "pergunta": "Qual caractere no campo de senha de /etc/passwd é usado para indicar que a senha criptografada está armazenada em /etc/shadow?",
     "opcoes": {
       "A": "*",
       "B": "(vazio)",
@@ -1570,7 +1575,7 @@
     "opcoes": {
       "A": "<code>Um tema gráfico padronizado de alto contraste para aplicações de desktop</code>",
       "B": "<code>Um ambiente de desktop Linux similar ao KDE e GNOME</code>",
-      "C": "<code>Uma tecnologia de display legada substituída por LCD D. Uma representação física de caracteres usando pequenos pontos</code>",
+      "C": "<code>Uma tecnologia de display legada substituída por LCD</code>",
       "D": "<code>Uma representação física de caracteres usando pequenos pontos</code>",
       "E": "<code>Um formato de arquivo padrão para troca de dados, similar ao XML</code>"
     },
@@ -1581,13 +1586,13 @@
   {
     "id": 118,
     "tipo": "fill",
-    "pergunta": "Qual variável de ambiente é usada por um cliente X11 para determinar o servidor X ao qual se\nconectar? (Especifique apenas o nome da variável, sem comandos ou valores adicionais.)",
+    "pergunta": "Qual variável de ambiente é usada por um cliente X11 para determinar o servidor X ao qual se conectar?<br>(Especifique apenas o nome da variável, sem comandos ou valores adicionais.)",
     "respostaCorreta": "DISPLAY",
     "explicacao": "A variável de ambiente DISPLAY é o mecanismo padrão do X Window System para que os clientes (aplicativos gráficos) saibam onde está o servidor X (o responsável por exibir a interface gráfica). O valor da variável segue o formato [host]:[display_number].[screen_number], indicando o local e a instância do servidor X ao qual o aplicativo deve se conectar para exibir sua janela."
   },
   {
     "id": 119,
-    "pergunta": "Quais das seguintes tarefas são gerenciadas por um gerenciador de exibição como XDM ou\nKDM?",
+    "pergunta": "Quais das seguintes tarefas são gerenciadas por um gerenciador de exibição como XDM ou KDM?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>Configurar dispositivos adicionais, como novos monitores ou projetores quando conectados.</code>",
       "B": "<code>Iniciar e preparar o ambiente de trabalho para o usuário.</code>",
@@ -1604,7 +1609,7 @@
   },
   {
     "id": 120,
-    "pergunta": "Qual dos seguintes protocolos é projetado para acessar a saída da placa de vídeo de uma\nmáquina virtual?",
+    "pergunta": "Qual dos seguintes protocolos é projetado para acessar a saída da placa de vídeo de uma máquina virtual?",
     "opcoes": {
       "A": "KDE",
       "B": "X11",
