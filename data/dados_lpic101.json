@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "pergunta": "Qual tipo de sistema de arquivos é criado pelo mkfs quando ele é executado apenas com o\nnome do dispositivo de bloco e sem nenhum parâmetro adicional?",
+    "pergunta": "Qual tipo de sistema de arquivos é criado pelo mkfs quando ele é executado apenas com o nome do dispositivo de bloco e sem nenhum parâmetro adicional?",
     "opcoes": {
       "A": "XFS",
       "B": "VFAT",
@@ -15,7 +15,7 @@
   },
   {
     "id": 2,
-    "pergunta": "Qual valor de umask garante que novos diretórios possam ser lidos, escritos e listados pelo\nseu usuário proprietário, lidos e listados pelo seu grupo proprietário e não sejam acessíveis\nde forma alguma por qualquer outra pessoa?",
+    "pergunta": "Qual valor de umask garante que novos diretórios possam ser lidos, escritos e listados pelo seu usuário proprietário, lidos e listados pelo seu grupo proprietário e não sejam acessíveis de forma alguma por qualquer outra pessoa?",
     "opcoes": {
       "A": "0750",
       "B": "0027",
@@ -29,7 +29,7 @@
   },
   {
     "id": 3,
-    "pergunta": "Qual dos seguintes comandos altera o número de dias antes que o sistema de arquivos ext3\nem /dev/sda1 precise passar por uma verificação completa do sistema de arquivos durante a\ninicialização?",
+    "pergunta": "Qual dos seguintes comandos altera o número de dias antes que o sistema de arquivos ext3 em /dev/sda1 precise passar por uma verificação completa do sistema de arquivos durante a inicialização?",
     "opcoes": {
       "A": "<code>tune2fs -d 200 /dev/sda1</code>",
       "B": "<code>tune2fs -i 200 /dev/sda1</code>",
@@ -43,7 +43,7 @@
   },
   {
     "id": 4,
-    "pergunta": "Qual é a porcentagem padrão de espaço reservado para o usuário root em novos sistemas de\narquivos ext4?",
+    "pergunta": "Qual é a porcentagem padrão de espaço reservado para o usuário root em novos sistemas de arquivos ext4?",
     "opcoes": {
       "A": "10%",
       "B": "3%",
@@ -57,13 +57,13 @@
   },
   {
     "id": 5,
-    "pergunta": "Qual das seguintes afirmativas é verdadeira quando um sistema de arquivos, que não está\nlistado em /etc/fstab nem é conhecido pelo sistema, é montado manualmente?",
+    "pergunta": "Qual das seguintes afirmativas é verdadeira quando um sistema de arquivos, que não está listado em /etc/fstab nem é conhecido pelo sistema, é montado manualmente?",
     "opcoes": {
-      "A": "<code>O systemd ignora qualquer montagem manual que não seja feita usando o comando systemctl mount</code>",
-      "B": "<code>O comando systemctl mountsync pode ser usado para criar uma unidade de montagem com base na montagem existente</code>",
-      "C": "<code>O systemd gera automaticamente uma unidade de montagem (mount unit) e monitora o ponto de montagem sem alterá-lo</code>",
-      "D": "<code>A menos que uma unidade de montagem do systemd seja criada, o systemd desmonta o sistema de arquivos após um curto período de tempo</code>",
-      "E": "<code>O comando systemctl unmount deve ser usado para remover a montagem porque o system abre um descritor de arquivo no ponto de montagem</code>"
+      "A": "O systemd ignora qualquer montagem manual que não seja feita usando o comando systemctl mount",
+      "B": "O comando systemctl mountsync pode ser usado para criar uma unidade de montagem com base na montagem existente",
+      "C": "O systemd gera automaticamente uma unidade de montagem (mount unit) e monitora o ponto de montagem sem alterá-lo",
+      "D": "A menos que uma unidade de montagem do systemd seja criada, o systemd desmonta o sistema de arquivos após um curto período de tempo",
+      "E": "O comando systemctl unmount deve ser usado para remover a montagem porque o system abre um descritor de arquivo no ponto de montagem"
     },
     "tipo": "multipla",
     "respostaCorreta": "C",
@@ -72,7 +72,7 @@
   {
     "id": 6,
     "tipo": "fill",
-    "pergunta": "Qual programa atualiza o banco de dados usado pelo comando locate?\n(Especifique apenas o comando, sem caminho ou parâmetros).",
+    "pergunta": "Qual programa atualiza o banco de dados usado pelo comando locate?<br>(Especifique apenas o comando, sem caminho ou parâmetros).",
     "respostaCorreta": "updatedb",
     "explicacao": "O comando updatedb é responsável por escanear o sistema de arquivos e criar ou atualizar o banco de dados mlocate.db. O comando locate utiliza este banco de dados préindexado para realizar pesquisas rápidas de arquivos."
   },
@@ -80,11 +80,11 @@
     "id": 7,
     "pergunta": "O que o comando mount --bind faz?",
     "opcoes": {
-      "A": "<code>Torna o conteúdo de um diretório disponível em outro diretório</code>",
-      "B": "<code>Monta todos os sistemas de arquivos disponíveis no diretório atual</code>",
-      "C": "<code>Monta todos os sistemas de arquivos montáveis pelo usuário no diretório home do usuário</code>",
-      "D": "<code>Monta todos os sistemas de arquivos listados em /etc/fstab que possuem a opção userbind definida</code>",
-      "E": "<code>Monta permanentemente um arquivo regular em um diretório</code>"
+      "A": "Torna o conteúdo de um diretório disponível em outro diretório",
+      "B": "Monta todos os sistemas de arquivos disponíveis no diretório atual",
+      "C": "Monta todos os sistemas de arquivos montáveis pelo usuário no diretório home do usuário",
+      "D": "Monta todos os sistemas de arquivos listados em /etc/fstab que possuem a opção userbind definida",
+      "E": "Monta permanentemente um arquivo regular em um diretório"
     },
     "tipo": "multipla",
     "respostaCorreta": "A",
@@ -92,7 +92,7 @@
   },
   {
     "id": 8,
-    "pergunta": "Considere a seguinte saída do comando ls -i:\n525385 -rw-rw-r-- 2 1000 1000 0 Feb 12 19:44 a.txt\n526255 lrw-rw-r-- 1 1000 1000 5 Feb 12 19:44 b.txt -> a.txt\nComo um novo arquivo chamado c.txt poderia ser criado com o mesmo número de inode que\na.txt (inode 525385)?",
+    "pergunta": "Considere a seguinte saída do comando <code>ls -i</code>:<code><br>525385 -rw-rw-r-- 2 1000 1000 0 Feb 12 19:44 a.txt<br>526255 lrw-rw-r-- 1 1000 1000 5 Feb 12 19:44 b.txt -> a.txt<br></code>Como um novo arquivo chamado c.txt poderia ser criado com o mesmo número de inode que a.txt (inode 525385)?",
     "opcoes": {
       "A": "<code>ln -h a.txt c.txt</code>",
       "B": "<code>ln c.txt a.txt</code>",
@@ -106,11 +106,12 @@
   },
   {
     "id": 9,
-    "pergunta": "Considere o seguinte diretório:\ndrwxrwxr-x 2 root sales 4096 Jan 1 15:21 sales\nQual comando garante que novos arquivos criados dentro do diretório sales sejam\npertencentes ao grupo sales?\n(Escolha duas opções.)",
+    "pergunta": "Considere o seguinte diretório:<code><br>drwxrwxr-x 2 root sales 4096 Jan 1 15:21 sales<br></code>Qual comando garante que novos arquivos criados dentro do diretório sales sejam pertencentes ao grupo sales?<br>(Escolha duas opções.)",
     "opcoes": {
       "A": "<code>chmod g+s sales</code>",
       "B": "<code>setpol -R newgroup=sales sales</code>",
-      "C": "<code>chgrp -p sales sales D. chown --persistent *.sales sales</code>",
+      "C": "<code>chgrp -p sales sales</code>", 
+      "D": "<code>chown --persistent *.sales sales</code>",
       "E": "<code>chmod 2775 sales</code>"
     },
     "tipo": "multipla",
@@ -118,16 +119,16 @@
       "A",
       "E"
     ],
-    "explicacao": "O bit SGID (Set Group ID) em um diretório força novos arquivos criados a herdarem o grupo do diretório, em vez do grupo primário do criador. As opções A (g+s) e E (o prefixo octal 2) são formas equivalentes de ativar o bit SGID."
+    "explicacao": "O bit SGID (Set Group ID) em um diretório força novos arquivos criados a herdarem o grupo do diretório, em vez do grupo primário do criador. A opção '<code>g+s</code>' e o prefixo octal '<strong>2</strong>' são formas equivalentes de ativar o bit SGID."
   },
   {
     "id": 10,
-    "pergunta": "Para exibir todos os sistemas de arquivos atualmente montados, quais dos seguintes\ncomandos poderiam ser usados?\n(Escolha duas opções.)",
+    "pergunta": "Para exibir todos os sistemas de arquivos atualmente montados, quais dos seguintes comandos poderiam ser usados?<br>(Escolha duas opções.)",
     "opcoes": {
       "A": "<code>cat /proc/self/mounts</code>",
-      "B": "free",
-      "C": "lsmounts",
-      "D": "mount",
+      "B": "<code>free</code>",
+      "C": "<code>lsmounts</code>",
+      "D": "<code>mount</code>",
       "E": "<code>cat /proc/filesystems</code>"
     },
     "tipo": "multipla",
@@ -140,13 +141,13 @@
   {
     "id": 11,
     "tipo": "fill",
-    "pergunta": "Qual comando exibe o uso atual de espaço em disco para todos os sistemas de arquivos\nmontados?\n(Especifique apenas o comando, sem caminho ou parâmetros).",
+    "pergunta": "Qual comando exibe o uso atual de espaço em disco para todos os sistemas de arquivos montados?<br>(Especifique apenas o comando, sem caminho ou parâmetros).",
     "respostaCorreta": "df",
     "explicacao": "O comando 'df' (disk free) é o utilitário padrão do Linux para relatar o uso de espaço em disco dos sistemas de arquivos. Ele exibe o espaço total, usado, disponível e a porcentagem de uso para todos os sistemas de arquivos montados."
   },
   {
     "id": 12,
-    "pergunta": "Qual comando chown altera o proprietário para dave e o grupo para staff em um arquivo\nchamado data.txt?",
+    "pergunta": "Qual comando chown altera o proprietário para dave e o grupo para staff em um arquivo chamado data.txt?",
     "opcoes": {
       "A": "<code>chown dave/staff data.txt</code>",
       "B": "<code>chown -u dave -g staff data.txt</code>",
@@ -162,11 +163,11 @@
     "id": 13,
     "pergunta": "Ao considerar o uso de hard links, quais são razões válidas para não utilizá-los?",
     "opcoes": {
-      "A": "<code>Hard links não estão disponíveis em todos os sistemas Linux porque sistemas de arquivos tradicionais, como ext4, não os suportam</code>",
-      "B": "<code>Cada hard link possui propriedade, permissões e ACLs individuais, o que pode levar à divulgação não intencional do conteúdo do arquivo</code>",
-      "C": "<code>Hard links são específicos de um único sistema de arquivos e não podem apontar para arquivos em outro sistema de arquivos</code>",
-      "D": "<code>Se usuários diferentes de root precisarem criar hard links, o suln deve ser instalado e configurado</code>",
-      "E": "<code>Quando um arquivo com hard link é alterado, uma cópia do arquivo é criada, consumindo espaço adicional</code>"
+      "A": "Hard links não estão disponíveis em todos os sistemas Linux porque sistemas de arquivos tradicionais, como ext4, não os suportam",
+      "B": "Cada hard link possui propriedade, permissões e ACLs individuais, o que pode levar à divulgação não intencional do conteúdo do arquivo",
+      "C": "Hard links são específicos de um único sistema de arquivos e não podem apontar para arquivos em outro sistema de arquivos",
+      "D": "Se usuários diferentes de root precisarem criar hard links, o suln deve ser instalado e configurado",
+      "E": "Quando um arquivo com hard link é alterado, uma cópia do arquivo é criada, consumindo espaço adicional"
     },
     "tipo": "multipla",
     "respostaCorreta": "C",
@@ -174,7 +175,7 @@
   },
   {
     "id": 14,
-    "pergunta": "De acordo com o FHS (Filesystem Hierarchy Standard), em qual diretório são encontradas as\nman pages?",
+    "pergunta": "De acordo com o FHS (Filesystem Hierarchy Standard), em qual diretório são encontradas as man pages?",
     "opcoes": {
       "A": "<code>/opt/man/</code>",
       "B": "<code>/usr/doc/</code>",
@@ -189,19 +190,19 @@
   {
     "id": 15,
     "tipo": "fill",
-    "pergunta": "Qual arquivo no sistema de arquivos /proc lista os parâmetros passados do bootloader para o\nkernel?\n(Especifique apenas o nome do arquivo, sem caminho.)",
+    "pergunta": "Qual arquivo no sistema de arquivos /proc lista os parâmetros passados do bootloader para o kernel?<br>(Especifique apenas o nome do arquivo, sem caminho.)",
     "respostaCorreta": "cmdline",
     "explicacao": "O arquivo /proc/cmdline armazena a string de parâmetros de inicialização recebida do bootloader. Ele exibe a linha de comando exata usada para inicializar a instância atual do kernel."
   },
   {
     "id": 16,
-    "pergunta": "Qual é o número de ID do processo (PID) do processo init em um sistema baseado em System\nV init?",
+    "pergunta": "Qual é o número de ID do processo (PID) do processo init em um sistema baseado em System V init?",
     "opcoes": {
       "A": "-1",
       "B": "0",
       "C": "1",
-      "D": "<code>Ele é diferente a cada reinicialização</code>",
-      "E": "<code>Ele é definido de acordo com o nível de execução atual</code>"
+      "D": "Ele é diferente a cada reinicialização",
+      "E": "Ele é definido de acordo com o nível de execução atual"
     },
     "tipo": "multipla",
     "respostaCorreta": "C",
@@ -223,13 +224,13 @@
   },
   {
     "id": 18,
-    "pergunta": "Quais das seguintes afirmativas são verdadeiras sobre a sequência de inicialização (boot) de\num PC que utiliza BIOS? (Escolha duas opções.)",
+    "pergunta": "Quais das seguintes afirmativas são verdadeiras sobre a sequência de inicialização (boot) de um PC que utiliza BIOS?<br>(Escolha duas opções.)",
     "opcoes": {
-      "A": "<code>Algumas partes do processo de boot podem ser configuradas a partir da BIOS</code>",
-      "B": "<code>O Linux não requer a assistência da BIOS para inicializar o computador</code>",
-      "C": "<code>O processo de boot da BIOS só começa se o armazenamento secundário (como o disco rígido) estiver funcional</code>",
-      "D": "<code>A BIOS inicia o processo de boot após ligar o computador</code>",
-      "E": "<code>A BIOS é iniciada ao carregar drivers de hardware do armazenamento secundário, como o disco rígido</code>"
+      "A": "Algumas partes do processo de boot podem ser configuradas a partir da BIOS",
+      "B": "O Linux não requer a assistência da BIOS para inicializar o computador",
+      "C": "O processo de boot da BIOS só começa se o armazenamento secundário (como o disco rígido) estiver funcional",
+      "D": "A BIOS inicia o processo de boot após ligar o computador",
+      "E": "A BIOS é iniciada ao carregar drivers de hardware do armazenamento secundário, como o disco rígido"
     },
     "tipo": "multipla",
     "respostaCorreta": [
@@ -240,30 +241,30 @@
   },
   {
     "id": 19,
-    "pergunta": "O que é verdadeiro em relação ao firmware UEFI?\n(Escolha duas opções.)",
+    "pergunta": "O que é verdadeiro em relação ao firmware UEFI?<br>(Escolha duas opções.)",
     "opcoes": {
-      "A": "<code>Ele pode ler e interpretar tabelas de partição</code>",
-      "B": "<code>Ele pode usar e ler certos sistemas de arquivos</code>",
-      "C": "<code>Ele armazena toda a sua configuração na partição /boot/</code>",
-      "D": "<code>Ele é armazenado em uma área especial dentro dos metadados GPT</code>",
-      "E": "<code>Ele é carregado a partir de uma posição fixa no disco de boot</code>"
+      "A": "Ele pode ler e interpretar tabelas de partição",
+      "B": "Ele pode usar e ler certos sistemas de arquivos",
+      "C": "Ele armazena toda a sua configuração na partição /boot/",
+      "D": "Ele é armazenado em uma área especial dentro dos metadados GPT",
+      "E": "Ele é carregado a partir de uma posição fixa no disco de boot"
     },
     "tipo": "multipla",
     "respostaCorreta": [
       "B",
       "D"
     ],
-    "explicacao": "O UEFI (Unified Extensible Firmware Interface) é o sucessor do BIOS e oferece recursos mais avançados. • (B) Está correta porque o UEFI consegue ler certos sistemas de arquivos, como FAT32, para acessar arquivos de boot na partição EFI. • (D) Também está correta porque o UEFI armazena algumas informações de inicialização em áreas específicas dos metadados GPT (GUID Partition Table), como as entradas de partição EFI. As demais opções estão incorretas porque o UEFI não armazena configurações em /boot, não depende de posição fixa no disco, e não lê diretamente tabelas de partição para inicializar o sistema."
+    "explicacao": "O UEFI (Unified Extensible Firmware Interface) é o sucessor do BIOS e oferece recursos mais avançados.<br> • O UEFI consegue ler certos sistemas de arquivos, como FAT32, para acessar arquivos de boot na partição EFI.<br> • O UEFI armazena algumas informações de inicialização em áreas específicas dos metadados GPT (GUID Partition Table), como as entradas de partição EFI.<br>As demais opções estão incorretas porque o UEFI não armazena configurações em /boot, não depende de posição fixa no disco, e não lê diretamente tabelas de partição para inicializar o sistema."
   },
   {
     "id": 20,
-    "pergunta": "Um módulo de kernel com defeito está causando problemas em uma placa de interface de\nrede.\nQual das seguintes ações garante que esse módulo não seja carregado automaticamente\ndurante a inicialização do sistema?",
+    "pergunta": "Um módulo de kernel com defeito está causando problemas em uma placa de interface de rede.<br>Qual das seguintes ações garante que esse módulo não seja carregado automaticamente durante a inicialização do sistema?",
     "opcoes": {
-      "A": "<code>Usar lsmod --remove --autoclean sem especificar o nome de um módulo específico</code>",
-      "B": "<code>Usar modinfo -k seguido do nome do módulo com problema</code>",
-      "C": "<code>Usar modprobe -r seguido do nome do módulo com problema</code>",
-      "D": "<code>Adicionar uma linha de blacklist incluindo o nome do módulo com problema no arquivo /etc/modprobe.d/blacklist.conf</code>",
-      "E": "<code>Excluir o diretório do módulo do kernel no sistema de arquivos e recompilar o kernel, incluindo seus módulos</code>"
+      "A": "Usar lsmod --remove --autoclean sem especificar o nome de um módulo específico",
+      "B": "Usar modinfo -k seguido do nome do módulo com problema",
+      "C": "Usar modprobe -r seguido do nome do módulo com problema",
+      "D": "Adicionar uma linha de blacklist incluindo o nome do módulo com problema no arquivo /etc/modprobe.d/blacklist.conf",
+      "E": "Excluir o diretório do módulo do kernel no sistema de arquivos e recompilar o kernel, incluindo seus módulos"
     },
     "tipo": "multipla",
     "respostaCorreta": "D",
@@ -271,13 +272,13 @@
   },
   {
     "id": 21,
-    "pergunta": "Quando o conteúdo do buffer circular do kernel (kernel ring buffer) é redefinido?\n(Escolha duas opções.)",
+    "pergunta": "Quando o conteúdo do buffer circular do kernel (kernel ring buffer) é redefinido?<br>(Escolha duas opções.)",
     "opcoes": {
-      "A": "<code>Quando o buffer é explicitamente redefinido usando o comando dmesg --clear</code>",
-      "B": "<code>Quando o buffer é lido usando dmesg sem parâmetros adicionais</code>",
-      "C": "<code>Quando um período configurável de tempo, 15 minutos por padrão, é atingido</code>",
-      "D": "<code>Quando o kernel carrega um módulo previamente descarregado</code>",
-      "E": "<code>Quando o sistema é desligado ou reiniciado</code>"
+      "A": "Quando o buffer é explicitamente redefinido usando o comando dmesg --clear",
+      "B": "Quando o buffer é lido usando dmesg sem parâmetros adicionais",
+      "C": "Quando um período configurável de tempo, 15 minutos por padrão, é atingido",
+      "D": "Quando o kernel carrega um módulo previamente descarregado",
+      "E": "Quando o sistema é desligado ou reiniciado"
     },
     "tipo": "multipla",
     "respostaCorreta": [
@@ -288,7 +289,7 @@
   },
   {
     "id": 22,
-    "pergunta": "Qual é o primeiro programa que o kernel Linux inicia durante a inicialização quando se utiliza\no System V init?",
+    "pergunta": "Qual é o primeiro programa que o kernel Linux inicia durante a inicialização quando se utiliza o System V init?",
     "opcoes": {
       "A": "<code>/lib/init.so</code>",
       "B": "<code>/proc/sys/kernel/init</code>",
@@ -302,13 +303,13 @@
   },
   {
     "id": 23,
-    "pergunta": "Um pacote Debian cria vários arquivos durante sua instalação.\nQual dos seguintes comandos pesquisa quais pacotes são proprietários do arquivo\n/etc/debian_version?",
+    "pergunta": "Um pacote Debian cria vários arquivos durante sua instalação.<br>Qual dos seguintes comandos pesquisa quais pacotes são proprietários do arquivo /etc/debian_version?",
     "opcoes": {
-      "A": "apt-get search /etc/debian_version",
+      "A": "<code>apt-get search /etc/debian_version</code>",
       "B": "<code>apt -r /etc/debian_version</code>",
       "C": "<code>find /etc/debian_version -dpkg</code>",
       "D": "<code>dpkg -S /etc/debian_version</code>",
-      "E": "apt-file /etc/debian_version"
+      "E": "<code>apt-file /etc/debian_version</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "D",
@@ -318,11 +319,11 @@
     "id": 24,
     "pergunta": "O que está contido na partição do sistema EFI (EFI System Partition – ESP)?",
     "opcoes": {
-      "A": "<code>O sistema de arquivos raiz do Linux</code>",
-      "B": "<code>O boot loader de primeira etapa (first stage boot loader)</code>",
-      "C": "<code>O arquivo de espaço de troca (swap) padrão</code>",
-      "D": "<code>Os binários do shell padrão do Linux</code>",
-      "E": "<code>Os diretórios home dos usuários</code>"
+      "A": "O sistema de arquivos raiz do Linux",
+      "B": "O boot loader de primeira etapa (first stage boot loader)",
+      "C": "O arquivo de espaço de troca (swap) padrão",
+      "D": "Os binários do shell padrão do Linux",
+      "E": "Os diretórios home dos usuários"
     },
     "tipo": "multipla",
     "respostaCorreta": "B",
@@ -330,9 +331,9 @@
   },
   {
     "id": 25,
-    "pergunta": "Quais dos seguintes diretórios em um sistema Linux 64 bits normalmente contêm bibliotecas\ncompartilhadas (shared libraries)?\n(Escolha duas opções.)",
+    "pergunta": "Quais dos seguintes diretórios em um sistema Linux 64 bits normalmente contêm bibliotecas compartilhadas (shared libraries)?<br>(Escolha duas opções.)",
     "opcoes": {
-      "A": "~/.lib64/",
+      "A": "<code>~/.lib64/</code>",
       "B": "<code>/usr/lib64/</code>",
       "C": "<code>/var/lib64/</code>",
       "D": "<code>/lib64/</code>",
@@ -347,7 +348,7 @@
   },
   {
     "id": 26,
-    "pergunta": "Quais dos seguintes arquivos existem em uma instalação padrão do GRUB 2?\n(Escolha duas opções.)",
+    "pergunta": "Quais dos seguintes arquivos existem em uma instalação padrão do GRUB 2?<br>(Escolha duas opções.)",
     "opcoes": {
       "A": "<code>/boot/grub/stages/stage0</code>",
       "B": "<code>/boot/grub/i386-pc/lvm.mod</code>",
@@ -378,7 +379,7 @@
   },
   {
     "id": 28,
-    "pergunta": "Quais das seguintes propriedades de um sistema Linux devem ser alteradas quando uma\nmáquina virtual é clonada?\n(Escolha duas opções.)",
+    "pergunta": "Quais das seguintes propriedades de um sistema Linux devem ser alteradas quando uma máquina virtual é clonada?<br>(Escolha duas opções.)",
     "opcoes": {
       "A": "<code>O esquema de particionamento</code>",
       "B": "<code>O sistema de arquivos</code>",
@@ -395,13 +396,13 @@
   },
   {
     "id": 29,
-    "pergunta": "Qual dos seguintes comandos instala o GRUB 2 no registro mestre de inicialização (MBR) do\nterceiro disco rígido?",
+    "pergunta": "Qual dos seguintes comandos instala o GRUB 2 no registro mestre de inicialização (MBR) do terceiro disco rígido?",
     "opcoes": {
       "A": "<code>grub2 install /dev/sdc</code>",
-      "B": "grub-mkrescue /dev/sdc",
-      "C": "grub-mbrinstall /dev/sdc",
-      "D": "grub-setup /dev/sdc",
-      "E": "grub-install /dev/sdc"
+      "B": "<code>grub-mkrescue /dev/sdc</code>",
+      "C": "<code>grub-mbrinstall /dev/sdc</code>",
+      "D": "<code>grub-setup /dev/sdc</code>",
+      "E": "<code>grub-install /dev/sdc</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "E",
@@ -409,7 +410,7 @@
   },
   {
     "id": 30,
-    "pergunta": "Qual dos seguintes tipos de partição é usado para áreas de swap do Linux ao particionar\ndiscos rígidos?",
+    "pergunta": "Qual dos seguintes tipos de partição é usado para áreas de swap do Linux ao particionar discos rígidos?",
     "opcoes": {
       "A": "7",
       "B": "82",
@@ -423,7 +424,7 @@
   },
   {
     "id": 31,
-    "pergunta": "O que é verdadeiro em relação à configuração do yum?\n(Escolha duas opções.)",
+    "pergunta": "O que é verdadeiro em relação à configuração do yum?<br>(Escolha duas opções.)",
     "opcoes": {
       "A": "<code>As alterações na configuração dos repositórios tornam-se ativas após executar yum confupdate</code>",
       "B": "<code>As alterações na configuração do yum tornam-se ativas após reiniciar o serviço yumd</code>",
@@ -440,13 +441,13 @@
   },
   {
     "id": 32,
-    "pergunta": "Qual dos seguintes subcomandos do apt-get instala as versões mais recentes de todos os\npacotes atualmente instalados?",
+    "pergunta": "Qual dos seguintes subcomandos do apt-get instala as versões mais recentes de todos os pacotes atualmente instalados?",
     "opcoes": {
-      "A": "auto-update",
-      "B": "dist-upgrade",
-      "C": "full-upgrade",
-      "D": "install",
-      "E": "update"
+      "A": "<code>auto-update</code>",
+      "B": "<code>dist-upgrade</code>",
+      "C": "<code>full-upgrade</code>",
+      "D": "<code>install</code>",
+      "E": "<code>update</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "B",
@@ -454,7 +455,7 @@
   },
   {
     "id": 33,
-    "pergunta": "Qual comando desinstala um pacote, mas mantém seus arquivos de configuração caso o\npacote seja reinstalado posteriormente?",
+    "pergunta": "Qual comando desinstala um pacote, mas mantém seus arquivos de configuração caso o pacote seja reinstalado posteriormente?",
     "opcoes": {
       "A": "<code>dpkg -s pkgname</code>",
       "B": "<code>dpkg -L pkgname</code>",
@@ -482,7 +483,7 @@
   },
   {
     "id": 35,
-    "pergunta": "Qual é o valor máximo de “niceness” que um usuário comum pode atribuir a um processo\nusando o comando nice ao executar um novo processo?",
+    "pergunta": "Qual é o valor máximo de “niceness” que um usuário comum pode atribuir a um processo usando o comando nice ao executar um novo processo?",
     "opcoes": {
       "A": "9",
       "B": "15",
@@ -496,7 +497,7 @@
   },
   {
     "id": 36,
-    "pergunta": "Quais dos seguintes comandos listam todos os arquivos e diretórios dentro do diretório /tmp/\ne de seus subdiretórios que são de propriedade do usuário root?",
+    "pergunta": "Quais dos seguintes comandos listam todos os arquivos e diretórios dentro do diretório /tmp/ e de seus subdiretórios que são de propriedade do usuário root?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>find /tmp -user root -print</code>",
       "B": "<code>find -path /tmp -uid root</code>",
@@ -509,11 +510,11 @@
       "A",
       "D"
     ],
-    "explicacao": "O comando find utiliza a sintaxe 'find [caminho] [critério]'. As opções A e D usam o caminho /tmp e o critério -user root para listar os arquivos pertencentes ao root. O -print (A) é opcional, pois o find lista os resultados por padrão (D)."
+    "explicacao": "O comando find utiliza a sintaxe 'find [caminho] [critério]'. Ambas opções usam o caminho /tmp e o critério -user root para listar os arquivos pertencentes ao root. O <code>-print</code> é opcional, pois o find lista os resultados por padrão."
   },
   {
     "id": 37,
-    "pergunta": "Quais dos seguintes são operadores válidos de redirecionamento de fluxo no Bash? (Escolha\nduas.)",
+    "pergunta": "Quais dos seguintes são operadores válidos de redirecionamento de fluxo no Bash?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<",
       "B": "#>",
@@ -544,8 +545,9 @@
   },
   {
     "id": 39,
-    "pergunta": "O comando dbmaint & foi usado para executar o dbmaint em segundo plano. No entanto, o\nprocesso é encerrado após o logout do usuário. Qual das seguintes alternativas permite que o\ndbmaint continue em execução mesmo após o logout?",
+    "pergunta": "O comando dbmaint & foi usado para executar o dbmaint em segundo plano. No entanto, o processo é encerrado após o logout do usuário. Qual das seguintes alternativas permite que o dbmaint continue em execução mesmo após o logout?",
     "opcoes": {
+      "A": "<code>job -b dmaint</code>",
       "B": "<code>dbmaint &>/dev/pts/null</code>",
       "C": "<code>nohup dbmaint &</code>",
       "D": "<code>bg dbmaint</code>",
@@ -557,12 +559,12 @@
   },
   {
     "id": 40,
-    "pergunta": "A partir de um shell Bash, quais dos seguintes comandos executam diretamente as instruções\ndo arquivo /usr/local/bin/runme.sh sem iniciar um subshell?",
+    "pergunta": "A partir de um shell Bash, quais dos seguintes comandos executam diretamente as instruções do arquivo /usr/local/bin/runme.sh sem iniciar um subshell?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>source /usr/local/bin/runme.sh</code>",
       "B": "<code>/usr/local/bin/runme.sh</code>",
       "C": "<code>/bin/bash /usr/local/bin/runme.sh</code>",
-      "D": ". /usr/local/bin/runme.sh",
+      "D": "<code>. /usr/local/bin/runme.sh</code>",
       "E": "<code>run /usr/local/bin/runme.sh</code>"
     },
     "tipo": "multipla",
@@ -575,13 +577,13 @@
   {
     "id": 41,
     "tipo": "fill",
-    "pergunta": "Qual programa executa um comando em intervalos específicos e atualiza a exibição da saída do\nprograma? (Especifique APENAS o comando, sem nenhum caminho ou parâmetro.)",
+    "pergunta": "Qual programa executa um comando em intervalos específicos e atualiza a exibição da saída do programa?<br>(Especifique APENAS o comando, sem nenhum caminho ou parâmetro.)",
     "respostaCorreta": "watch",
     "explicacao": "O comando `watch` executa um comando especificado repetidamente em intervalos regulares (padrão de 2 segundos). Ele exibe a saída em tela cheia, atualizando-a automaticamente para monitoramento contínuo."
   },
   {
     "id": 42,
-    "pergunta": "Imediatamente após excluir 3 linhas de texto no vi e mover o cursor para uma linha diferente,\nqual comando de um único caractere insere o conteúdo excluído abaixo da linha atual?",
+    "pergunta": "Imediatamente após excluir 3 linhas de texto no vi e mover o cursor para uma linha diferente,qual comando de um único caractere insere o conteúdo excluído abaixo da linha atual?",
     "opcoes": {
       "A": "<code>i (minúsculo)</code>",
       "B": "<code>p (minúsculo)</code>",
@@ -595,7 +597,7 @@
   },
   {
     "id": 43,
-    "pergunta": "Qual dos seguintes comandos altera todas as quebras de linha CR-LF no arquivo de texto\nuserlist.txt para o padrão LF do Linux e armazena o resultado em newlist.txt?",
+    "pergunta": "Qual dos seguintes comandos altera todas as quebras de linha CR-LF no arquivo de texto userlist.txt para o padrão LF do Linux e armazena o resultado em newlist.txt?",
     "opcoes": {
       "A": "<code>tr -d '\\r' < userlist.txt > newlist.txt</code>",
       "B": "<code>tr -c '\\n\\r' '' < newlist.txt > userlist.txt</code>",
@@ -609,13 +611,13 @@
   },
   {
     "id": 44,
-    "pergunta": "Dado o seguinte fluxo de entrada:\ntxt1.txt\natxt.txt\ntxtB.txt\nQual das seguintes expressões regulares transforma esse fluxo de entrada no seguinte fluxo de\nsaída?\ntxt1.bak.txt\natxt.bak.txt\ntxtB.bak.txt",
+    "pergunta": "Dado o seguinte fluxo de entrada:<code><br>txt1.txt<br>atxt.txt<br>txtB.txt<br></code>Qual das seguintes expressões regulares transforma esse fluxo de entrada no seguinte fluxo de saída?<code><br>txt1.bak.txt<br>atxt.bak.txt<br>txtB.bak.txt</code>",
     "opcoes": {
-      "A": "s/^.txt/.bak/",
-      "B": "s/txt/bak.txt/",
-      "C": "s/txt$/bak.txt/",
-      "D": "s/^txt$/.bak^/",
-      "E": "s/[.txt]/.bak$1/"
+      "A": "<code>s/^.txt/.bak/</code>",
+      "B": "<code>s/txt/bak.txt/</code>",
+      "C": "<code>s/txt$/bak.txt/</code>",
+      "D": "<code>s/^txt$/.bak^/</code>",
+      "E": "<code>s/[.txt]/.bak$1/</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "C",
@@ -637,7 +639,7 @@
   },
   {
     "id": 46,
-    "pergunta": "Qual dos seguintes sinais é enviado a um processo quando a combinação de teclas Ctrl+C é\npressionada no teclado?",
+    "pergunta": "Qual dos seguintes sinais é enviado a um processo quando a combinação de teclas Ctrl+C é pressionada no teclado?",
     "opcoes": {
       "A": "SIGTERM",
       "B": "SIGCONT",
@@ -651,7 +653,7 @@
   },
   {
     "id": 47,
-    "pergunta": "Qual dos seguintes comandos exibe a saída do comando foo na tela e também grava essa saída\nem um arquivo chamado /tmp/foodata?",
+    "pergunta": "Qual dos seguintes comandos exibe a saída do comando foo na tela e também grava essa saída em um arquivo chamado /tmp/foodata?",
     "opcoes": {
       "A": "<code>foo | less /tmp/foodata</code>",
       "B": "<code>foo | cp /tmp/foodata</code>",
@@ -665,13 +667,13 @@
   },
   {
     "id": 48,
-    "pergunta": "Qual saída será exibida quando o usuário fred executar o seguinte comando?\necho 'fred $USER'",
+    "pergunta": "Qual saída será exibida quando o usuário fred executar o seguinte comando?<br><code>echo 'fred $USER'</code>",
     "opcoes": {
       "A": "<code>fred fred</code>",
       "B": "<code>fred /home/fred/</code>",
-      "C": "'fred $USER'",
+      "C": "<code>'fred $USER'</code>",
       "D": "<code>fred $USER</code>",
-      "E": "'fred fred'"
+      "E": "<code>'fred fred'</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "D",
@@ -679,7 +681,7 @@
   },
   {
     "id": 49,
-    "pergunta": "Qual dos seguintes comandos exibe o caminho para o arquivo executável que seria executado\nquando o comando foo é invocado?",
+    "pergunta": "Qual dos seguintes comandos exibe o caminho para o arquivo executável que seria executado quando o comando foo é invocado?",
     "opcoes": {
       "A": "<code>lsattr foo</code>",
       "B": "<code>apropos foo</code>",
@@ -693,7 +695,7 @@
   },
   {
     "id": 50,
-    "pergunta": "Ao redirecionar a saída do comando find para o comando xargs, qual opção do find é útil se os\nnomes de arquivos contiverem espaços?",
+    "pergunta": "Ao redirecionar a saída do comando find para o comando xargs, qual opção do find é útil se os nomes de arquivos contiverem espaços?",
     "opcoes": {
       "A": "-rep-space",
       "B": "-printnul",
@@ -707,10 +709,10 @@
   },
   {
     "id": 51,
-    "pergunta": "Quais dos seguintes comandos podem ser usados para determinar há quanto tempo o sistema\nestá em execução? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos podem ser usados para determinar há quanto tempo o sistema está em execução?<br>(Escolha dois.)",
     "opcoes": {
-      "A": "uptime",
-      "B": "up",
+      "A": "<code>uptime</code>",
+      "B": "<code>up</code>",
       "C": "<code>time --up</code>",
       "D": "<code>uname -u</code>",
       "E": "<code>top</code>"
@@ -721,7 +723,7 @@
   },
   {
     "id": 52,
-    "pergunta": "O que é verdadeiro em relação ao comando\nls > files\nse o arquivo files não existir?",
+    "pergunta": "O que é verdadeiro em relação ao comando<br><code>ls > files</code><br>se o arquivo files não existir?",
     "opcoes": {
       "A": "<code>A saída do ls é exibida no terminal</code>",
       "B": "<code>files é criado e contém a saída do ls</code>",
@@ -735,7 +737,7 @@
   },
   {
     "id": 53,
-    "pergunta": "Qual dos seguintes arquivos, localizado no diretório pessoal de um usuário, contém o histórico\ndo Bash?",
+    "pergunta": "Qual dos seguintes arquivos, localizado no diretório pessoal de um usuário, contém o histórico do Bash?",
     "opcoes": {
       "A": ".bashrc_history",
       "B": ".bash_histfile",
@@ -749,7 +751,7 @@
   },
   {
     "id": 54,
-    "pergunta": "Quais curingas corresponderão aos seguintes nomes de arquivos? (Escolha dois.)\nttyS0 ttyS1 ttyS2",
+    "pergunta": "Quais curingas corresponderão aos seguintes nomes de arquivos? (Escolha dois.)<br><code>ttyS0 ttyS1 ttyS2</code>",
     "opcoes": {
       "A": "ttyS[1-5]",
       "B": "tty?[0-5]",
@@ -762,7 +764,7 @@
       "B",
       "D"
     ],
-    "explicacao": "As opções B (tty?[0-5]) e D (tty[A-Z][012]) correspondem aos três nomes de arquivos listados. Em ambos os casos, o curinga na quarta posição (o '?' ou '[A-Z]') corresponde ao 'S', e a lista de caracteres final cobre os dígitos 0, 1 e 2."
+    "explicacao": "As opções '<code>tty?[0-5]</code>' e '<code>tty[A-Z][012]</code>' correspondem aos três nomes de arquivos listados. Em ambos os casos, o curinga na quarta posição (o '?' ou '[A-Z]') corresponde ao 'S', e a lista de caracteres final cobre os dígitos 0, 1 e 2."
   },
   {
     "id": 55,
@@ -794,8 +796,9 @@
   },
   {
     "id": 57,
-    "pergunta": "Qual dos seguintes comandos imprime uma lista de nomes de usuários (primeira coluna) e\nseus grupos primários (quarta coluna) a partir do arquivo /etc/passwd?",
+    "pergunta": "Qual dos seguintes comandos imprime uma lista de nomes de usuários (primeira coluna) e seus grupos primários (quarta coluna) a partir do arquivo /etc/passwd?",
     "opcoes": {
+      "A": "<code>fmt -f 1,4 /etc/passwd</code>",
       "B": "<code>cut -d : -f 1,4 /etc/passwd</code>",
       "C": "<code>sort -t : -k 1,4 /etc/passwd</code>",
       "D": "<code>paste -f 1,4 /etc/passwd</code>",
@@ -822,13 +825,13 @@
   {
     "id": 59,
     "tipo": "fill",
-    "pergunta": "Qual comando é usado para iniciar outro comando com um determinado nível de prioridade\n(nice level)?\n(Especifique APENAS o comando, sem qualquer caminho ou parâmetros.)",
+    "pergunta": "Qual comando é usado para iniciar outro comando com um determinado nível de prioridade (nice level)?<br>(Especifique APENAS o comando, sem qualquer caminho ou parâmetros.)",
     "respostaCorreta": "nice",
     "explicacao": "O comando nice é usado para iniciar um programa com um valor de nice (prioridade) especificado. Este valor afeta como o kernel aloca tempo de CPU para o processo."
   },
   {
     "id": 60,
-    "pergunta": "Dado um arquivo de log loga.log com carimbos de data/hora no formato\nDD/MM/YYYY:hh:mm:ss, qual comando filtra todas as entradas de log no período entre 8:00 e\n8:59?",
+    "pergunta": "Dado um arquivo de log loga.log com carimbos de data/hora no formato <code>DD/MM/YYYY:hh:mm:ss</code>, qual comando filtra todas as entradas de log no período entre 8:00 e\n8:59?",
     "opcoes": {
       "A": "<code>grep -E ':08:[09]+:[09]+' loga.log</code>",
       "B": "<code>grep -E ':08:[00]+' loga.log</code>",
@@ -838,11 +841,11 @@
     },
     "tipo": "multipla",
     "respostaCorreta": "E",
-    "explicacao": "A opção E utiliza `grep -E` para expressões regulares estendidas. O padrão `:08:[09]+:[0-9]+` filtra entradas que contenham a hora 08, seguida por qualquer combinação de minutos e segundos (representados por um ou mais dígitos), cobrindo o intervalo de 8:00 a 8:59."
+    "explicacao": "A opção correta utiliza `grep -E` para expressões regulares estendidas. O padrão `:08:[09]+:[0-9]+` filtra entradas que contenham a hora 08, seguida por qualquer combinação de minutos e segundos (representados por um ou mais dígitos), cobrindo o intervalo de 8:00 a 8:59."
   },
   {
     "id": 61,
-    "pergunta": "Em vez de fornecer um dispositivo explícito em /etc/fstab para montagem, quais outras\nopções podem ser usadas para identificar a partição desejada?",
+    "pergunta": "Em vez de fornecer um dispositivo explícito em /etc/fstab para montagem, quais outras opções podem ser usadas para identificar a partição desejada?<br>(Escolha duas.)",
     "opcoes": {
       "A": "LABEL",
       "B": "ID",
@@ -859,7 +862,7 @@
   },
   {
     "id": 62,
-    "pergunta": "Um repositório yum pode declarar conjuntos de pacotes relacionados. Qual comando yum\ninstala todos os pacotes pertencentes ao grupo admintools?",
+    "pergunta": "Um repositório yum pode declarar conjuntos de pacotes relacionados. Qual comando yum instala todos os pacotes pertencentes ao grupo admintools?",
     "opcoes": {
       "A": "<code>yum pkgsel --install admintools</code>",
       "B": "<code>yum install admintools/*</code>",
@@ -874,13 +877,13 @@
   {
     "id": 63,
     "tipo": "fill",
-    "pergunta": "Qual diretório contém os arquivos de configuração para repositórios adicionais do yum?",
+    "pergunta": "Qual diretório contém os arquivos de configuração para repositórios adicionais do yum?<br>(Especifique o caminho completo para o diretório.)",
     "respostaCorreta": "/etc/yum.repos.d/",
     "explicacao": "O YUM (Yellowdog Updater Modified) lê os arquivos de configuração de repositórios, geralmente com extensão .repo, localizados neste diretório. Isso permite adicionar ou remover fontes de pacotes de forma modular, separada do arquivo de configuração principal."
   },
   {
     "id": 64,
-    "pergunta": "Qual dos seguintes comandos instala os arquivos de boot do GRUB nos sistemas de arquivos\natualmente ativos e o carregador de boot na primeira partição do primeiro disco?",
+    "pergunta": "Qual dos seguintes comandos instala os arquivos de boot do GRUB nos sistemas de arquivos atualmente ativos e o carregador de boot na primeira partição do primeiro disco?",
     "opcoes": {
       "A": "grub-install /dev/sda",
       "B": "grub-install /dev/sda1",
@@ -894,7 +897,7 @@
   },
   {
     "id": 65,
-    "pergunta": "Quais dos seguintes arquivos são encontrados no sistema de arquivos /boot/?",
+    "pergunta": "Quais dos seguintes arquivos são encontrados no sistema de arquivos /boot/?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>Imagens do kernel Linux</code>",
       "B": "<code>Binários do shell Bash</code>",
@@ -911,7 +914,7 @@
   },
   {
     "id": 66,
-    "pergunta": "Qual arquivo define os locais de rede de onde o gerenciador de pacotes Debian faz o\ndownload dos pacotes de software?",
+    "pergunta": "Qual arquivo define os locais de rede de onde o gerenciador de pacotes Debian faz o download dos pacotes de software?",
     "opcoes": {
       "A": "<code>/etc/dpkg/dpkg.cfg</code>",
       "B": "<code>/etc/apt/apt.conf.d</code>",
@@ -925,7 +928,7 @@
   },
   {
     "id": 67,
-    "pergunta": "Ao remover um pacote em um sistema que utiliza o gerenciamento de pacotes dpkg, qual\nopção do dpkg garante que os arquivos de configuração também sejam removidos?",
+    "pergunta": "Ao remover um pacote em um sistema que utiliza o gerenciamento de pacotes dpkg, qual opção do dpkg garante que os arquivos de configuração também sejam removidos?",
     "opcoes": {
       "A": "--clean",
       "B": "--purge",
@@ -939,7 +942,7 @@
   },
   {
     "id": 68,
-    "pergunta": "Quais das seguintes afirmações estão corretas ao comparar containers Linux com máquinas\nvirtuais tradicionais (por exemplo, LXC vs. KVM)?",
+    "pergunta": "Quais das seguintes afirmações estão corretas ao comparar containers Linux com máquinas virtuais tradicionais (por exemplo, LXC vs. KVM)?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>Os containers são um método de virtualização leve em que o kernel controla o isolamento de processos e o gerenciamento de recursos.</code>",
       "B": "<code>Máquinas totalmente virtualizadas podem executar qualquer sistema operacional compatível com uma arquitetura de hardware específica dentro da máquina virtual.</code>",
@@ -953,13 +956,13 @@
   },
   {
     "id": 69,
-    "pergunta": "A instalação de um pacote Debian local falhou devido a dependências não satisfeitas. Qual\ndos seguintes comandos instala as dependências ausentes e conclui a instalação interrompida\ndo pacote?",
+    "pergunta": "A instalação de um pacote Debian local falhou devido a dependências não satisfeitas. Qual dos seguintes comandos instala as dependências ausentes e conclui a instalação interrompida do pacote?",
     "opcoes": {
       "A": "<code>dpkg --fix --all</code>",
-      "B": "apt-get autoinstall",
-      "C": "dpkg-reconfigure --all",
-      "D": "apt-get all",
-      "E": "apt-get install -f"
+      "B": "<code>apt-get autoinstall</code>",
+      "C": "<code>dpkg-reconfigure --all</code>",
+      "D": "<code>apt-get all</code>",
+      "E": "<code>apt-get install -f</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "E",
@@ -967,7 +970,7 @@
   },
   {
     "id": 70,
-    "pergunta": "Qual dos seguintes comandos lista todos os pacotes atualmente instalados ao usar o\ngerenciador de pacotes RPM?",
+    "pergunta": "Qual dos seguintes comandos lista todos os pacotes atualmente instalados ao usar o gerenciador de pacotes RPM?",
     "opcoes": {
       "A": "<code>yum --query --all</code>",
       "B": "<code>yum --list --installed</code>",
@@ -981,7 +984,7 @@
   },
   {
     "id": 71,
-    "pergunta": "Quais dos seguintes comandos são válidos no arquivo de configuração do GRUB 2? (Escolha\nduas.)",
+    "pergunta": "Quais dos seguintes comandos são válidos no arquivo de configuração do GRUB 2?<br>(Escolha duas.)",
     "opcoes": {
       "A": "menuentry",
       "B": "uefi",
@@ -1012,7 +1015,7 @@
   },
   {
     "id": 73,
-    "pergunta": "Para que o Logical Volume Manager (LVM) pode ser utilizado?",
+    "pergunta": "Para que o Logical Volume Manager (LVM) pode ser utilizado?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>Para criar snapshots.</code>",
       "B": "<code>Para alterar dinamicamente o tamanho dos volumes lógicos.</code>",
@@ -1030,7 +1033,7 @@
   },
   {
     "id": 74,
-    "pergunta": "Quais são as principais diferenças entre as tabelas de partição GPT e MBR em relação ao\nnúmero máximo e ao tamanho das partições?",
+    "pergunta": "Quais são as principais diferenças entre as tabelas de partição GPT e MBR em relação ao número máximo e ao tamanho das partições?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>O MBR pode lidar com partições de até 4 TB, enquanto o GPT suporta partições de até 128 ZB.</code>",
       "B": "<code>Por padrão, o GPT pode gerenciar até 128 partições, enquanto o MBR suporta apenas quatro partições primárias.</code>",
@@ -1043,11 +1046,11 @@
       "B",
       "D"
     ],
-    "explicacao": "O MBR é limitado a 4 partições primárias e um tamanho máximo de 2.2 TB devido ao endereçamento de 32 bits. O GPT utiliza endereçamento de 64 bits, suportando 128 partições por padrão e volumes de até 9.4 ZB, tornando as alternativas B e D corretas."
+    "explicacao": "O MBR é limitado a 4 partições primárias e um tamanho máximo de 2.2 TB devido ao endereçamento de 32 bits. O GPT utiliza endereçamento de 64 bits, suportando 128 partições por padrão e volumes de até 9.4 ZB, tornando as alternativas corretas."
   },
   {
     "id": 75,
-    "pergunta": "Um software de backup utiliza amplamente hard links entre arquivos que não foram alterados\nentre duas execuções de backup. Quais benefícios são obtidos devido a esses hard links?",
+    "pergunta": "Um software de backup utiliza amplamente hard links entre arquivos que não foram alterados\nentre duas execuções de backup. Quais benefícios são obtidos devido a esses hard links?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>Os backups antigos podem ser movidos para mídias de backup lentas, como fitas, enquanto ainda servem como alvo de hard link em novos backups.</code>",
       "B": "<code>O backup é executado mais rapidamente porque os hard links são operações assíncronas, adiando a cópia dos dados para um momento posterior.</code>",
@@ -1065,7 +1068,7 @@
   {
     "id": 76,
     "tipo": "fill",
-    "pergunta": "Qual arquivo do sistema de arquivos /proc/ contém uma lista de todos os dispositivos\natualmente montados?",
+    "pergunta": "Qual arquivo do sistema de arquivos /proc/ contém uma lista de todos os dispositivos atualmente montados?<br>(Especifique o nome completo do arquivo, incluindo o caminho.)",
     "respostaCorreta": "/proc/mounts",
     "explicacao": "O arquivo /proc/mounts é um arquivo virtual que lista todos os sistemas de arquivos e dispositivos atualmente montados pelo kernel. Ele fornece informações em tempo real sobre os pontos de montagem ativos, sendo similar à saída do comando 'mount'."
   },
@@ -1085,10 +1088,11 @@
   },
   {
     "id": 78,
-    "pergunta": "Executar chmod 640 filea.txt como um usuário comum não altera as permissões do arquivo\nfilea.txt. Qual pode ser o motivo pelo qual o chmod não consegue modificar as permissões?",
+    "pergunta": "Executar chmod 640 filea.txt como um usuário comum não altera as permissões do arquivo filea.txt. Qual pode ser o motivo pelo qual o chmod não consegue modificar as permissões?<br>(Escolha duas.)",
     "opcoes": {
       "A": "filea.txt pertence a outro usuário, e um usuário comum não pode alterar as permissões de um arquivo de outro usuário.",
-      "B": "filea.txt é um link simbólico cujas permissões têm um valor fixo que não pode ser alterado. C. filea.txt possui o sticky bit definido, e um usuário comum não pode remover essa permissão.",
+      "B": "filea.txt é um link simbólico cujas permissões têm um valor fixo que não pode ser alterado.",
+      "C": "filea.txt possui o sticky bit definido, e um usuário comum não pode remover essa permissão.",
       "D": "filea.txt é um link físico cujas permissões são herdadas do destino e não podem ser definidas diretamente.",
       "E": "filea.txt possui o bit SetUID definido, o que impõe a restrição de que apenas o usuário root pode fazer alterações no arquivo."
     },
@@ -1097,11 +1101,11 @@
       "A",
       "B"
     ],
-    "explicacao": "o chmod não altera as permissões porque o usuário não é o dono do arquivo ou porque o arquivo é um link simbólico, cujas permissões não podem ser modificadas. • (A) Correta: um usuário comum não pode alterar permissões de um arquivo que pertence a outro usuário, a menos que tenha privilégios administrativos. • (B) Correta: links simbólicos (symlinks) possuem permissões fixas e o comando chmod atua sobre o destino, não sobre o próprio link; portanto, as permissões do link não podem ser modificadas diretamente."
+    "explicacao": "o chmod não altera as permissões porque o usuário não é o dono do arquivo ou porque o arquivo é um link simbólico, cujas permissões não podem ser modificadas.<br> • um usuário comum não pode alterar permissões de um arquivo que pertence a outro usuário, a menos que tenha privilégios administrativos.<br> • links simbólicos (symlinks) possuem permissões fixas e o comando chmod atua sobre o destino, não sobre o próprio link; portanto, as permissões do link não podem ser modificadas diretamente."
   },
   {
     "id": 79,
-    "pergunta": "Quais dos seguintes sistemas de arquivos Linux pré-alocam um número fixo de inodes ao criar\num novo sistema de arquivos, em vez de gerá-los conforme a necessidade?",
+    "pergunta": "Quais dos seguintes sistemas de arquivos Linux pré-alocam um número fixo de inodes ao criar um novo sistema de arquivos, em vez de gerá-los conforme a necessidade?<br>(Escolha duas.)",
     "opcoes": {
       "A": "JFS",
       "B": "ext3",
@@ -1132,7 +1136,7 @@
   },
   {
     "id": 81,
-    "pergunta": "Quais dos seguintes comandos podem ser usados para exibir o número do inode de um\ndeterminado arquivo? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos podem ser usados para exibir o número do inode de um determinado arquivo?<br>(Escolha dois.)",
     "opcoes": {
       "A": "inode",
       "B": "ln",
@@ -1149,7 +1153,7 @@
   },
   {
     "id": 82,
-    "pergunta": "Qual das seguintes configurações de umask garante que novos arquivos tenham as permissões\npadrão -rw-r-----?",
+    "pergunta": "Qual das seguintes configurações de umask garante que novos arquivos tenham as permissões padrão -rw-r-----?",
     "opcoes": {
       "A": "0017",
       "B": "0640",
@@ -1163,7 +1167,7 @@
   },
   {
     "id": 83,
-    "pergunta": "Após uma queda de energia, o sistema de arquivos XFS em /dev/sda3 está inconsistente.\nComo os erros existentes do sistema de arquivos podem ser corrigidos?",
+    "pergunta": "Após uma queda de energia, o sistema de arquivos XFS em /dev/sda3 está inconsistente.Como os erros existentes do sistema de arquivos podem ser corrigidos?",
     "opcoes": {
       "A": "<code>mount -f para forçar a montagem do sistema de arquivos</code>",
       "B": "<code>xfsck no sistema de arquivos</code>",
@@ -1177,13 +1181,13 @@
   },
   {
     "id": 84,
-    "pergunta": "Qual das seguintes propriedades de um arquivo existente é alterada quando um link físico\n(hard link) apontando para esse arquivo é criado?",
+    "pergunta": "Qual das seguintes propriedades de um arquivo existente é alterada quando um link físico (hard link) apontando para esse arquivo é criado?",
     "opcoes": {
       "A": "<code>Tamanho do arquivo</code>",
       "B": "<code>Contagem de links</code>",
-      "C": "Data/hora de modificação",
+      "C": "<code>Data/hora de modificação</code>",
       "D": "<code>Número do inode</code>",
-      "E": "Permissões"
+      "E": "<code>Permissões</code>"
     },
     "tipo": "multipla",
     "respostaCorreta": "B",
@@ -1192,7 +1196,7 @@
   {
     "id": 85,
     "tipo": "fill",
-    "pergunta": "Seguindo o Filesystem Hierarchy Standard (FHS), onde devem ser colocados os binários\ncompilados pelo administrador do sistema para que fiquem disponíveis a todos os usuários\ndo sistema? (Especifique o caminho completo do diretório.)",
+    "pergunta": "Seguindo o Filesystem Hierarchy Standard (FHS), onde devem ser colocados os binários compilados pelo administrador do sistema para que fiquem disponíveis a todos os usuários do sistema?<br>(Especifique o caminho completo do diretório.)",
     "respostaCorreta": "/usr/local/bin/",
     "explicacao": "O Filesystem Hierarchy Standard (FHS) define /usr/local para dados instalados localmente pelo administrador. O subdiretório /usr/local/bin é o local correto para binários compilados localmente que devem ser acessíveis por todos os usuários."
   },
@@ -1212,11 +1216,12 @@
   },
   {
     "id": 87,
-    "pergunta": "Quando no modo Normal no vi, qual caractere pode ser usado para iniciar uma busca reversa\nno texto?",
+    "pergunta": "Quando no modo Normal no vi, qual caractere pode ser usado para iniciar uma busca reversa no texto?",
     "opcoes": {
       "A": "r",
       "B": "/",
-      "C": "<code>F D. ?</code>",
+      "C": "F",
+      "D": "?",
       "E": "s"
     },
     "tipo": "multipla",
@@ -1239,7 +1244,7 @@
   },
   {
     "id": 89,
-    "pergunta": "Qual dos seguintes comandos cria ou, caso já exista, sobrescreve um arquivo chamado data\ncom a saída do comando ls?",
+    "pergunta": "Qual dos seguintes comandos cria ou, caso já exista, sobrescreve um arquivo chamado data com a saída do comando ls?",
     "opcoes": {
       "A": "<code>ls 3> data</code>",
       "B": "<code>ls >& data</code>",
@@ -1253,7 +1258,7 @@
   },
   {
     "id": 90,
-    "pergunta": "Qual dos seguintes comandos é usado para alterar opções e parâmetros posicionais dentro de\num shell Bash em execução?",
+    "pergunta": "Qual dos seguintes comandos é usado para alterar opções e parâmetros posicionais dentro de um shell Bash em execução?",
     "opcoes": {
       "A": "history",
       "B": "setsh",
@@ -1267,7 +1272,7 @@
   },
   {
     "id": 91,
-    "pergunta": "Quais dos seguintes comandos exibem os IDs de todos os processos pertencentes ao usuário\nroot? (Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos exibem os IDs de todos os processos pertencentes ao usuário root?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>pgrep -c root</code>",
       "B": "<code>pgrep -u root</code>",
@@ -1284,7 +1289,7 @@
   },
   {
     "id": 92,
-    "pergunta": "Quais das seguintes sequências no editor vi salvam o documento aberto e saem do editor?",
+    "pergunta": "Quais das seguintes sequências no editor vi salvam o documento aberto e saem do editor?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>Ctrl XX</code>",
       "B": "<code>Ctrl :W</code>",
@@ -1315,7 +1320,7 @@
   },
   {
     "id": 94,
-    "pergunta": "Quais das seguintes ferramentas podem mostrar o caminho completo de um arquivo\nexecutável que o shell atual executaria ao iniciar um comando sem especificar seu caminho\ncompleto?",
+    "pergunta": "Quais das seguintes ferramentas podem mostrar o caminho completo de um arquivo executável que o shell atual executaria ao iniciar um comando sem especificar seu caminho completo?<br>(Escolha duas.)",
     "opcoes": {
       "A": "find",
       "B": "pwd",
@@ -1332,7 +1337,7 @@
   },
   {
     "id": 95,
-    "pergunta": "Qual dos seguintes sinais é enviado a um processo quando a combinação de teclas Ctrl+Z é\npressionada no teclado?",
+    "pergunta": "Qual dos seguintes sinais é enviado a um processo quando a combinação de teclas Ctrl+Z é pressionada no teclado?",
     "opcoes": {
       "A": "SIGTERM",
       "B": "SIGCONT",
@@ -1346,7 +1351,7 @@
   },
   {
     "id": 96,
-    "pergunta": "Qual é a saída quando a expressão regular s/[ABC][abc]/xx/ é aplicada à seguinte string?\nABCabc",
+    "pergunta": "Qual é a saída quando a expressão regular <code>s/[ABC][abc]/xx/</code> é aplicada à seguinte string?<br><code>ABCabc</code>",
     "opcoes": {
       "A": "ABxxbc",
       "B": "xxCxxc",
@@ -1360,12 +1365,12 @@
   },
   {
     "id": 97,
-    "pergunta": "Quais dos seguintes comandos imprimem o diretório de trabalho atual ao usar um shell Bash?\n(Escolha dois.)",
+    "pergunta": "Quais dos seguintes comandos imprimem o diretório de trabalho atual ao usar um shell Bash?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>echo \"${PWD}\"</code>",
       "B": "<code>echo \"${WD}\"</code>",
-      "C": "printwd",
-      "D": "pwd",
+      "C": "<code>printwd</code>",
+      "D": "<code>pwd</code>",
       "E": "<code>echo \"${pwd}\"</code>"
     },
     "tipo": "multipla",
@@ -1377,13 +1382,13 @@
   },
   {
     "id": 98,
-    "pergunta": "Qual dos seguintes comandos envia a palavra test para o shell?",
+    "pergunta": "Qual dos seguintes comandos envia a palavra test para o shell?<br>(Ignore as aspas simples presente dentro das alternativa, elas foram colocadas para aparecer as alternativas inteiras.)",
     "opcoes": {
-      "A": "<code>cat <!EOT test EOT</code>",
-      "B": "<code>cat <|EOT test EOT</code>",
-      "C": "<code>cat !<EOT test EOT</code>",
-      "D": "<code>cat &<EOT test EOT</code>",
-      "E": "<code>cat <<EOT test EOT</code>"
+      "A": "cat <'!'EOT test EOT",
+      "B": "cat '<|'EOT test EOT",
+      "C": "cat '!<'EOT test EOT",
+      "D": "cat '&<'EOT test EOT",
+      "E": "cat '<<'EOT test EOT"
     },
     "tipo": "multipla",
     "respostaCorreta": "E",
@@ -1405,7 +1410,7 @@
   },
   {
     "id": 100,
-    "pergunta": "Um usuário acidentalmente criou o subdiretório \\dir em seu diretório home. Qual dos\nseguintes comandos removerá esse diretório?",
+    "pergunta": "Um usuário acidentalmente criou o subdiretório \\dir em seu diretório home. Qual dos seguintes comandos removerá esse diretório?",
     "opcoes": {
       "A": "<code>rmdir ~/\\\\dir</code>",
       "B": "<code>rmdir \"~/\\\\dir\"</code>",
@@ -1419,7 +1424,7 @@
   },
   {
     "id": 101,
-    "pergunta": "Qual dos seguintes comandos pode realizar buscas no conteúdo de arquivos usando\nexpressões regulares?",
+    "pergunta": "Qual dos seguintes comandos pode realizar buscas no conteúdo de arquivos usando expressões regulares?",
     "opcoes": {
       "A": "find",
       "B": "locate",
@@ -1433,7 +1438,7 @@
   },
   {
     "id": 102,
-    "pergunta": "Em uma estrutura de diretórios aninhada, qual opção de linha de comando do find seria usada\npara restringir a busca a um determinado número de subdiretórios?",
+    "pergunta": "Em uma estrutura de diretórios aninhada, qual opção de linha de comando do find seria usada para restringir a busca a um determinado número de subdiretórios?",
     "opcoes": {
       "A": "-maxdepth",
       "B": "-dirmax",
@@ -1447,7 +1452,7 @@
   },
   {
     "id": 103,
-    "pergunta": "Qual dos seguintes comandos determina o formato de um arquivo usando um arquivo de\nbanco de dados de definições que contém informações sobre todos os tipos de arquivos\ncomuns?",
+    "pergunta": "Qual dos seguintes comandos determina o formato de um arquivo usando um arquivo de banco de dados de definições que contém informações sobre todos os tipos de arquivos comuns?",
     "opcoes": {
       "A": "type",
       "B": "file",
@@ -1461,7 +1466,7 @@
   },
   {
     "id": 104,
-    "pergunta": "Qual dos seguintes comandos gera uma lista de nomes de usuários a partir de /etc/passwd\njuntamente com seu shell de login?",
+    "pergunta": "Qual dos seguintes comandos gera uma lista de nomes de usuários a partir de /etc/passwd juntamente com seu shell de login?",
     "opcoes": {
       "A": "<code>column -s : 1,7 /etc/passwd</code>",
       "B": "<code>chop -c 1,7 /etc/passwd</code>",
@@ -1475,7 +1480,7 @@
   },
   {
     "id": 105,
-    "pergunta": "Se o arquivo tar compactado com gzip texts.tgz contém os arquivos a.txt e b.txt, quais arquivos\nestarão presentes no diretório atual após executar gunzip texts.tgz?",
+    "pergunta": "Se o arquivo tar compactado com gzip texts.tgz contém os arquivos a.txt e b.txt, quais arquivos estarão presentes no diretório atual após executar gunzip texts.tgz?",
     "opcoes": {
       "A": "<code>Somente a.txt, b.txt e texts.tgz</code>",
       "B": "<code>Somente texts.tar e texts.tgz</code>",
@@ -1489,7 +1494,7 @@
   },
   {
     "id": 106,
-    "pergunta": "No editor vi, como comandos como mover o cursor ou copiar linhas para o buffer podem ser\nexecutados várias vezes ou aplicados a múltiplas linhas?",
+    "pergunta": "No editor vi, como comandos como mover o cursor ou copiar linhas para o buffer podem ser executados várias vezes ou aplicados a múltiplas linhas?",
     "opcoes": {
       "A": "<code>Usando o comando :repeat seguido pelo número e o comando</code>",
       "B": "<code>Especificando o número diretamente antes de um comando, como 41 ou 2yj</code>",
@@ -1517,7 +1522,7 @@
   },
   {
     "id": 108,
-    "pergunta": "Qual dos seguintes comandos lê um arquivo e cria partes separadas de um tamanho\ndeterminado a partir do conteúdo do arquivo?",
+    "pergunta": "Qual dos seguintes comandos lê um arquivo e cria partes separadas de um tamanho determinado a partir do conteúdo do arquivo?",
     "opcoes": {
       "A": "ar",
       "B": "cat",
@@ -1546,20 +1551,20 @@
   {
     "id": 110,
     "tipo": "fill",
-    "pergunta": "Qual comando exibe uma lista de todas as tarefas em segundo plano em execução no shell\natual? (Especifique apenas o comando, sem caminho ou parâmetros.)",
+    "pergunta": "Qual comando exibe uma lista de todas as tarefas em segundo plano em execução no shell atual?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "jobs",
     "explicacao": "O comando 'jobs' é um builtin do shell (como Bash) usado especificamente para listar e gerenciar as tarefas (jobs) que estão rodando em segundo plano ou suspensas no shell atual. Ele exibe o número do job, o status e o comando associado."
   },
   {
     "id": 111,
     "tipo": "fill",
-    "pergunta": "Qual comando é usado para alterar a prioridade de um processo que já está em execução?\n(Especifique apenas o comando, sem caminho ou parâmetros.)",
+    "pergunta": "Qual comando é usado para alterar a prioridade de um processo que já está em execução?<br>(Especifique apenas o comando, sem caminho ou parâmetros.)",
     "respostaCorreta": "renice",
     "explicacao": "renice é o comando específico para modificar o valor nice (prioridade) de processos que já estão em execução. O comando nice é usado apenas para iniciar um processo com uma prioridade diferente."
   },
   {
     "id": 112,
-    "pergunta": "No Bash, inserir 1>&2 após um comando redireciona:",
+    "pergunta": "No Bash, inserir <code>1>&2</code> após um comando redireciona:",
     "opcoes": {
       "A": "<code>erro padrão para entrada padrão</code>",
       "B": "<code>saída padrão para erro padrão</code>",
@@ -1573,7 +1578,7 @@
   },
   {
     "id": 113,
-    "pergunta": "Ao inicializar a partir do disco rígido, um computador carrega com sucesso o kernel Linux e o\ninitramfs, mas trava durante as tarefas de inicialização subsequentes. O sistema é iniciado\nusando um CD de resgate baseado em Linux para investigar o problema. Qual dos seguintes\nmétodos ajuda a identificar a causa raiz do problema?",
+    "pergunta": "Ao inicializar a partir do disco rígido, um computador carrega com sucesso o kernel Linux e o initramfs, mas trava durante as tarefas de inicialização subsequentes. O sistema é iniciado usando um CD de resgate baseado em Linux para investigar o problema. Qual dos seguintes métodos ajuda a identificar a causa raiz do problema?",
     "opcoes": {
       "A": "<code>Usar o comando dmesg a partir do shell do CD de resgate para visualizar os logs de inicialização do sistema original</code>",
       "B": "<code>Investigar o arquivo /proc/kmsg no disco rígido do computador em busca de possíveis erros</code>",
@@ -1605,7 +1610,8 @@
     "opcoes": {
       "A": "<code>systemctl isolate multi-user.target</code>",
       "B": "<code>systemctl set-runlevel multi-user.target</code>",
-      "C": "<code>systemctl set-boot multi-user.target D. systemctl set-default multi-user.target</code>",
+      "C": "<code>systemctl set-boot multi-user.target</code>", 
+      "D": "<code>systemctl set-default multi-user.target</code>",
       "E": "<code>systemctl boot -p multi-user.target</code>"
     },
     "tipo": "multipla",
@@ -1614,7 +1620,7 @@
   },
   {
     "id": 116,
-    "pergunta": "Quais das seguintes afirmações são corretas sobre o initial RAM disk (initramfs) envolvido no\nprocesso de boot do Linux?",
+    "pergunta": "Quais das seguintes afirmações são corretas sobre o initial RAM disk (initramfs) envolvido no processo de boot do Linux?<br>(Escolha duas.)",
     "opcoes": {
       "A": "<code>Um initramfs é um arquivo de sistema de arquivos compactado, que pode ser desempacotado para examinar seu conteúdo.</code>",
       "B": "<code>Um arquivo initramfs contém o MBR, o bootloader e o kernel Linux.</code>",
@@ -1627,11 +1633,11 @@
       "A",
       "D"
     ],
-    "explicacao": "O initramfs é tipicamente um arquivo CPIO compactado que pode ser desempacotado para inspeção (A). Sua função principal é fornecer ao kernel os módulos e scripts necessários temporariamente (D) para que ele possa acessar e montar o sistema de arquivos raiz real."
+    "explicacao": "O initramfs é tipicamente um arquivo CPIO compactado que pode ser desempacotado para inspeção. Sua função principal é fornecer ao kernel os módulos e scripts necessários temporariamente para que ele possa acessar e montar o sistema de arquivos raiz real."
   },
   {
     "id": 117,
-    "pergunta": "Qual dos seguintes comandos carrega um módulo do kernel junto com quaisquer módulos\ndependentes necessários?",
+    "pergunta": "Qual dos seguintes comandos carrega um módulo do kernel junto com quaisquer módulos dependentes necessários?",
     "opcoes": {
       "A": "depmod",
       "B": "modprobe",
@@ -1645,10 +1651,11 @@
   },
   {
     "id": 118,
-    "pergunta": "Quais informações o comando lspci pode exibir sobre o hardware do sistema?",
+    "pergunta": "Quais informações o comando lspci pode exibir sobre o hardware do sistema?<br>(Escolha três.)",
     "opcoes": {
       "A": "<code>Tipo da bateria do sistema</code>",
-      "B": "<code>Configurações de IRQ do dispositivo C. Velocidade do barramento PCI</code>",
+      "B": "<code>Configurações de IRQ do dispositivo</code>", 
+      "C": "<code>Velocidade do barramento PCI</code>",
       "D": "<code>Endereço MAC da placa de rede</code>",
       "E": "<code>Identificação do fabricante do dispositivo</code>"
     },
@@ -1663,13 +1670,13 @@
   {
     "id": 119,
     "tipo": "fill",
-    "pergunta": "Qual arquivo de configuração do System V init é comumente usado para definir o nível de\nexecução padrão?",
+    "pergunta": "Qual arquivo de configuração do System V init é comumente usado para definir o nível de execução padrão?<br>(Especifique o nome completo do arquivo, incluindo o caminho.)",
     "respostaCorreta": "/etc/inittab",
     "explicacao": "O arquivo /etc/inittab é o principal arquivo de configuração do SysVinit. Ele contém a linha 'id:X:initdefault:', onde 'X' especifica o nível de execução padrão (runlevel) para o qual o sistema deve inicializar."
   },
   {
     "id": 120,
-    "pergunta": "Dadas os seguintes links simbólicos na configuração do System V init:\n/etc/rc1.d/K01apache2\n/etc/rc2.d/S02apache2\nQuando os scripts referenciados por esses links são executados? (Escolha dois.)",
+    "pergunta": "Dadas os seguintes links simbólicos na configuração do System V init:<code><br>/etc/rc1.d/K01apache2<br>/etc/rc2.d/S02apache2<br></code>Quando os scripts referenciados por esses links são executados?<br>(Escolha dois.)",
     "opcoes": {
       "A": "<code>S02apache2 é executado quando o runlevel 2 é iniciado.</code>",
       "B": "<code>S02apache2 é executado quando o runlevel 2 é encerrado.</code>",
