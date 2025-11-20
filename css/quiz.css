@@ -1,5 +1,8 @@
-/* Estilos da página do quiz (quiz.html) */
+/* css/quiz.css - Versão Consolidada e Corrigida */
 
+/* =========================================
+   ESTILOS GERAIS E BASE
+   ========================================= */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f0f2f5;
@@ -7,7 +10,7 @@ body {
     padding: 0;
 }
 
-/* --- Estilos do Menu Hambúrguer e Botões de Controle --- */
+/* --- Menu Hambúrguer e Botões (Corrigido) --- */
 .hamburger-btn {
     background: #fff;
     border: 1px solid #ccc;
@@ -19,11 +22,11 @@ body {
     width: 45px;
     height: 45px;
     
-    /* Flexbox para centralização */
+    /* Centralização Absoluta do ícone */
     display: flex;
-    flex-direction: column; /* Empilha um em cima do outro */
-    justify-content: center; /* Centraliza Verticalmente */
-    align-items: center;     /* Centraliza Horizontalmente */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -32,14 +35,8 @@ body {
     width: 20px;
     height: 3px;
     background: #333;
-    
-    /* O SEGREDO ESTÁ AQUI: */
-    /* 3px em cima/baixo para espaçamento */
-    /* 'auto' nas laterais força o centro horizontalmente */
-    margin: 3px auto; 
-    
+    margin: 2px auto; /* Auto nas laterais força o centro */
     border-radius: 2px;
-    transform-origin: center;
 }
 
 /* --- Menu Lateral (Drawer) --- */
@@ -85,7 +82,7 @@ body {
     background: #f8f9fa;
 }
 
-/* --- Overlay (Fundo escuro quando menu abre) --- */
+/* --- Overlay --- */
 .overlay {
     position: fixed;
     top: 0;
@@ -100,7 +97,7 @@ body {
     display: block;
 }
 
-/* --- Container Principal do Quiz --- */
+/* --- Layout do Quiz --- */
 .quiz-container {
     background: #fff;
     width: 100%;
@@ -110,10 +107,9 @@ body {
     padding: 30px;
     box-sizing: border-box;
     margin: 20px auto; 
-    margin-top: 80px; /* Espaço extra no topo para não colar nos botões em telas pequenas */
+    margin-top: 80px;
 }
 
-/* --- Mensagens de Erro --- */
 .error-container {
     background-color: #ffebee;
     color: #c62828;
@@ -126,7 +122,7 @@ body {
     display: none; 
 }
 
-/* --- Cabeçalho da Questão --- */
+/* Cabeçalho da Questão */
 .question-header {
     display: flex;
     justify-content: space-between;
@@ -139,7 +135,7 @@ body {
 #question-title {
     font-size: 22px;
     color: #212529;
-    margin-left: 0; /* Margem removida pois os botões agora são flutuantes */
+    margin-left: 0;
     flex-grow: 1; 
     word-break: break-word; 
 }
@@ -167,7 +163,7 @@ body {
     padding-top: 4px; 
 }
 
-/* --- Lista de Respostas --- */
+/* Lista de Respostas (Estilo Base) */
 .answers {
     margin: 0;
     padding: 0;
@@ -207,51 +203,13 @@ body {
     font-weight: 500;
     word-break: break-word;
 }
-.answer-btn.selected {
-    background-color: #d0e7ff; 
-    border-color: #007bff;
-}
 
-/* Estados de Resposta (Light Mode) */
-.answer-btn.correct {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-    font-weight: bold;
-}
-.answer-btn.correct .option-key,
-.answer-btn.correct .option-text {
-    color: #155724;
-    font-weight: bold;
-}
-.answer-btn.incorrect {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-    font-weight: bold;
-}
-.answer-btn.incorrect .option-key,
-.answer-btn.incorrect .option-text {
-    color: #721c24;
-    font-weight: bold;
-}
-.answer-btn.missed {
-    background-color: #fff;
-    border: 2px dashed #155724;
-    color: #155724;
-    font-weight: bold;
-}
-.answer-btn.missed .option-key,
-.answer-btn.missed .option-text {
-    color: #155724;
-    font-weight: bold;
-}
 .answer-btn:disabled {
     cursor: not-allowed;
-    opacity: 0.7; 
+    opacity: 0.9; /* Aumentei a opacidade para ver melhor as cores */
 }
 
-/* Inputs de Texto (Fill in the blank) */
+/* Inputs de Texto */
 .answer-input {
     display: block;
     width: 100%;
@@ -262,20 +220,8 @@ body {
     font-size: 16px;
     box-sizing: border-box; 
 }
-.answer-input.correct {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
-    font-weight: bold;
-}
-.answer-input.incorrect {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-    font-weight: bold;
-}
 
-/* Área de Explicação */
+/* Explicação */
 .explanation-container {
     background: #e7f3fe; 
     border: 1px solid #b0c4de; 
@@ -293,7 +239,7 @@ body {
     margin-bottom: 5px;
 }
 
-/* Rodapé e Botões de Ação */
+/* Rodapé */
 .quiz-footer {
     margin-top: 20px;
     text-align: right;
@@ -306,6 +252,7 @@ body {
     color: #212529;
 }
 
+/* Botões de Ação (Próxima, Reiniciar) */
 .action-btn {
     background-color: #007bff;
     color: white;
@@ -324,38 +271,30 @@ body {
     transform: scale(1.03);
     box-shadow: 0 4px 15px rgba(0,123,255,0.25);
 }
-
 .submit-fill-btn {
     text-align: center;
     width: auto; 
     float: right;
     margin-top: 10px; 
 }
-#next-btn {
-    display: none; 
-}
-#restart-btn {
-    text-align: center;
-}
+#next-btn { display: none; }
+#restart-btn { text-align: center; }
 
-/* --- Layout Responsivo (Celular) --- */
+/* Responsivo */
 @media (max-width: 650px) {
     .quiz-container {
         padding: 15px;
-        margin: 60px auto 10px; /* Aumentado topo para não cobrir com botões */
+        margin: 60px auto 10px;
     }
-
     .question-header {
         flex-direction: column-reverse;
         align-items: stretch;
         gap: 5px; 
         margin-bottom: 15px;
     }
-
     #question-title {
         font-size: 20px; 
     }
-    
     #progress {
         text-align: right;
         padding-top: 0; 
@@ -364,82 +303,63 @@ body {
 }
 
 /* =========================================
-   DARK MODE
+   DARK MODE (ESTILOS BASE)
    ========================================= */
-
 body.dark-mode {
     background-color: #121212;
     color: #e0e0e0;
 }
-
-/* Menu e Botões */
 body.dark-mode .nav-drawer,
 body.dark-mode .hamburger-btn {
     background-color: #1e1e1e;
     border-color: #333;
     color: #e0e0e0;
 }
-
 body.dark-mode .hamburger-btn span {
     background: #e0e0e0;
 }
-
-/* Container do Quiz */
 body.dark-mode .quiz-container {
     background-color: #1e1e1e;
     box-shadow: 0 6px 12px rgba(0,0,0,0.5);
     border: 1px solid #333;
 }
-
-/* Títulos e Textos */
 body.dark-mode h2, 
 body.dark-mode h3, 
 body.dark-mode #question-title,
 body.dark-mode .option-key {
     color: #ffffff;
 }
-
 body.dark-mode .question-header {
     border-bottom: 1px solid #333;
 }
-
-/* Blocos de Código */
 body.dark-mode #question-title code,
 body.dark-mode #question-title pre {
     background: #2d2d2d;
     border: 1px solid #444;
-    color: #f8f8f2; /* Cor clara estilo Drácula/Monokai */
+    color: #f8f8f2;
 }
-
-/* Botões de Resposta (Estado Normal) */
+/* Botões Base no Dark Mode */
 body.dark-mode .answer-btn,
 body.dark-mode .answer-input {
     background-color: #2d2d2d;
     border-color: #444;
     color: #e0e0e0;
 }
-
 body.dark-mode .answer-btn:hover:not([disabled]) {
     background-color: #383838;
     border-color: #007bff;
 }
-
 body.dark-mode .option-text {
     color: #ccc;
 }
-
-/* Explicação */
 body.dark-mode .explanation-container {
-    background: #1e2a36; /* Azul muito escuro */
+    background: #1e2a36;
     border-color: #2c4a66;
     color: #e0e0e0;
 }
-
 body.dark-mode .explanation-container strong {
     color: #66b0ff;
 }
-
-/* Lista do Menu Lateral */
 body.dark-mode #question-list li a {
     color: #ccc;
     border-bottom: 1px solid #333;
@@ -450,12 +370,67 @@ body.dark-mode #question-list li a:hover {
 
 
 /* ============================================================
-   AJUSTES FINAIS E DEFINITIVOS DE CORES (DARK MODE)
+   SISTEMA DE CORES E FEEDBACK (O FINAL DEFINITIVO)
    ============================================================ */
 
-/* 1. ESTADO INICIAL: Selecionado (Azul) 
-   Aplica-se quando o usuário clica, mas ainda não verificou. 
-   Usa !important para ganhar da cor cinza padrão. */
+/* ------------------------------------------------------------
+   1. LIGHT MODE (MODO CLARO) - Padrão
+   Usamos !important aqui também para garantir que apareça
+   ------------------------------------------------------------ */
+
+/* Selecionado (Azul Claro) */
+.answer-btn.selected {
+    background-color: #d0e7ff !important; 
+    border-color: #007bff !important;
+}
+
+/* Correto (Verde) - Deve ganhar do selecionado */
+.answer-btn.correct,
+.answer-btn.selected.correct,
+.answer-input.correct {
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+    color: #155724 !important;
+}
+.answer-btn.correct .option-key,
+.answer-btn.correct .option-text {
+    color: #155724 !important;
+    font-weight: bold;
+}
+
+/* Incorreto (Vermelho) - Deve ganhar do selecionado */
+.answer-btn.incorrect,
+.answer-btn.selected.incorrect,
+.answer-input.incorrect {
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+    color: #721c24 !important;
+}
+.answer-btn.incorrect .option-key,
+.answer-btn.incorrect .option-text {
+    color: #721c24 !important;
+    font-weight: bold;
+}
+
+/* Missed (Correta não marcada) - Verde Tracejado */
+.answer-btn.missed {
+    background-color: #fff !important;
+    border: 2px dashed #155724 !important;
+    color: #155724 !important;
+}
+.answer-btn.missed .option-key,
+.answer-btn.missed .option-text {
+    color: #155724 !important;
+    font-weight: bold;
+}
+
+
+/* ------------------------------------------------------------
+   2. DARK MODE (MODO ESCURO) - Override
+   Usa "body.dark-mode" para ganhar especificidade sobre o Light Mode
+   ------------------------------------------------------------ */
+
+/* Selecionado (Azul Marinho) */
 body.dark-mode .answer-btn.selected {
     background-color: #102a43 !important;
     border-color: #4dabf7 !important;
@@ -463,48 +438,38 @@ body.dark-mode .answer-btn.selected {
 }
 body.dark-mode .answer-btn.selected .option-key {
     color: #4dabf7 !important;
-    font-weight: bold;
 }
-/* Hover no selecionado */
 body.dark-mode .answer-btn.selected:hover {
     background-color: #183552 !important;
-    border-color: #4dabf7 !important;
 }
 
-
-/* 2. ESTADOS FINAIS (Pós-Verificação)
-   Aqui usamos seletores mais específicos (.selected.correct) para garantir 
-   que estas cores vençam a cor azul acima. */
-
-/* A) CORRETO (Verde) - Ganha do Azul */
-body.dark-mode .answer-btn.selected.correct,
+/* Correto (Verde Escuro) */
 body.dark-mode .answer-btn.correct,
+body.dark-mode .answer-btn.selected.correct,
 body.dark-mode .answer-input.correct {
     background-color: #153619 !important;
     border-color: #28a745 !important;
     color: #e6f4ea !important;
 }
 body.dark-mode .answer-btn.correct .option-key,
-body.dark-mode .answer-btn.correct .option-text,
-body.dark-mode .answer-btn.selected.correct .option-key {
+body.dark-mode .answer-btn.correct .option-text {
     color: #e6f4ea !important;
 }
 
-/* B) INCORRETO (Vermelho) - Ganha do Azul */
-body.dark-mode .answer-btn.selected.incorrect,
+/* Incorreto (Vermelho Escuro) */
 body.dark-mode .answer-btn.incorrect,
+body.dark-mode .answer-btn.selected.incorrect,
 body.dark-mode .answer-input.incorrect {
     background-color: #42171b !important;
     border-color: #dc3545 !important;
     color: #f8d7da !important;
 }
 body.dark-mode .answer-btn.incorrect .option-key,
-body.dark-mode .answer-btn.incorrect .option-text,
-body.dark-mode .answer-btn.selected.incorrect .option-key {
+body.dark-mode .answer-btn.incorrect .option-text {
     color: #f8d7da !important;
 }
 
-/* C) MISSED (Correta não marcada) - Verde Tracejado */
+/* Missed (Verde Tracejado Escuro) */
 body.dark-mode .answer-btn.missed {
     background-color: transparent !important;
     border-color: #28a745 !important;

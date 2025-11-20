@@ -1,29 +1,49 @@
-/* Ajuste no Body para permitir rolagem e fluxo normal */
+/* css/style.css - Estilos da Página Inicial */
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f0f2f5;
-    /* Removemos o height: 100vh fixo e o display flex centralizado do body 
-       para permitir que o grid cresça naturalmente */
+    /* Permite rolagem se necessário */
     min-height: 100vh; 
     margin: 0;
-    padding: 40px 20px; /* Um pouco mais de espaço nas bordas */
+    padding: 40px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; 
 }
 
-/* Novo Wrapper para segurar múltiplos cards */
+/* Título da Página Principal */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #212529;
+}
+h1 {
+    color: #212529;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+.subtitle {
+    color: #6c757d;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+/* Wrapper do Grid (Para ficar lado a lado) */
 .main-grid {
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards quebrem linha se não houver espaço */
-    gap: 30px; /* Espaço entre os cards */
-    justify-content: center; /* Centraliza os cards na tela */
+    flex-wrap: wrap; /* Quebra linha se faltar espaço */
+    gap: 30px;
+    justify-content: center;
     width: 100%;
-    max-width: 1200px; /* Limite máximo de largura para telas grandes */
+    max-width: 1200px;
 }
 
-/* Ajuste leve na .container para ela se comportar como um Card */
+/* Cartão (Card) */
 .container {
     text-align: center;
     background-color: #fff;
@@ -31,59 +51,33 @@ body {
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0,0,0,0.08);
     
-    /* --- CORREÇÃO FLEXBOX --- */
-    /* Removemos o width: 100% fixo que forçava a quebra de linha */
-    /* Usamos 'flex' para definir o comportamento: */
-    /* crescer (1), encolher (1), tamanho base (300px) */
-    flex: 1 1 300px; 
-    max-width: 400px; /* O limite máximo continua o mesmo */
-    /* ------------------------ */
-
+    /* Flexbox para controle de tamanho */
+    flex: 1 1 300px; /* Cresce, encolhe, base 300px */
+    max-width: 400px;
+    
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-/* Título da Página Principal (Opcional, para dar um cabeçalho) */
-.page-header {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #212529;
-}
-
-/* --- Estilos da Imagem de Capa --- */
+/* Imagem de Capa */
 .cover-image-container {
     width: 100%;
-    height: 180px; /* Altura fixa para a imagem */
-    overflow: hidden; /* Para garantir que a imagem se ajuste */
-    border-top-left-radius: 12px; /* Arredonda as bordas superiores */
+    height: 180px;
+    overflow: hidden;
+    border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    margin-bottom: 30px; /* Espaço entre a imagem e o título */
+    margin-bottom: 30px;
 }
 .cover-image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Faz a imagem cobrir o container sem distorcer */
-    display: block; /* Remove espaço extra abaixo da imagem */
-}
-/* --- Fim dos Estilos da Imagem de Capa --- */
-
-h1 {
-    color: #212529;
-    margin-top: 0;
-    margin-bottom: 10px; /* Reduz margem inferior do título */
-    font-size: 28px;
+    object-fit: cover;
+    display: block;
 }
 
-.subtitle {
-    color: #6c757d;
-    font-size: 16px;
-    margin-top: 0;
-    margin-bottom: 30px; /* Mantém a margem para separar dos botões */
-    padding: 0 20px; /* Adiciona padding lateral para o subtítulo */
-}
-
+/* Botões de Link */
 .quiz-link {
     display: flex;
     justify-content: space-between;
@@ -91,7 +85,7 @@ h1 {
     background-color: #007bff;
     color: white;
     padding: 15px 25px;
-    margin: 15px 30px; /* Adiciona margem horizontal aos botões */
+    margin: 15px 30px;
     border-radius: 8px;
     text-decoration: none;
     font-size: 18px;
@@ -103,12 +97,24 @@ h1 {
     transform: scale(1.03);
     box-shadow: 0 4px 15px rgba(0,123,255,0.25);
 }
-
 .quiz-link span:last-child {
     font-size: 24px;
     font-weight: bold;
-    transition: transform 0.2s ease-in-out;
 }
-.quiz-link:hover span:last-child {
-    transform: translateX(5px);
+
+/* --- Suporte Básico a Dark Mode no Index (Opcional) --- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+body.dark-mode .page-header h1,
+body.dark-mode .page-header .subtitle {
+    color: #e0e0e0;
+}
+body.dark-mode .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+body.dark-mode h1 {
+    color: #fff;
 }

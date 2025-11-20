@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Simulados Linux</title>
-    <link rel="stylesheet" href="css/style.css?v=2"></head>
+    <link rel="stylesheet" href="css/style.css?v=3">
+</head>
 <body>
 
     <div class="page-header">
@@ -50,7 +51,16 @@
             </a>
         </div>
 
-        </div>
+    </div>
 
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('quizTheme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
 </body>
 </html>
