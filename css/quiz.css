@@ -1,4 +1,4 @@
-/* css/quiz.css - Versão Consolidada e Corrigida */
+/* css/quiz.css - Versão Final Gold */
 
 /* =========================================
    ESTILOS GERAIS E BASE
@@ -10,7 +10,7 @@ body {
     padding: 0;
 }
 
-/* --- Menu Hambúrguer e Botões (Corrigido) --- */
+/* --- Menu Hambúrguer e Botões (COM CORREÇÃO MOBILE) --- */
 .hamburger-btn {
     background: #fff;
     border: 1px solid #ccc;
@@ -22,7 +22,14 @@ body {
     width: 45px;
     height: 45px;
     
-    /* Centralização Absoluta do ícone */
+    /* --- FIX PARA MOBILE (iOS/Android) --- */
+    -webkit-appearance: none; /* Remove estilo nativo iOS */
+    appearance: none;         /* Remove estilo nativo Android */
+    line-height: 1;           /* Remove espaçamento vertical do texto/emoji */
+    touch-action: manipulation;
+    /* ------------------------------------- */
+    
+    /* Centralização Absoluta */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,8 +42,12 @@ body {
     width: 20px;
     height: 3px;
     background: #333;
+    
+    /* O SEGREDO DO ALINHAMENTO DO ÍCONE: */
     margin: 2px auto; /* Auto nas laterais força o centro */
+    
     border-radius: 2px;
+    transform-origin: center;
 }
 
 /* --- Menu Lateral (Drawer) --- */
@@ -206,7 +217,7 @@ body {
 
 .answer-btn:disabled {
     cursor: not-allowed;
-    opacity: 0.9; /* Aumentei a opacidade para ver melhor as cores */
+    opacity: 0.9;
 }
 
 /* Inputs de Texto */
@@ -252,7 +263,7 @@ body {
     color: #212529;
 }
 
-/* Botões de Ação (Próxima, Reiniciar) */
+/* Botões de Ação */
 .action-btn {
     background-color: #007bff;
     color: white;
@@ -338,7 +349,6 @@ body.dark-mode #question-title pre {
     border: 1px solid #444;
     color: #f8f8f2;
 }
-/* Botões Base no Dark Mode */
 body.dark-mode .answer-btn,
 body.dark-mode .answer-input {
     background-color: #2d2d2d;
@@ -373,18 +383,11 @@ body.dark-mode #question-list li a:hover {
    SISTEMA DE CORES E FEEDBACK (O FINAL DEFINITIVO)
    ============================================================ */
 
-/* ------------------------------------------------------------
-   1. LIGHT MODE (MODO CLARO) - Padrão
-   Usamos !important aqui também para garantir que apareça
-   ------------------------------------------------------------ */
-
-/* Selecionado (Azul Claro) */
+/* 1. LIGHT MODE (MODO CLARO) */
 .answer-btn.selected {
     background-color: #d0e7ff !important; 
     border-color: #007bff !important;
 }
-
-/* Correto (Verde) - Deve ganhar do selecionado */
 .answer-btn.correct,
 .answer-btn.selected.correct,
 .answer-input.correct {
@@ -397,8 +400,6 @@ body.dark-mode #question-list li a:hover {
     color: #155724 !important;
     font-weight: bold;
 }
-
-/* Incorreto (Vermelho) - Deve ganhar do selecionado */
 .answer-btn.incorrect,
 .answer-btn.selected.incorrect,
 .answer-input.incorrect {
@@ -411,8 +412,6 @@ body.dark-mode #question-list li a:hover {
     color: #721c24 !important;
     font-weight: bold;
 }
-
-/* Missed (Correta não marcada) - Verde Tracejado */
 .answer-btn.missed {
     background-color: #fff !important;
     border: 2px dashed #155724 !important;
@@ -425,12 +424,7 @@ body.dark-mode #question-list li a:hover {
 }
 
 
-/* ------------------------------------------------------------
-   2. DARK MODE (MODO ESCURO) - Override
-   Usa "body.dark-mode" para ganhar especificidade sobre o Light Mode
-   ------------------------------------------------------------ */
-
-/* Selecionado (Azul Marinho) */
+/* 2. DARK MODE (MODO ESCURO) - Override */
 body.dark-mode .answer-btn.selected {
     background-color: #102a43 !important;
     border-color: #4dabf7 !important;
@@ -438,34 +432,37 @@ body.dark-mode .answer-btn.selected {
 }
 body.dark-mode .answer-btn.selected .option-key {
     color: #4dabf7 !important;
+    font-weight: bold;
 }
 body.dark-mode .answer-btn.selected:hover {
     background-color: #183552 !important;
 }
 
 /* Correto (Verde Escuro) */
-body.dark-mode .answer-btn.correct,
 body.dark-mode .answer-btn.selected.correct,
+body.dark-mode .answer-btn.correct,
 body.dark-mode .answer-input.correct {
     background-color: #153619 !important;
     border-color: #28a745 !important;
     color: #e6f4ea !important;
 }
 body.dark-mode .answer-btn.correct .option-key,
-body.dark-mode .answer-btn.correct .option-text {
+body.dark-mode .answer-btn.correct .option-text,
+body.dark-mode .answer-btn.selected.correct .option-key {
     color: #e6f4ea !important;
 }
 
 /* Incorreto (Vermelho Escuro) */
-body.dark-mode .answer-btn.incorrect,
 body.dark-mode .answer-btn.selected.incorrect,
+body.dark-mode .answer-btn.incorrect,
 body.dark-mode .answer-input.incorrect {
     background-color: #42171b !important;
     border-color: #dc3545 !important;
     color: #f8d7da !important;
 }
 body.dark-mode .answer-btn.incorrect .option-key,
-body.dark-mode .answer-btn.incorrect .option-text {
+body.dark-mode .answer-btn.incorrect .option-text,
+body.dark-mode .answer-btn.selected.incorrect .option-key {
     color: #f8d7da !important;
 }
 
